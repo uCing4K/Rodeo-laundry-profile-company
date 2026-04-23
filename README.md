@@ -51,12 +51,12 @@ Output akhir minimal:
 Data utama berasal dari folder [database/](database/).
 
 Gunakan urutan SQL berikut:
-1. [database/01_schema.sql](database/01_schema.sql)
-2. [database/02_seed_data.sql](database/02_seed_data.sql)
-3. [database/03_views_and_queries.sql](database/03_views_and_queries.sql)
+1. [database/schema/01_schema.sql](database/schema/01_schema.sql)
+2. [database/seeds/02_seed_data.sql](database/seeds/02_seed_data.sql)
+3. [database/views/03_views_and_queries.sql](database/views/03_views_and_queries.sql)
 
 Dump referensi lengkap tersedia di:
-- [database/rodd1157_profile_company.sql](database/rodd1157_profile_company.sql)
+- [database/dump/rodd1157_profile_company.sql](database/dump/rodd1157_profile_company.sql)
 
 Catatan:
 - Untuk development, disarankan gunakan file 01-03 (lebih modular)
@@ -223,7 +223,7 @@ Langkah cepat:
 3. Set kredensial database
 4. Jalankan composer install
 5. Jalankan php artisan key:generate
-6. Import SQL dari folder database (01-03)
+6. Import SQL dari folder database secara berurutan: schema, seeds, views
 7. Jalankan php artisan serve
 8. Jalankan npm install lalu npm run dev (jika pakai Vite)
 
@@ -312,7 +312,7 @@ Sebuah fitur dianggap selesai jika:
 ## 18. Prioritas Implementasi Teknis Pertama
 
 Urutan kerja yang paling aman:
-1. Finalisasi skema database dev (01-03)
+1. Finalisasi skema database dev (schema, seeds, views)
 2. Bangun endpoint publik read-only
 3. Bangun halaman frontend konsumsi API
 4. Bangun tracking publik
@@ -330,9 +330,9 @@ Agar tidak sering saling tanya:
 
 - [RODEO_LAUNDRY_Company_Profile_Planning.md](RODEO_LAUNDRY_Company_Profile_Planning.md)
 - [database/README.md](database/README.md)
-- [database/01_schema.sql](database/01_schema.sql)
-- [database/02_seed_data.sql](database/02_seed_data.sql)
-- [database/03_views_and_queries.sql](database/03_views_and_queries.sql)
+- [database/schema/01_schema.sql](database/schema/01_schema.sql)
+- [database/seeds/02_seed_data.sql](database/seeds/02_seed_data.sql)
+- [database/views/03_views_and_queries.sql](database/views/03_views_and_queries.sql)
 
 ---
 
