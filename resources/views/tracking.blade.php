@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cek Status Order - Rodeo Laundry</title>
+    <meta
+      name="description"
+      content="Cek status order Rodeo Laundry menggunakan nomor order atau token tracking."
+    />
+    <meta property="og:title" content="Cek Status Order" />
+    <meta
+      property="og:description"
+      content="Masukkan nomor order atau token untuk mengetahui status laundry Anda."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Lewati ke konten</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="{{ route('index') ?? '/' }}">
+          <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+          <span>Rodeo Laundry</span>
+        </a>
+
+        <nav class="site-nav" id="site-menu" data-menu-panel>
+          <a href="{{ route('index') ?? '/' }}">Beranda</a>
+          <a href="{{ route('services') ?? '/services' }}">Layanan</a>
+          <a class="is-active" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a href="{{ route('about') ?? '/about' }}">Tentang</a>
+          <a href="{{ route('contact') ?? '/contact' }}">Kontak</a>
+          <a href="{{ route('faq') ?? '/faq' }}">FAQ</a>
+          <div class="nav-mobile-cta">
+            <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
+            <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          </div>
+        </nav>
+
+        <div class="header-cta">
+          <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          data-menu-toggle
+          aria-controls="site-menu"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div data-reveal style="--reveal-delay: 0ms;">
+            <div class="eyebrow">Cek status order</div>
+            <h1>Tracking pesanan laundry secara real time.</h1>
+            <p>
+              Masukkan nomor order atau token tracking untuk melihat status
+              pesanan Anda saat ini.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat bantuan</a>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat layanan</a>
+            </div>
+          </div>
+          <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
+            <span class="badge">Form tracking</span>
+            <h3>Masukkan data Anda di bawah ini.</h3>
+            <p>
+              Format order: RODEO-YYYYMMDD-XXXX atau gunakan token tracking.
+            </p>
+            <form class="hero-form" data-tracking-form data-api="/api/public/tracking">
+              <div class="field">
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Contoh: RODEO-20260428-0001"
+                />
+                <button class="btn btn-primary" type="submit">Cek status</button>
+              </div>
+              <small>Masukkan data yang benar agar status muncul.</small>
+            </form>
+            <div class="alert" data-tracking-error hidden></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <div class="eyebrow">Hasil tracking</div>
+            <h2 class="section-title">Status pesanan Anda akan tampil di sini.</h2>
+          </div>
+          <div class="tracking-result" data-tracking-result>
+            <div class="card tracking-placeholder" data-reveal>
+              <h3>Belum ada hasil</h3>
+              <p>Masukkan nomor order atau token tracking di atas.</p>
+            </div>
+            <div class="tracking-card" data-reveal data-tracking-card>
+              <div>
+                <div class="tracking-status">
+                  <span class="status-pill">Processing</span>
+                  <span>Status saat ini sedang diproses</span>
+                </div>
+                <p>Nomor order: <strong data-tracking-order>RODEO-20260428-0001</strong></p>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <p><strong>Estimasi selesai</strong></p>
+                  <p>28 April 2026</p>
+                </div>
+                <div>
+                  <p><strong>Jenis layanan</strong></p>
+                  <p>Cuci Setrika - Reguler</p>
+                </div>
+              </div>
+              <div>
+                <p><strong>Timeline proses</strong></p>
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <span>Pesanan diterima</span>
+                    <span>27 Apr 10:30</span>
+                  </div>
+                  <div class="timeline-item">
+                    <span>Proses cuci dan setrika</span>
+                    <span>27 Apr 11:00</span>
+                  </div>
+                  <div class="timeline-item">
+                    <span>Siap diambil</span>
+                    <span>28 Apr 15:00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="cta-actions">
+                <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat admin</a>
+                <a class="btn btn-ghost" href="{{ route('contact') ?? '/contact' }}">Kontak</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">
+            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <span>Rodeo Laundry</span>
+          </div>
+          <p>
+            Layanan laundry profesional dengan proses cepat dan hasil bersih.
+          </p>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          <ul>
+            <li><a href="{{ route('index') ?? '/' }}">Beranda</a></li>
+            <li><a href="{{ route('services') ?? '/services' }}">Layanan</a></li>
+            <li><a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a></li>
+            <li><a href="{{ route('about') ?? '/about' }}">Tentang</a></li>
+            <li><a href="{{ route('contact') ?? '/contact' }}">Kontak</a></li>
+            <li><a href="{{ route('faq') ?? '/faq' }}">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Kontak</h3>
+          <ul>
+            <li>Batu, Sumberejo, Gg. Rodeo</li>
+            <li><a href="tel:+6282143297707">+62 821-4329-7707</a></li>
+            <li><a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
+            <li>Jam operasional: 09:00 - 19:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>Copyright 2026 Rodeo Laundry. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="floating-buttons">
+      <a class="fab" href="tel:+6282143297707" aria-label="Telepon Rodeo Laundry">Call</a>
+      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">WA</a>
+    </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+  </body>
+</html>
