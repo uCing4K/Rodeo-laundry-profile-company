@@ -1,63 +1,11 @@
-<!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tentang Kami - Rodeo Laundry</title>
-    <meta
-      name="description"
-      content="Mengenal Rodeo Laundry, visi, misi, nilai, dan perjalanan kami."
-    />
-    <meta property="og:title" content="Tentang Rodeo Laundry" />
-    <meta
-      property="og:description"
-      content="Rodeo Laundry fokus pada kebersihan, ketepatan waktu, dan layanan pelanggan terbaik."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="id_ID" />
-    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Lewati ke konten</a>
+@extends('layouts.app')
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="logo" href="{{ route('index') ?? '/' }}">
-          <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
-          <span>Rodeo Laundry</span>
-        </a>
+@section('title', 'Tentang Kami - Rodeo Laundry')
+@section('description', 'Mengenal Rodeo Laundry, visi, misi, nilai, dan perjalanan kami.')
+@section('og_title', 'Tentang Rodeo Laundry')
+@section('og_description', 'Rodeo Laundry fokus pada kebersihan, ketepatan waktu, dan layanan pelanggan terbaik.')
 
-        <nav class="site-nav" id="site-menu" data-menu-panel>
-          <a href="{{ route('index') ?? '/' }}">Beranda</a>
-          <a href="{{ route('services') ?? '/services' }}">Layanan</a>
-          <a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          <a class="is-active" href="{{ route('about') ?? '/about' }}">Tentang</a>
-          <a href="{{ route('contact') ?? '/contact' }}">Kontak</a>
-          <a href="{{ route('faq') ?? '/faq' }}">FAQ</a>
-          <div class="nav-mobile-cta">
-            <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
-            <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          </div>
-        </nav>
-
-        <div class="header-cta">
-          <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
-        </div>
-
-        <button
-          class="menu-toggle"
-          type="button"
-          data-menu-toggle
-          aria-controls="site-menu"
-          aria-expanded="false"
-        >
-          Menu
-        </button>
-      </div>
-    </header>
-
-    <main id="main-content">
+@section('content')
       <section class="hero">
         <div class="container hero-grid">
           <div data-reveal style="--reveal-delay: 0ms;">
@@ -185,49 +133,4 @@
         </div>
       </section>
     </main>
-
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <div class="logo">
-            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
-            <span>Rodeo Laundry</span>
-          </div>
-          <p>
-            Layanan laundry profesional dengan proses cepat dan hasil bersih.
-          </p>
-        </div>
-        <div>
-          <h3>Menu</h3>
-          <ul>
-            <li><a href="{{ route('index') ?? '/' }}">Beranda</a></li>
-            <li><a href="{{ route('services') ?? '/services' }}">Layanan</a></li>
-            <li><a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a></li>
-            <li><a href="{{ route('about') ?? '/about' }}">Tentang</a></li>
-            <li><a href="{{ route('contact') ?? '/contact' }}">Kontak</a></li>
-            <li><a href="{{ route('faq') ?? '/faq' }}">FAQ</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Kontak</h3>
-          <ul>
-            <li>Batu, Sumberejo, Gg. Rodeo</li>
-            <li><a href="tel:+6282143297707">+62 821-4329-7707</a></li>
-            <li><a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
-            <li>Jam operasional: 09:00 - 19:00</li>
-          </ul>
-        </div>
-      </div>
-      <div class="container footer-bottom">
-        <p>Copyright 2026 Rodeo Laundry. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <div class="floating-buttons">
-      <a class="fab" href="tel:+6282143297707" aria-label="Telepon Rodeo Laundry">Call</a>
-      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">WA</a>
-    </div>
-
-    <script src="{{ asset('asset/js/main.js') }}"></script>
-  </body>
-</html>
+@endsection
