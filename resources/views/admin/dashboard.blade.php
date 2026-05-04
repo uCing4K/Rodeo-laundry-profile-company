@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Dashboard - Rodeo Laundry</title>
     <meta name="description" content="Dashboard admin Rodeo Laundry." />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body class="admin-body">
@@ -531,6 +531,6 @@
       </main>
     </div>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('asset/js/main.js') }}"></script>
   </body>
 </html>

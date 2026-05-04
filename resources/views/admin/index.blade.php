@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Login - Rodeo Laundry</title>
     <meta name="description" content="Halaman login admin Rodeo Laundry." />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
       .login-container {
@@ -166,5 +166,6 @@
         </form>
       </div>
     </div>
+    <script src="{{ asset('asset/js/main.js') }}"></script>
   </body>
 </html>

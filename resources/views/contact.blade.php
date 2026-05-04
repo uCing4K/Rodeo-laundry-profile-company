@@ -15,7 +15,7 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Lewati ke konten</a>
@@ -186,6 +186,6 @@
       <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">WA</a>
     </div>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('asset/js/main.js') }}"></script>
   </body>
 </html>
