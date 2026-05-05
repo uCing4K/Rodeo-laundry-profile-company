@@ -105,7 +105,7 @@
           <div class="grid-3">
             @forelse($products as $index => $product)
               <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
-                <div class="icon-badge">{{ substr($product->name, 0, 2) | upper }}</div>
+                <div class="icon-badge">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
                 <h3>{{ $product->name }}</h3>
                 <p>Mulai dari Rp {{ number_format($product->price, 0, ',', '.') }} per {{ $product->unit }}.</p>
                 <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
