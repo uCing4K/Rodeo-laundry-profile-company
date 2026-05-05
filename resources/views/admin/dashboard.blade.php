@@ -138,8 +138,7 @@
             </div>
           </div>
           <div class="admin-actions">
-            <button class="btn btn-ghost" type="button">Preview Website</button>
-            <button class="btn btn-primary" type="button">Tambah Order</button>
+            <a class="btn btn-ghost" href="{{ url('/') }}" target="_blank">Preview Website</a>
           </div>
         </header>
 
@@ -153,8 +152,7 @@
                 tampilan yang rapi dan mudah dipahami.
               </p>
               <div class="admin-hero-actions">
-                <button class="btn btn-primary" type="button">Buat Order</button>
-                <button class="btn btn-ghost" type="button">Kelola Layanan</button>
+                <a class="btn btn-primary" href="#services">Kelola Layanan</a>
               </div>
             </div>
             <div class="admin-hero-card">
@@ -165,24 +163,24 @@
               <div class="admin-hero-list">
                 <div class="admin-hero-item">
                   <div>
-                    <p class="admin-hero-item-title">Order aktif</p>
-                    <p class="admin-hero-item-meta">Pesanan berjalan hari ini</p>
+                    <p class="admin-hero-item-title">Order hari ini</p>
+                    <p class="admin-hero-item-meta">Pesanan masuk hari ini</p>
                   </div>
-                  <span class="admin-hero-item-value">34</span>
+                  <span class="admin-hero-item-value">{{ $stats['orders_today'] }}</span>
                 </div>
                 <div class="admin-hero-item">
                   <div>
-                    <p class="admin-hero-item-title">Estimasi selesai</p>
-                    <p class="admin-hero-item-meta">Rata-rata 24 - 48 jam</p>
+                    <p class="admin-hero-item-title">Produk aktif</p>
+                    <p class="admin-hero-item-meta">Total layanan tersedia</p>
                   </div>
-                  <span class="admin-hero-item-value">48j</span>
+                  <span class="admin-hero-item-value">{{ $stats['total_products'] }}</span>
                 </div>
                 <div class="admin-hero-item">
                   <div>
-                    <p class="admin-hero-item-title">CS aktif</p>
-                    <p class="admin-hero-item-meta">Balas chat pelanggan</p>
+                    <p class="admin-hero-item-title">Kategori</p>
+                    <p class="admin-hero-item-meta">Kategori layanan aktif</p>
                   </div>
-                  <span class="admin-hero-item-value">3</span>
+                  <span class="admin-hero-item-value">{{ $stats['total_categories'] }}</span>
                 </div>
               </div>
             </div>
@@ -192,29 +190,25 @@
             <div class="admin-card">
               <div class="admin-card-head">
                 <h3>Ringkasan KPI</h3>
-                <span class="admin-chip">Hari ini</span>
+                <span class="admin-chip">Live</span>
               </div>
               <div class="admin-kpis">
                 <div class="admin-kpi">
-                  <p class="stat-value">15</p>
+                  <p class="stat-value">{{ $stats['total_categories'] }}</p>
                   <p class="stat-label">Kategori layanan</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">120</p>
+                  <p class="stat-value">{{ $stats['total_products'] }}</p>
                   <p class="stat-label">Produk aktif</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">34</p>
+                  <p class="stat-value">{{ $stats['orders_today'] }}</p>
                   <p class="stat-label">Order hari ini</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">10</p>
+                  <p class="stat-value">{{ $stats['total_faq'] }}</p>
                   <p class="stat-label">FAQ aktif</p>
                 </div>
-              </div>
-              <div class="note-block">
-                <strong>Catatan backend:</strong>
-                Endpoint ringkasan bisa disediakan di GET /admin/summary.
               </div>
             </div>
             <div class="admin-card">
@@ -223,39 +217,33 @@
                 <a class="admin-card-link" href="#orders">Lihat semua</a>
               </div>
               <div class="admin-activity">
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0001</p>
-                    <p class="admin-activity-meta">Budi Santoso - Processing</p>
+                @forelse ($recent_orders as $order)
+                  <div class="admin-activity-item">
+                    <div>
+                      <p class="admin-activity-title">{{ $order->order_number }}</p>
+                      <p class="admin-activity-meta">
+                        {{ $order->customer_name ?? ($order->customer->name ?? '-') }} — {{ ucfirst($order->status) }}
+                      </p>
+                    </div>
+                    <span class="admin-pill">{{ $order->created_at->format('H:i') }}</span>
                   </div>
-                  <span class="admin-pill">17:00</span>
-                </div>
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0002</p>
-                    <p class="admin-activity-meta">Rina P. - Ready</p>
-                  </div>
-                  <span class="admin-pill">16:30</span>
-                </div>
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0003</p>
-                    <p class="admin-activity-meta">Satria R. - Pickup</p>
-                  </div>
-                  <span class="admin-pill">15:10</span>
-                </div>
+                @empty
+                  <p style="padding:12px 0;color:var(--text-muted,#888)">Belum ada order.</p>
+                @endforelse
               </div>
             </div>
           </section>
 
-          <section class="admin-section" id="services" data-api="/admin/services">
+          <section class="admin-section" id="services">
             <h3>Layanan dan Harga</h3>
             <p>Kelola daftar produk layanan yang tampil di website.</p>
-            <div class="note-block">
-              <strong>Catatan backend:</strong>
-              CRUD tabel products. Fields utama: category_id, name, unit,
-              base_price, service_type_id, is_active, description.
-            </div>
+
+            @if (session('success'))
+              <div class="note-block" style="background:var(--success-bg,#e6f9ee);border-color:var(--success,#22c55e);">
+                {{ session('success') }}
+              </div>
+            @endif
+
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
@@ -264,63 +252,146 @@
                     <th>Produk</th>
                     <th>Satuan</th>
                     <th>Harga</th>
-                    <th>Tipe</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Setrika</td>
-                    <td>Setrika Saja</td>
-                    <td>kg</td>
-                    <td>2500</td>
-                    <td>Reguler</td>
-                    <td><span class="status-tag">Aktif</span></td>
-                    <td>Edit | Hapus</td>
-                  </tr>
+                  @forelse ($products as $product)
+                    <tr>
+                      <td>{{ $product->category->name ?? '-' }}</td>
+                      <td>{{ $product->name }}</td>
+                      <td>{{ $product->unit }}</td>
+                      <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                      <td>
+                        <span class="status-tag {{ $product->is_active ? '' : 'inactive' }}">
+                          {{ $product->is_active ? 'Aktif' : 'Nonaktif' }}
+                        </span>
+                      </td>
+                      <td style="display:flex;gap:8px;">
+                        <button class="btn btn-ghost" type="button" style="padding:4px 10px;font-size:.8rem;"
+                          onclick="editProduct({{ $product->id }},
+                            '{{ addslashes($product->name) }}',
+                            '{{ $product->category_id }}',
+                            '{{ addslashes($product->unit) }}',
+                            '{{ $product->price }}',
+                            '{{ (int)$product->is_active }}',
+                            '{{ addslashes($product->description ?? '') }}')">Edit</button>
+                        <form method="POST" action="{{ route('admin.products.destroy', $product) }}"
+                          onsubmit="return confirm('Hapus layanan ini?')" style="margin:0">
+                          @csrf @method('DELETE')
+                          <button class="btn btn-ghost" type="submit"
+                            style="padding:4px 10px;font-size:.8rem;color:#ef4444;">Hapus</button>
+                        </form>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="6" style="text-align:center;padding:16px;color:var(--text-muted,#888)">
+                        Belum ada layanan. Tambahkan lewat form di bawah.
+                      </td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form">
+
+            <form class="hero-form" id="product-form"
+              method="POST" action="{{ route('admin.products.store') }}">
+              @csrf
+              <input type="hidden" name="_method" id="product-method" value="POST">
+              <input type="hidden" name="product_id" id="product-id" value="">
+
+              <h4 id="product-form-title" style="margin-bottom:12px;">Tambah Layanan Baru</h4>
+
               <div class="form-grid">
                 <div class="field">
-                  <input type="text" placeholder="Nama produk" />
+                  <label>Nama Produk</label>
+                  <input type="text" name="name" id="field-name"
+                    placeholder="Nama produk" required />
                 </div>
                 <div class="field">
-                  <select>
-                    <option>Kategori</option>
-                    <option>Setrika</option>
-                    <option>Cuci Setrika</option>
+                  <label>Kategori</label>
+                  <select name="category_id" id="field-category" required>
+                    <option value="">Pilih kategori</option>
+                    @foreach ($categories as $cat)
+                      <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="field">
-                  <input type="text" placeholder="Satuan (kg/pcs/meter)" />
+                  <label>Satuan</label>
+                  <input type="text" name="unit" id="field-unit"
+                    placeholder="kg / pcs / meter" required />
                 </div>
                 <div class="field">
-                  <input type="number" placeholder="Harga" />
+                  <label>Harga (Rp)</label>
+                  <input type="number" name="price" id="field-price"
+                    placeholder="Harga" min="0" required />
                 </div>
                 <div class="field">
-                  <select>
-                    <option>Tipe layanan</option>
-                    <option>Reguler</option>
-                    <option>Premium</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <select>
-                    <option>Status</option>
-                    <option>Aktif</option>
-                    <option>Nonaktif</option>
+                  <label>Status</label>
+                  <select name="is_active" id="field-status">
+                    <option value="1">Aktif</option>
+                    <option value="0">Nonaktif</option>
                   </select>
                 </div>
               </div>
+
               <div class="field">
-                <textarea rows="3" placeholder="Deskripsi singkat"></textarea>
+                <label>Deskripsi</label>
+                <textarea rows="3" name="description" id="field-description"
+                  placeholder="Deskripsi singkat (opsional)"></textarea>
               </div>
-              <button class="btn btn-primary" type="button">Simpan layanan</button>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="product-submit-btn">
+                  Simpan Layanan
+                </button>
+                <button class="btn btn-ghost" type="button" id="product-cancel-btn"
+                  style="display:none" onclick="resetProductForm()">
+                  Batal
+                </button>
+              </div>
             </form>
           </section>
+
+          <script>
+            const productForm    = document.getElementById('product-form');
+            const productMethod  = document.getElementById('product-method');
+            const productId = document.getElementById('product-id');
+            const formTitle = document.getElementById('product-form-title');
+            const submitBtn = document.getElementById('product-submit-btn');
+            const cancelBtn = document.getElementById('product-cancel-btn');
+
+            function editProduct(id, name, categoryId, unit, price, isActive, description) {
+              formTitle.textContent = 'Edit Layanan';
+              productMethod.value  = 'PUT';
+              productForm.action = '/admin/products/' + id;
+              productId.value = id;
+
+              document.getElementById('field-name').value = name;
+              document.getElementById('field-category').value = categoryId;
+              document.getElementById('field-unit').value = unit;
+              document.getElementById('field-price').value = price;
+              document.getElementById('field-status').value = isActive;
+              document.getElementById('field-description').value = description;
+
+              submitBtn.textContent = 'Update Layanan';
+              cancelBtn.style.display = 'inline-flex';
+              productForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function resetProductForm() {
+              formTitle.textContent = 'Tambah Layanan Baru';
+              productMethod.value  = 'POST';
+              productForm.action = '{{ route("admin.products.store") }}';
+              productId.value  = '';
+              productForm.reset();
+              submitBtn.textContent   = 'Simpan Layanan';
+              cancelBtn.style.display = 'none';
+            }
+          </script>
 
           <section class="admin-section" id="categories" data-api="/admin/categories">
             <h3>Kategori Layanan</h3>
