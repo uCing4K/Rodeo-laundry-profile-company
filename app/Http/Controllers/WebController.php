@@ -11,6 +11,9 @@ use App\Models\ServiceType;
 use App\Models\TeamMember;
 use App\Models\PageContent;
 use App\Models\Order;
+use App\Models\Faq;
+use App\Models\Testimonial;
+use App\Models\OperatingHour;
 
 class WebController extends Controller
 {
@@ -21,10 +24,14 @@ class WebController extends Controller
             ->orderBy('sort_order', 'asc')
             ->limit(6)
             ->get();
+        $testimonials = Testimonial::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
         return view('index', [
             'companySetting' => $companySetting,
             'products' => $products,
+            'testimonials' => $testimonials,
         ]);
     }
 
@@ -67,9 +74,11 @@ class WebController extends Controller
     public function contact()
     {
         $companySetting = CompanySetting::group('company');
+        $operatingHours = OperatingHour::orderBy('day_of_week')->get();
 
         return view('contact', [
             'companySetting' => $companySetting,
+            'operatingHours' => $operatingHours,
         ]);
     }
 
@@ -93,6 +102,35 @@ class WebController extends Controller
 
     public function faq()
     {
-        return view('faq');
+        $data = Faq::where('is_active', true)
+                    ->get()
+                    ->makeHidden(['created_at', 'updated_at', 'is_active']);
+
+        return view('faq', [
+            'faq' => $data,
+        ]);
+    }
+
+    public function testimonials()
+    {
+        $data = Testimonial::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->get()
+                    ->makeHidden(['created_at', 'updated_at', 'is_active']);
+
+        return view('index', [
+            'testimonials' => $data,
+        ]);
+    }
+
+    public function operatingHours()
+    {
+        $data = OperatingHour::where('is_closed', false)
+                    ->get()
+                    ->makeHidden(['created_at', 'updated_at', 'is_closed']);
+
+        return view('contact', [
+            'operatingHours' => $data,
+        ]);
     }
 }

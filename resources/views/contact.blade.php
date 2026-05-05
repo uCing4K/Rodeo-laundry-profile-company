@@ -85,13 +85,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Senin</td><td>09:00 - 19:00 WIB</td></tr>
-                <tr><td>Selasa</td><td>09:00 - 19:00 WIB</td></tr>
-                <tr><td>Rabu</td><td>09:00 - 19:00 WIB</td></tr>
-                <tr><td>Kamis</td><td>09:00 - 19:00 WIB</td></tr>
-                <tr><td>Jumat</td><td>09:00 - 19:00 WIB</td></tr>
-                <tr><td>Sabtu</td><td>08:00 - 20:00 WIB</td></tr>
-                <tr><td>Minggu</td><td>09:00 - 19:00 WIB</td></tr>
+                @forelse ($operatingHours as $hour)
+                  <tr>
+                    <td>{{ $hour->day_name }}</td>
+                    <td>{{ $hour->hours }}</td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td colspan="2">Jam operasional belum tersedia. Silakan hubungi kami untuk informasi.</td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>

@@ -18,6 +18,9 @@ Route::get('/tracking', [WebController::class, 'tracking'])->name('tracking');
 
 Route::get('/faq', [WebController::class, 'faq'])->name('faq');
 
+Route::get('/testimonials', [WebController::class, 'testimonials'])->name('testimonials');
+
+Route::get('/operating-hours', [WebController::class, 'operatingHours'])->name('operating-hours');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
