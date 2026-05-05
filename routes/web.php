@@ -2,32 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\WebController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [WebController::class, 'index'])->name('index');
 
 Route::redirect('/login', '/admin')->name('login');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [WebController::class, 'about'])->name('about');
 
-Route::get('/services', function () {
-    return view('services');
-})->name('services');
+Route::get('/services', [WebController::class, 'services'])->name('services');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [WebController::class, 'contact'])->name('contact');
 
-Route::get('/tracking', function () {
-    return view('tracking');
-})->name('tracking');
+Route::get('/tracking', [WebController::class, 'tracking'])->name('tracking');
 
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
+Route::get('/faq', [WebController::class, 'faq'])->name('faq');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {

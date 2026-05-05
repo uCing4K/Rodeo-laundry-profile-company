@@ -145,7 +145,7 @@
       <div class="login-form-wrapper">
         <div class="login-form-header">
           <div class="login-logo-container">
-            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
           </div>
           <h2>Masuk Admin</h2>
           <p>Masukkan kredensial Anda untuk lanjut</p>

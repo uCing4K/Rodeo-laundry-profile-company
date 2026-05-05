@@ -49,11 +49,9 @@
           </div>
           <div class="service-filters" data-reveal>
             <span class="chip is-active">Semua</span>
-            <span class="chip">Reguler</span>
-            <span class="chip">Premium</span>
-            <span class="chip">Express</span>
-            <span class="chip">Per kg</span>
-            <span class="chip">Per pcs</span>
+            @foreach($serviceTypes as $type)
+              <span class="chip">{{ $type->name }}</span>
+            @endforeach
           </div>
           <div class="section" style="padding-top: 36px;">
             <div class="field">
@@ -81,84 +79,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Setrika</td>
-                  <td>Setrika Saja</td>
-                  <td>/kg</td>
-                  <td>Rp 2.500</td>
-                </tr>
-                <tr>
-                  <td>Cuci Kering</td>
-                  <td>Cuci Kering Lipat</td>
-                  <td>/kg</td>
-                  <td>Rp 4.000</td>
-                </tr>
-                <tr>
-                  <td>Cuci Setrika</td>
-                  <td>Cuci Setrika</td>
-                  <td>/kg</td>
-                  <td>Rp 5.000</td>
-                </tr>
-                <tr>
-                  <td>Selimut</td>
-                  <td>S - M - L - XL - XXL</td>
-                  <td>/pcs</td>
-                  <td>Rp 5.000 - 20.000</td>
-                </tr>
-                <tr>
-                  <td>Bedcover</td>
-                  <td>S - M - L - XL - XXL</td>
-                  <td>/pcs</td>
-                  <td>Rp 13.000 - 25.000</td>
-                </tr>
-                <tr>
-                  <td>Seprai</td>
-                  <td>Seprai + sarung bantal guling</td>
-                  <td>/pcs</td>
-                  <td>Rp 5.000 - 10.000</td>
-                </tr>
-                <tr>
-                  <td>Karpet</td>
-                  <td>Tipis - sedang - tebal</td>
-                  <td>/meter</td>
-                  <td>Rp 5.000 - 15.000</td>
-                </tr>
-                <tr>
-                  <td>Boneka</td>
-                  <td>Kecil - sedang - besar - jumbo</td>
-                  <td>/pcs</td>
-                  <td>Rp 2.000 - 25.000</td>
-                </tr>
-                <tr>
-                  <td>Handuk dan Jaket</td>
-                  <td>Handuk, jaket, keset</td>
-                  <td>/pcs</td>
-                  <td>Rp 2.000 - 15.000</td>
-                </tr>
-                <tr>
-                  <td>Cuci Sepatu</td>
-                  <td>Ukuran kecil - normal</td>
-                  <td>/pcs</td>
-                  <td>Rp 10.000 - 15.000</td>
-                </tr>
-                <tr>
-                  <td>Gorden</td>
-                  <td>Normal - tebal</td>
-                  <td>/kg</td>
-                  <td>Rp 7.000 - 10.000</td>
-                </tr>
-                <tr>
-                  <td>Bantal dan Guling</td>
-                  <td>Bantal normal, guling tebal</td>
-                  <td>/pcs</td>
-                  <td>Rp 10.000 - 12.000</td>
-                </tr>
-                <tr>
-                  <td>Tas</td>
-                  <td>Kecil - sedang - besar</td>
-                  <td>/pcs</td>
-                  <td>Rp 5.000 - 15.000</td>
-                </tr>
+                @forelse($products as $product)
+                  <tr>
+                    <td>{{ $product->category?->name ?? '-' }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>/{{ $product->unit }}</td>
+                    <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td colspan="4" style="text-align: center;">Tidak ada produk tersedia</td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -215,18 +147,17 @@
             <h2 class="section-title">Pilih waktu pengerjaan sesuai kebutuhan.</h2>
           </div>
           <div class="grid-3">
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <h3>Reguler</h3>
-              <p>Harga standar sesuai kategori produk.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <h3>Express 24 Jam</h3>
-              <p>Tambahan biaya Rp 15.000 untuk penyelesaian cepat.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <h3>Express Same Day</h3>
-              <p>Tambahan biaya Rp 10.000 untuk pengerjaan hari yang sama.</p>
-            </div>
+            @forelse($serviceTypes as $index => $type)
+              <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
+                <h3>{{ $type->name }}</h3>
+                <p>{{ $type->description }}</p>
+                @if($type->additional_cost > 0)
+                  <p style="font-size: 0.9em; color: #666;">Biaya tambahan: Rp {{ number_format($type->additional_cost, 0, ',', '.') }}</p>
+                @endif
+              </div>
+            @empty
+              <p>Tidak ada jenis layanan tersedia.</p>
+            @endforelse
           </div>
         </div>
       </section>

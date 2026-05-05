@@ -49,10 +49,16 @@
           <div class="card" data-reveal style="--reveal-delay: 120ms;">
             <h3>Nilai inti kami</h3>
             <ul>
-              <li>Bersih dan rapi di setiap proses.</li>
-              <li>Tepat waktu sesuai estimasi.</li>
-              <li>Komunikasi ramah dan responsif.</li>
-              <li>Transparan dalam harga dan layanan.</li>
+              @if(isset($pageContent['core_values']))
+                @foreach(json_decode($pageContent['core_values'], true) ?? [] as $value)
+                  <li>{{ $value }}</li>
+                @endforeach
+              @else
+                <li>Bersih dan rapi di setiap proses.</li>
+                <li>Tepat waktu sesuai estimasi.</li>
+                <li>Komunikasi ramah dan responsif.</li>
+                <li>Transparan dalam harga dan layanan.</li>
+              @endif
             </ul>
           </div>
         </div>
@@ -91,19 +97,19 @@
           </div>
           <div class="grid-4">
             <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <h3>5.000+</h3>
+              <h3>{{ $pageContent['total_orders'] ?? '5.000+' }}</h3>
               <p>Total pesanan selesai</p>
             </div>
             <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <h3>1.000+</h3>
+              <h3>{{ $pageContent['total_customers'] ?? '1.000+' }}</h3>
               <p>Pelanggan terdaftar</p>
             </div>
             <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <h3>15+</h3>
+              <h3>{{ $pageContent['total_categories'] ?? '15+' }}</h3>
               <p>Kategori layanan</p>
             </div>
             <div class="card" data-reveal style="--reveal-delay: 240ms;">
-              <h3>2020</h3>
+              <h3>{{ $pageContent['founded_year'] ?? '2020' }}</h3>
               <p>Tahun berdiri</p>
             </div>
           </div>
@@ -117,18 +123,20 @@
             <h2 class="section-title">Pelayanan ramah di setiap tahap.</h2>
           </div>
           <div class="grid-3">
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <h3>Customer Service</h3>
-              <p>Respons cepat untuk konsultasi dan tracking pesanan.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <h3>Tim Operasional</h3>
-              <p>Menangani proses cuci, setrika, dan quality control.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <h3>Logistik</h3>
-              <p>Memastikan pesanan siap diantar atau diambil tepat waktu.</p>
-            </div>
+            @forelse($teamMembers as $index => $member)
+              <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
+                @if($member->photo)
+                  <img src="{{ $member->photo }}" alt="{{ $member->name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 16px;">
+                @endif
+                <h3>{{ $member->name }}</h3>
+                <p><strong>{{ $member->position }}</strong></p>
+                @if($member->bio)
+                  <p>{{ $member->bio }}</p>
+                @endif
+              </div>
+            @empty
+              <p>Tim belum tersedia.</p>
+            @endforelse
           </div>
         </div>
       </section>

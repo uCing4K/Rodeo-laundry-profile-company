@@ -13,7 +13,7 @@
       <aside class="admin-sidebar" id="admin-sidebar" data-admin-sidebar>
         <div class="admin-sidebar-head">
           <div class="admin-brand">
-            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
             <div class="admin-brand-text">
               <span class="admin-brand-name">Rodeo Laundry</span>
               <span class="admin-brand-role">Admin Dashboard</span>

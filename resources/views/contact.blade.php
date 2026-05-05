@@ -12,18 +12,17 @@
             <div class="eyebrow">Lokasi dan kontak</div>
             <h1>Kunjungi atau hubungi Rodeo Laundry.</h1>
             <p>
-              Kami berlokasi di Batu, Sumberejo. Hubungi kami untuk pemesanan atau
-              informasi layanan.
+              Kami berlokasi di {{ $companySetting['address'] ?? 'Batu, Sumberejo' }}. Hubungi kami untuk pemesanan atau informasi layanan.
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat WhatsApp</a>
-              <a class="btn btn-ghost" href="tel:+6282143297707">Telepon langsung</a>
+              <a class="btn btn-primary" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySetting['whatsapp'] ?? '6282143297707') }}">Chat WhatsApp</a>
+              <a class="btn btn-ghost" href="tel:{{ $companySetting['phone'] ?? '+6282143297707' }}">Telepon langsung</a>
             </div>
           </div>
           <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
             <span class="badge">Info cepat</span>
             <h3>Jam operasional</h3>
-            <p>Senin - Minggu, pukul 09:00 - 19:00 WIB.</p>
+            <p>Senin - Minggu, pukul {{ $companySetting['opening_time'] ?? '09:00' }} - {{ $companySetting['closing_time'] ?? '19:00' }} WIB.</p>
             <div class="hero-stats">
               <div class="stat">
                 <div class="stat-value">WA aktif</div>
@@ -31,7 +30,7 @@
               </div>
               <div class="stat">
                 <div class="stat-value">Lokasi</div>
-                <div class="stat-label">Batu, Sumberejo</div>
+                <div class="stat-label">{{ $companySetting['city'] ?? 'Batu, Sumberejo' }}</div>
               </div>
             </div>
           </div>
@@ -43,10 +42,18 @@
           <div class="card" data-reveal style="--reveal-delay: 0ms;">
             <h3>Kontak utama</h3>
             <ul>
-              <li><strong>Alamat:</strong> Batu, Sumberejo, Gg. Rodeo</li>
-              <li><strong>Telepon:</strong> <a href="tel:+6282143297707">+62 821-4329-7707</a></li>
-              <li><strong>WhatsApp:</strong> <a href="https://wa.me/6282143297707">Chat sekarang</a></li>
-              <li><strong>Email:</strong> <a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
+              @if(isset($companySetting['address']))
+                <li><strong>Alamat:</strong> {{ $companySetting['address'] }}</li>
+              @endif
+              @if(isset($companySetting['phone']))
+                <li><strong>Telepon:</strong> <a href="tel:{{ $companySetting['phone'] }}">{{ $companySetting['phone'] }}</a></li>
+              @endif
+              @if(isset($companySetting['whatsapp']))
+                <li><strong>WhatsApp:</strong> <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companySetting['whatsapp']) }}">Chat sekarang</a></li>
+              @endif
+              @if(isset($companySetting['email']))
+                <li><strong>Email:</strong> <a href="mailto:{{ $companySetting['email'] }}">{{ $companySetting['email'] }}</a></li>
+              @endif
             </ul>
           </div>
           <div class="card" data-reveal style="--reveal-delay: 120ms;">
@@ -54,7 +61,7 @@
             <div class="map-frame">
               <iframe
                 title="Lokasi Rodeo Laundry"
-                src="https://www.google.com/maps?q=Batu%2C%20Sumberejo%2C%20Gg.%20Rodeo&output=embed"
+                src="https://www.google.com/maps?q={{ urlencode($companySetting['address'] ?? 'Batu, Sumberejo') }}&output=embed"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>

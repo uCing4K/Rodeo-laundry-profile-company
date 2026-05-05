@@ -103,42 +103,16 @@
             </p>
           </div>
           <div class="grid-3">
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <div class="icon-badge">CS</div>
-              <h3>Cuci Setrika</h3>
-              <p>Mulai dari Rp 5.000 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <div class="icon-badge">CK</div>
-              <h3>Cuci Kering Lipat</h3>
-              <p>Mulai dari Rp 4.000 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <div class="icon-badge">ST</div>
-              <h3>Setrika Saja</h3>
-              <p>Mulai dari Rp 2.500 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <div class="icon-badge">SL</div>
-              <h3>Selimut</h3>
-              <p>Mulai dari Rp 5.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <div class="icon-badge">BD</div>
-              <h3>Bedcover</h3>
-              <p>Mulai dari Rp 13.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <div class="icon-badge">SP</div>
-              <h3>Seprai</h3>
-              <p>Mulai dari Rp 5.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
+            @forelse($products as $index => $product)
+              <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
+                <div class="icon-badge">{{ substr($product->name, 0, 2) | upper }}</div>
+                <h3>{{ $product->name }}</h3>
+                <p>Mulai dari Rp {{ number_format($product->price, 0, ',', '.') }} per {{ $product->unit }}.</p>
+                <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+              </div>
+            @empty
+              <p>Tidak ada produk tersedia saat ini.</p>
+            @endforelse
           </div>
         </div>
       </section>

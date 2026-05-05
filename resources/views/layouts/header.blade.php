@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="logo" href="{{ route('index') ?? '/' }}">
-      <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+      <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
       <span>Rodeo Laundry</span>
     </a>
 

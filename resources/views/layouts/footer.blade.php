@@ -2,7 +2,7 @@
   <div class="container footer-grid">
     <div>
       <div class="logo">
-        <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+        <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
         <span>Rodeo Laundry</span>
       </div>
       <p>
