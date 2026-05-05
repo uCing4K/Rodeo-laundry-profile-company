@@ -103,11 +103,14 @@
           <div class="admin-user">
             <div class="admin-user-avatar">RL</div>
             <div>
-              <p class="admin-user-name">Admin Rodeo</p>
-              <p class="admin-user-role">Owner</p>
+              <p class="admin-user-name">{{ Auth::user()->name ?? 'Admin' }}</p>
+              <p class="admin-user-role">{{ Auth::user()->role ?? 'Owner' }}</p>
             </div>
           </div>
-          <button class="btn btn-ghost" type="button">Logout</button>
+          <form method="POST" action="{{ route('admin.logout') }}" style="width: 100%;">
+            @csrf
+            <button class="btn btn-ghost" type="submit" style="width: 100%;">Logout</button>
+          </form>
         </div>
       </aside>
 

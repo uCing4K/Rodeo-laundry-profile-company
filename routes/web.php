@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+Route::redirect('/login', '/admin')->name('login');
 
 Route::get('/about', function () {
     return view('about');
@@ -26,14 +29,21 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('index');
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/', [AdminAuthController::class, 'showLoginForm'])->name('index');
+        Route::post('/', [AdminAuthController::class, 'login'])->name('login');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    });
 });
 
 Route::get('/welcome', function () {
