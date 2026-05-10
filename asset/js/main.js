@@ -138,20 +138,6 @@
     });
   }
 
-  const passwordShows = document.querySelectorAll("[data-show-password]");
-  if (passwordShows.length) {
-    passwordShows.forEach((checkbox) => {
-      const targetId = checkbox.getAttribute("data-show-password");
-      const input = targetId ? document.getElementById(targetId) : null;
-      if (!input) {
-        return;
-      }
-
-      checkbox.addEventListener("change", () => {
-        input.type = checkbox.checked ? "text" : "password";
-      });
-    });
-  }
 
   const trackingForm = document.querySelector("[data-tracking-form]");
   if (trackingForm) {

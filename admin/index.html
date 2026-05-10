@@ -77,26 +77,6 @@
         background: #ffffff;
       }
 
-      .password-show-toggle {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 4px;
-        font-size: 0.9rem;
-      }
-
-      .password-show-toggle input[type="checkbox"] {
-        width: 16px;
-        height: 16px;
-        cursor: pointer;
-        accent-color: var(--orange-500);
-      }
-
-      .password-show-toggle label {
-        cursor: pointer;
-        color: var(--ink-700);
-      }
-
       .login-form-group input[type="email"]:focus,
       .login-form-group input[type="password"]:focus {
         outline: none;
@@ -187,10 +167,6 @@
               autocomplete="current-password"
               required
             />
-            <div class="password-show-toggle">
-              <input type="checkbox" id="showPassword" data-show-password="password" />
-              <label for="showPassword">Tampilkan password</label>
-            </div>
           </div>
 
           <div class="login-form-remember">
