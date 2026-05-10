@@ -19,14 +19,6 @@
               <span class="admin-brand-role">Admin Dashboard</span>
             </div>
           </div>
-          <button
-            class="admin-menu-btn admin-menu-close"
-            type="button"
-            aria-label="Tutup menu"
-            data-admin-menu-close
-          >
-            <i class="fas fa-bars"></i>
-          </button>
         </div>
 
         <p class="admin-sidebar-note">
@@ -61,14 +53,6 @@
           </div>
 
           <div class="admin-nav-section">
-            <span class="admin-nav-label">Transaksi</span>
-            <a class="admin-nav-item" href="#orders">
-              <i class="admin-nav-icon fas fa-box"></i>
-              <span>Order & Tracking</span>
-            </a>
-          </div>
-
-          <div class="admin-nav-section">
             <span class="admin-nav-label">Informasi Publik</span>
             <a class="admin-nav-item" href="#faq">
               <i class="admin-nav-icon fas fa-question-circle"></i>
@@ -77,10 +61,6 @@
             <a class="admin-nav-item" href="#testimonials">
               <i class="admin-nav-icon fas fa-star"></i>
               <span>Testimoni</span>
-            </a>
-            <a class="admin-nav-item" href="#team">
-              <i class="admin-nav-icon fas fa-users"></i>
-              <span>Tim</span>
             </a>
           </div>
 
@@ -111,21 +91,9 @@
         </div>
       </aside>
 
-      <div class="admin-sidebar-backdrop" data-admin-backdrop></div>
-
       <main class="admin-main">
         <header class="admin-topbar">
           <div class="admin-topbar-left">
-            <button
-              class="admin-menu-btn"
-              type="button"
-              aria-label="Buka menu"
-              aria-controls="admin-sidebar"
-              aria-expanded="false"
-              data-admin-menu-toggle
-            >
-              <i class="fas fa-bars"></i>
-            </button>
             <div class="admin-topbar-title">
               <p class="admin-kicker">Dashboard</p>
               <h1>Selamat datang, Admin</h1>
@@ -136,7 +104,6 @@
           </div>
           <div class="admin-actions">
             <button class="btn btn-ghost" type="button">Preview Website</button>
-            <button class="btn btn-primary" type="button">Tambah Order</button>
           </div>
         </header>
 
@@ -146,41 +113,11 @@
               <p class="admin-hero-label">Overview Hari Ini</p>
               <h2>Semua modul siap dikelola dalam satu dashboard.</h2>
               <p>
-                Monitor order, layanan, dan komunikasi pelanggan dalam satu
+                Monitor layanan, harga, dan komunikasi pelanggan dalam satu
                 tampilan yang rapi dan mudah dipahami.
               </p>
               <div class="admin-hero-actions">
-                <button class="btn btn-primary" type="button">Buat Order</button>
-                <button class="btn btn-ghost" type="button">Kelola Layanan</button>
-              </div>
-            </div>
-            <div class="admin-hero-card">
-              <div class="admin-hero-card-head">
-                <h3>Snapshot Operasional</h3>
-                <span class="admin-pill">Live</span>
-              </div>
-              <div class="admin-hero-list">
-                <div class="admin-hero-item">
-                  <div>
-                    <p class="admin-hero-item-title">Order aktif</p>
-                    <p class="admin-hero-item-meta">Pesanan berjalan hari ini</p>
-                  </div>
-                  <span class="admin-hero-item-value">34</span>
-                </div>
-                <div class="admin-hero-item">
-                  <div>
-                    <p class="admin-hero-item-title">Estimasi selesai</p>
-                    <p class="admin-hero-item-meta">Rata-rata 24 - 48 jam</p>
-                  </div>
-                  <span class="admin-hero-item-value">48j</span>
-                </div>
-                <div class="admin-hero-item">
-                  <div>
-                    <p class="admin-hero-item-title">CS aktif</p>
-                    <p class="admin-hero-item-meta">Balas chat pelanggan</p>
-                  </div>
-                  <span class="admin-hero-item-value">3</span>
-                </div>
+                <a class="btn btn-primary" href="#services">Kelola Layanan</a>
               </div>
             </div>
           </section>
@@ -201,10 +138,6 @@
                   <p class="stat-label">Produk aktif</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">34</p>
-                  <p class="stat-label">Order hari ini</p>
-                </div>
-                <div class="admin-kpi">
                   <p class="stat-value">10</p>
                   <p class="stat-label">FAQ aktif</p>
                 </div>
@@ -212,35 +145,6 @@
               <div class="note-block">
                 <strong>Catatan backend:</strong>
                 Endpoint ringkasan bisa disediakan di GET /admin/summary.
-              </div>
-            </div>
-            <div class="admin-card">
-              <div class="admin-card-head">
-                <h3>Order Terbaru</h3>
-                <a class="admin-card-link" href="#orders">Lihat semua</a>
-              </div>
-              <div class="admin-activity">
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0001</p>
-                    <p class="admin-activity-meta">Budi Santoso - Processing</p>
-                  </div>
-                  <span class="admin-pill">17:00</span>
-                </div>
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0002</p>
-                    <p class="admin-activity-meta">Rina P. - Ready</p>
-                  </div>
-                  <span class="admin-pill">16:30</span>
-                </div>
-                <div class="admin-activity-item">
-                  <div>
-                    <p class="admin-activity-title">RODEO-20260428-0003</p>
-                    <p class="admin-activity-meta">Satria R. - Pickup</p>
-                  </div>
-                  <span class="admin-pill">15:10</span>
-                </div>
               </div>
             </div>
           </section>
@@ -268,13 +172,13 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Setrika</td>
-                    <td>Setrika Saja</td>
-                    <td>kg</td>
-                    <td>2500</td>
-                    <td>Reguler</td>
-                    <td><span class="status-tag">Aktif</span></td>
-                    <td>Edit | Hapus</td>
+                    <td data-label="Kategori">Setrika</td>
+                    <td data-label="Produk">Setrika Saja</td>
+                    <td data-label="Satuan">kg</td>
+                    <td data-label="Harga">2500</td>
+                    <td data-label="Tipe">Reguler</td>
+                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
+                    <td data-label="Aksi">Edit | Hapus</td>
                   </tr>
                 </tbody>
               </table>
@@ -292,7 +196,12 @@
                   </select>
                 </div>
                 <div class="field">
-                  <input type="text" placeholder="Satuan (kg/pcs/meter)" />
+                  <select>
+                    <option>Satuan</option>
+                    <option>kg</option>
+                    <option>pcs</option>
+                    <option>meter</option>
+                  </select>
                 </div>
                 <div class="field">
                   <input type="number" placeholder="Harga" />
@@ -339,11 +248,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Setrika</td>
-                    <td>HT</td>
-                    <td>1</td>
-                    <td><span class="status-tag">Aktif</span></td>
-                    <td>Edit | Hapus</td>
+                    <td data-label="Nama">Setrika</td>
+                    <td data-label="Icon">HT</td>
+                    <td data-label="Urutan">1</td>
+                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
+                    <td data-label="Aksi">Edit | Hapus</td>
                   </tr>
                 </tbody>
               </table>
@@ -371,39 +280,6 @@
               </div>
               <button class="btn btn-primary" type="button">Simpan tipe</button>
             </form>
-          </section>
-
-          <section class="admin-section" id="orders" data-api="/admin/orders">
-            <h3>Order dan Tracking</h3>
-            <p>Update status pesanan untuk kebutuhan tracking publik.</p>
-            <div class="note-block">
-              <strong>Catatan backend:</strong>
-              CRUD tabel orders + order_items. Fields penting: order_number,
-              tracking_token, status, estimated_done_at. Pastikan validasi regex
-              order number dan audit log perubahan status.
-            </div>
-            <div class="table-wrapper">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Order</th>
-                    <th>Pelanggan</th>
-                    <th>Status</th>
-                    <th>Estimasi selesai</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>RODEO-20260428-0001</td>
-                    <td>Budi Santoso</td>
-                    <td><span class="status-tag">Processing</span></td>
-                    <td>2026-04-28 17:00</td>
-                    <td>Update | Detail</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </section>
 
           <section class="admin-section" id="faq" data-api="/admin/faq">
@@ -444,11 +320,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Rina P.</td>
-                    <td>Pengerjaan cepat dan rapi.</td>
-                    <td>5</td>
-                    <td><span class="status-tag">Aktif</span></td>
-                    <td>Edit | Hapus</td>
+                    <td data-label="Nama">Rina P.</td>
+                    <td data-label="Pesan">Pengerjaan cepat dan rapi.</td>
+                    <td data-label="Rating">5</td>
+                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
+                    <td data-label="Aksi">Edit | Hapus</td>
                   </tr>
                 </tbody>
               </table>
@@ -460,16 +336,24 @@
             <p>Data global yang tampil di header, footer, dan halaman kontak.</p>
             <div class="note-block">
               <strong>Catatan backend:</strong>
-              CRUD tabel company_settings. Fields: company_name, address, phone,
-              whatsapp, email, tagline, seo_title, seo_description.
+              CRUD tabel company_settings. Fields: company_name, address, whatsapp,
+              email, seo_title, seo_description.
             </div>
             <form class="hero-form">
               <div class="form-grid">
                 <div class="field"><input type="text" placeholder="Nama perusahaan" /></div>
-                <div class="field"><input type="text" placeholder="Tagline" /></div>
-                <div class="field"><input type="text" placeholder="Telepon" /></div>
-                <div class="field"><input type="text" placeholder="WhatsApp" /></div>
-                <div class="field"><input type="email" placeholder="Email" /></div>
+                <div class="field">
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp"
+                    inputmode="numeric"
+                    pattern="[0-9+()\s-]+"
+                    title="Gunakan angka dan simbol +() - saja"
+                  />
+                </div>
+                <div class="field">
+                  <input type="email" placeholder="Email" pattern=".+@.+" title="Masukkan email yang valid" />
+                </div>
                 <div class="field"><input type="text" placeholder="Alamat" /></div>
               </div>
               <div class="field">
@@ -499,34 +383,17 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Senin</td>
-                    <td>09:00</td>
-                    <td>19:00</td>
-                    <td><span class="status-tag">Buka</span></td>
-                    <td>Edit</td>
+                    <td data-label="Hari">Senin</td>
+                    <td data-label="Jam buka">09:00</td>
+                    <td data-label="Jam tutup">19:00</td>
+                    <td data-label="Status"><span class="status-tag">Buka</span></td>
+                    <td data-label="Aksi">Edit</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </section>
 
-          <section class="admin-section" id="team" data-api="/admin/team">
-            <h3>Tim</h3>
-            <p>Kelola informasi tim untuk halaman Tentang Kami.</p>
-            <div class="note-block">
-              <strong>Catatan backend:</strong>
-              CRUD tabel team_members. Fields: name, role, photo_url, display_order, is_active.
-            </div>
-            <form class="hero-form">
-              <div class="form-grid">
-                <div class="field"><input type="text" placeholder="Nama" /></div>
-                <div class="field"><input type="text" placeholder="Jabatan" /></div>
-                <div class="field"><input type="text" placeholder="URL foto" /></div>
-                <div class="field"><input type="number" placeholder="Urutan tampil" /></div>
-              </div>
-              <button class="btn btn-primary" type="button">Simpan anggota</button>
-            </form>
-          </section>
         </div>
       </main>
     </div>

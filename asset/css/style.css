@@ -906,7 +906,7 @@ small {
 .admin-topbar {
   background: #ffffff;
   border-bottom: 1px solid var(--line);
-  padding: 20px 32px;
+  padding: 16px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -924,7 +924,7 @@ small {
 
 .admin-topbar-title h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .admin-kicker {
@@ -937,7 +937,7 @@ small {
 }
 
 .admin-topbar-subtitle {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   color: var(--ink-500);
   font-size: 0.95rem;
 }
@@ -977,7 +977,7 @@ small {
 
 .admin-hero {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 20px;
   background: #ffffff;
   border: 1px solid var(--line);
@@ -1063,7 +1063,7 @@ small {
 
 .admin-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
@@ -1259,6 +1259,43 @@ small {
   }
 }
 
+@media (min-width: 721px) {
+  .admin-table,
+  .table {
+    display: table;
+  }
+
+  .admin-table thead,
+  .table thead {
+    display: table-header-group;
+  }
+
+  .admin-table tbody,
+  .table tbody {
+    display: table-row-group;
+  }
+
+  .admin-table tbody tr,
+  .table tbody tr {
+    display: table-row;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .admin-table td,
+  .table td {
+    display: table-cell;
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+  }
+
+  .admin-table td::before,
+  .table td::before {
+    display: none;
+  }
+}
+
 @media (max-width: 960px) {
   :root {
     --section-gap: 80px;
@@ -1342,37 +1379,15 @@ small {
   }
 
   .admin-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: min(86vw, 320px);
-    min-height: 100vh;
-    max-height: 100vh;
-    transform: translateX(-105%);
-    transition: transform 0.28s ease;
-    overflow-y: auto;
-    padding: 24px 20px;
+    display: none;
   }
 
   .admin-menu-btn {
-    display: inline-flex;
+    display: none;
   }
 
-  .admin-menu-close {
-    display: inline-flex;
-  }
-
-  body.admin-menu-open {
-    overflow: hidden;
-  }
-
-  body.admin-menu-open .admin-sidebar {
-    transform: translateX(0);
-  }
-
-  body.admin-menu-open .admin-sidebar-backdrop {
-    opacity: 1;
-    pointer-events: auto;
+  .admin-sidebar-backdrop {
+    display: none;
   }
 
   .admin-nav {
@@ -1395,7 +1410,7 @@ small {
   }
 
   .admin-topbar {
-    padding: 18px 20px;
+    padding: 14px 18px;
   }
 
   .admin-auth {
@@ -1453,7 +1468,22 @@ small {
   }
 
   .admin-topbar-title h1 {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
+  }
+
+  .admin-topbar {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    background: linear-gradient(135deg, #ffffff, #fff1e3);
+    border: 1px solid rgba(245, 130, 31, 0.18);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .admin-topbar-left {
+    align-items: flex-start;
   }
 
   .admin-actions,
@@ -1510,7 +1540,8 @@ small {
 
   .admin-table,
   .table {
-    min-width: 520px;
+    min-width: 0;
+    width: 100%;
   }
 
   .table-wrapper {
@@ -1523,6 +1554,66 @@ small {
   .table td {
     padding: 10px 12px;
     font-size: 0.9rem;
+  }
+
+  .table-wrapper {
+    border-radius: 0;
+    border: none;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .admin-table,
+  .table {
+    display: grid;
+  }
+
+  .admin-table thead,
+  .table thead {
+    display: none;
+  }
+
+  .admin-table tbody,
+  .table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .admin-table tbody tr,
+  .table tbody tr {
+    display: grid;
+    gap: 12px;
+    background: #ffffff;
+    border: 2px solid var(--orange-500);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    grid-template-columns: auto 1fr;
+    overflow: hidden;
+  }
+
+  .admin-table td,
+  .table td {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 0;
+    padding-bottom: 8px;
+  }
+
+  .admin-table td::before,
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--orange-600);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .admin-table td:last-child,
+  .table td:last-child {
+    padding-bottom: 0;
   }
 
   .tracking-status,
