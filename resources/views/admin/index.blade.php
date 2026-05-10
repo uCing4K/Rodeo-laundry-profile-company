@@ -75,6 +75,47 @@
         font-family: inherit;
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
         background: #ffffff;
+        letter-spacing: 0.15em;
+      }
+
+      .login-form-group input[type="password"] {
+        font-family: "Courier New", monospace;
+      }
+
+      .login-form-group input[type="password"]:-webkit-autofill,
+      .login-form-group input[type="text"] {
+        letter-spacing: 0.15em;
+      }
+
+      .password-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .password-field input {
+        width: 100%;
+        padding-right: 90px;
+        letter-spacing: 0.15em;
+      }
+
+      .password-toggle-btn {
+        position: absolute;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        background: transparent;
+        color: var(--orange-600);
+        cursor: pointer;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .password-toggle-btn i {
+        font-size: 1rem;
       }
 
       .login-form-group input[type="email"]:focus,
@@ -152,6 +193,7 @@
         </div>
 
         <form class="login-form" data-api="/admin/login" method="post">
+          @csrf
           <div class="login-form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="admin@example.com" required />
@@ -159,12 +201,39 @@
 
           <div class="login-form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="••••••••" required />
+            <div class="password-field">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                class="password-toggle-btn"
+                type="button"
+                data-password-toggle
+                data-target="password"
+                aria-pressed="false"
+                aria-label="Tampilkan password"
+                title="Tampilkan password"
+              >
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="login-form-remember">
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">Remember me</label>
           </div>
 
           <button class="login-form-submit" type="submit">Masuk Sekarang</button>
         </form>
       </div>
     </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
   </body>
 </html>

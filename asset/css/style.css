@@ -862,6 +862,10 @@ small {
   gap: 14px;
 }
 
+.admin-logout {
+  width: 100%;
+}
+
 .admin-user {
   display: flex;
   align-items: center;
@@ -1204,6 +1208,47 @@ small {
   font-size: 0.8rem;
 }
 
+.admin-table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-table-actions form {
+  margin: 0;
+}
+
+.admin-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--orange-500);
+  background: #ffffff;
+  color: var(--orange-600);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-action-btn:hover {
+  background: var(--orange-500);
+  color: #ffffff;
+}
+
+.admin-action-btn.is-danger {
+  border-color: #d64545;
+  color: #d64545;
+}
+
+.admin-action-btn.is-danger:hover {
+  background: #d64545;
+  color: #ffffff;
+}
+
 .admin-auth {
   min-height: 100vh;
   display: grid;
@@ -1504,19 +1549,6 @@ small {
 
   .admin-kpis {
     grid-template-columns: 1fr;
-  }
-    padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .admin-welcome-meta {
-    width: 100%;
-  }
-
-  .admin-welcome-meta span {
-    width: 100%;
-    justify-content: flex-start;
   }
 
   .admin-topbar .btn,

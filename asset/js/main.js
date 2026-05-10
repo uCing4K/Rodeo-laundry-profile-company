@@ -63,6 +63,37 @@
     });
   }
 
+  const adminNavItems = document.querySelectorAll(".admin-nav-item");
+  if (adminNavItems.length) {
+    const setActiveNav = (hash) => {
+      let matched = false;
+      adminNavItems.forEach((item) => {
+        const isMatch = hash && item.getAttribute("href") === hash;
+        if (isMatch) {
+          matched = true;
+        }
+        item.classList.toggle("is-active", isMatch);
+      });
+
+      if (!matched) {
+        adminNavItems.forEach((item, index) => {
+          item.classList.toggle("is-active", index === 0);
+        });
+      }
+    };
+
+    adminNavItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        setActiveNav(item.getAttribute("href"));
+      });
+    });
+
+    setActiveNav(window.location.hash);
+    window.addEventListener("hashchange", () => {
+      setActiveNav(window.location.hash);
+    });
+  }
+
   const revealItems = document.querySelectorAll("[data-reveal]");
   if (revealItems.length) {
     const observer = new IntersectionObserver(
@@ -91,6 +122,49 @@
       button.addEventListener("click", () => {
         const isOpen = item.classList.toggle("is-open");
         button.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
+  }
+
+  const confirmForms = document.querySelectorAll("form[data-confirm]");
+  if (confirmForms.length) {
+    confirmForms.forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        const message = form.getAttribute("data-confirm") || "Lanjutkan aksi ini?";
+        if (!window.confirm(message)) {
+          event.preventDefault();
+        }
+      });
+    });
+  }
+
+  const passwordToggles = document.querySelectorAll("[data-password-toggle]");
+  if (passwordToggles.length) {
+    passwordToggles.forEach((button) => {
+      const targetId = button.getAttribute("data-target");
+      const input = targetId ? document.getElementById(targetId) : null;
+      if (!input) {
+        return;
+      }
+
+      button.addEventListener("click", () => {
+        const willShow = input.type === "password";
+        input.type = willShow ? "text" : "password";
+        button.setAttribute("aria-pressed", String(willShow));
+        button.setAttribute(
+          "aria-label",
+          willShow ? "Sembunyikan password" : "Tampilkan password"
+        );
+        button.setAttribute(
+          "title",
+          willShow ? "Sembunyikan password" : "Tampilkan password"
+        );
+
+        const icon = button.querySelector("i");
+        if (icon) {
+          icon.classList.toggle("fa-eye", !willShow);
+          icon.classList.toggle("fa-eye-slash", willShow);
+        }
       });
     });
   }
