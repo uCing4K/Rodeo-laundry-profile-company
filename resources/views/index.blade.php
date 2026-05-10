@@ -150,27 +150,19 @@
             <h2 class="section-title">Cerita pelanggan yang puas.</h2>
           </div>
           <div class="grid-3">
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
-              <p>
-                Pengerjaan cepat dan rapi. Harga juga jelas dari awal, jadi
-                nyaman untuk langganan rutin.
-              </p>
-              <strong>Rina P.</strong>
-            </div>
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 80ms;">
-              <p>
-                Enak karena bisa tracking. Saya selalu tahu status pesanan saya
-                tanpa harus tanya lewat chat.
-              </p>
-              <strong>Dedi S.</strong>
-            </div>
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 160ms;">
-              <p>
-                Pelayanan ramah dan hasil bersih. Cocok untuk kebutuhan laundry
-                rutin keluarga.
-              </p>
-              <strong>Fitri A.</strong>
-            </div>
+            @forelse($testimonials as $index => $testimonial)
+              <div class="testimonial-card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
+                <p>{{ $testimonial->content }}</p>
+                <strong>{{ $testimonial->customer_name }}</strong>
+                @if(!empty($testimonial->customer_title))
+                  <span>{{ $testimonial->customer_title }}</span>
+                @endif
+              </div>
+            @empty
+              <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
+                <p>Belum ada testimoni pelanggan saat ini.</p>
+              </div>
+            @endforelse
           </div>
         </div>
       </section>
