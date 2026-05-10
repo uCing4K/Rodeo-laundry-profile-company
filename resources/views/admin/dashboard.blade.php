@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Dashboard - Rodeo Laundry</title>
     <meta name="description" content="Dashboard admin Rodeo Laundry." />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body class="admin-body">
@@ -13,7 +13,7 @@
       <aside class="admin-sidebar" id="admin-sidebar" data-admin-sidebar>
         <div class="admin-sidebar-head">
           <div class="admin-brand">
-            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
             <div class="admin-brand-text">
               <span class="admin-brand-name">Rodeo Laundry</span>
               <span class="admin-brand-role">Admin Dashboard</span>
@@ -531,6 +531,6 @@
       </main>
     </div>
 
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('asset//main.js') }}"></script>
   </body>
 </html>
