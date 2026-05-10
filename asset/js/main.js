@@ -98,6 +98,7 @@
   const trackingForm = document.querySelector("[data-tracking-form]");
   if (trackingForm) {
     const input = trackingForm.querySelector("input");
+    const redirectBase = trackingForm.getAttribute("data-tracking-redirect");
     const resultWrap = document.querySelector("[data-tracking-result]");
     const resultCard = document.querySelector("[data-tracking-card]");
     const orderOutput = document.querySelector("[data-tracking-order]");
@@ -109,7 +110,7 @@
 
       if (!value) {
         if (errorOutput) {
-          errorOutput.textContent = "Masukkan nomor order atau token tracking.";
+          errorOutput.textContent = "Masukkan token tracking terlebih dahulu.";
           errorOutput.hidden = false;
         }
         if (input) {
@@ -121,6 +122,15 @@
       if (errorOutput) {
         errorOutput.textContent = "";
         errorOutput.hidden = true;
+      }
+
+      if (redirectBase) {
+        const targetUrl = `${redirectBase}?token=${encodeURIComponent(value)}`;
+        const popup = window.open(targetUrl, "_blank");
+        if (!popup) {
+          window.location.href = targetUrl;
+        }
+        return;
       }
 
       if (resultWrap) {

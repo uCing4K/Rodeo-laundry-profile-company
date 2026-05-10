@@ -78,16 +78,21 @@
             <p>
               Format order: RODEO-YYYYMMDD-XXXX atau gunakan token tracking.
             </p>
-            <form class="hero-form" data-tracking-form data-api="/api/public/tracking">
+            <form
+              class="hero-form"
+              data-tracking-form
+              data-tracking-redirect="https://rodeolaundry.online/public/receipt-digital.php"
+            >
               <div class="field">
                 <input
                   type="text"
-                  name="query"
-                  placeholder="Contoh: RODEO-20260428-0001"
+                  name="token"
+                  placeholder="Contoh: 3b04a2dcf6df846a889de268b5c4f24b"
+                  required
                 />
                 <button class="btn btn-primary" type="submit">Cek status</button>
               </div>
-              <small>Masukkan data yang benar agar status muncul.</small>
+              <small>Masukkan token agar langsung diarahkan ke status order.</small>
             </form>
             <div class="alert" data-tracking-error hidden></div>
           </div>
