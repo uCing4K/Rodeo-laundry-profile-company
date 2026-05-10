@@ -75,47 +75,26 @@
         font-family: inherit;
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
         background: #ffffff;
-        letter-spacing: 0.15em;
       }
 
-      .login-form-group input[type="password"] {
-        font-family: "Courier New", monospace;
-      }
-
-      .login-form-group input[type="password"]:-webkit-autofill,
-      .login-form-group input[type="text"] {
-        letter-spacing: 0.15em;
-      }
-
-      .password-field {
-        position: relative;
+      .password-show-toggle {
         display: flex;
         align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+        font-size: 0.9rem;
       }
 
-      .password-field input {
-        width: 100%;
-        padding-right: 90px;
-        letter-spacing: 0.15em;
-      }
-
-      .password-toggle-btn {
-        position: absolute;
-        right: 12px;
-        width: 36px;
-        height: 36px;
-        border: none;
-        background: transparent;
-        color: var(--orange-600);
+      .password-show-toggle input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
         cursor: pointer;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        accent-color: var(--orange-500);
       }
 
-      .password-toggle-btn i {
-        font-size: 1rem;
+      .password-show-toggle label {
+        cursor: pointer;
+        color: var(--ink-700);
       }
 
       .login-form-group input[type="email"]:focus,
@@ -201,26 +180,17 @@
 
           <div class="login-form-group">
             <label for="password">Password</label>
-            <div class="password-field">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="••••••••"
-                autocomplete="current-password"
-                required
-              />
-              <button
-                class="password-toggle-btn"
-                type="button"
-                data-password-toggle
-                data-target="password"
-                aria-pressed="false"
-                aria-label="Tampilkan password"
-                title="Tampilkan password"
-              >
-                <i class="fas fa-eye" aria-hidden="true"></i>
-              </button>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+            <div class="password-show-toggle">
+              <input type="checkbox" id="showPassword" data-show-password="password" />
+              <label for="showPassword">Tampilkan password</label>
             </div>
           </div>
 

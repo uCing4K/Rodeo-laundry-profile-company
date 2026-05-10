@@ -138,33 +138,17 @@
     });
   }
 
-  const passwordToggles = document.querySelectorAll("[data-password-toggle]");
-  if (passwordToggles.length) {
-    passwordToggles.forEach((button) => {
-      const targetId = button.getAttribute("data-target");
+  const passwordShows = document.querySelectorAll("[data-show-password]");
+  if (passwordShows.length) {
+    passwordShows.forEach((checkbox) => {
+      const targetId = checkbox.getAttribute("data-show-password");
       const input = targetId ? document.getElementById(targetId) : null;
       if (!input) {
         return;
       }
 
-      button.addEventListener("click", () => {
-        const willShow = input.type === "password";
-        input.type = willShow ? "text" : "password";
-        button.setAttribute("aria-pressed", String(willShow));
-        button.setAttribute(
-          "aria-label",
-          willShow ? "Sembunyikan password" : "Tampilkan password"
-        );
-        button.setAttribute(
-          "title",
-          willShow ? "Sembunyikan password" : "Tampilkan password"
-        );
-
-        const icon = button.querySelector("i");
-        if (icon) {
-          icon.classList.toggle("fa-eye", !willShow);
-          icon.classList.toggle("fa-eye-slash", willShow);
-        }
+      checkbox.addEventListener("change", () => {
+        input.type = checkbox.checked ? "text" : "password";
       });
     });
   }
