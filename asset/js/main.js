@@ -1,11 +1,13 @@
 (() => {
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuPanel = document.querySelector("[data-menu-panel]");
+  const root = document.documentElement;
 
   if (menuToggle && menuPanel) {
     menuToggle.addEventListener("click", () => {
       const isOpen = menuPanel.classList.toggle("is-open");
       document.body.classList.toggle("menu-open", isOpen);
+      root.classList.toggle("menu-open", isOpen);
       menuToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
@@ -13,6 +15,7 @@
       link.addEventListener("click", () => {
         menuPanel.classList.remove("is-open");
         document.body.classList.remove("menu-open");
+        root.classList.remove("menu-open");
         menuToggle.setAttribute("aria-expanded", "false");
       });
     });

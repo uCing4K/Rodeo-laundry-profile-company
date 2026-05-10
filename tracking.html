@@ -35,14 +35,24 @@
           <a href="contact.html">Kontak</a>
           <a href="faq.html">FAQ</a>
           <div class="nav-mobile-cta">
-            <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
+            <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+              <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+              </svg>
+              <span class="sr-only">WhatsApp</span>
+            </a>
             <a class="btn btn-ghost" href="tracking.html">Cek Status</a>
           </div>
         </nav>
 
         <div class="header-cta">
           <a class="btn btn-ghost" href="tracking.html">Cek Status</a>
-          <a class="btn btn-primary" href="https://wa.me/6282143297707">WhatsApp</a>
+          <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+            </svg>
+            <span class="sr-only">WhatsApp</span>
+          </a>
         </div>
 
         <button
@@ -52,7 +62,8 @@
           aria-controls="site-menu"
           aria-expanded="false"
         >
-          Menu
+          <span class="menu-toggle-lines" aria-hidden="true"></span>
+          <span class="sr-only">Menu</span>
         </button>
       </div>
     </header>
@@ -99,60 +110,6 @@
         </div>
       </section>
 
-      <section class="section section-alt">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Hasil tracking</div>
-            <h2 class="section-title">Status pesanan Anda akan tampil di sini.</h2>
-          </div>
-          <div class="tracking-result" data-tracking-result>
-            <div class="card tracking-placeholder" data-reveal>
-              <h3>Belum ada hasil</h3>
-              <p>Masukkan nomor order atau token tracking di atas.</p>
-            </div>
-            <div class="tracking-card" data-reveal data-tracking-card>
-              <div>
-                <div class="tracking-status">
-                  <span class="status-pill">Processing</span>
-                  <span>Status saat ini sedang diproses</span>
-                </div>
-                <p>Nomor order: <strong data-tracking-order>RODEO-20260428-0001</strong></p>
-              </div>
-              <div class="grid-2">
-                <div>
-                  <p><strong>Estimasi selesai</strong></p>
-                  <p>28 April 2026</p>
-                </div>
-                <div>
-                  <p><strong>Jenis layanan</strong></p>
-                  <p>Cuci Setrika - Reguler</p>
-                </div>
-              </div>
-              <div>
-                <p><strong>Timeline proses</strong></p>
-                <div class="timeline">
-                  <div class="timeline-item">
-                    <span>Pesanan diterima</span>
-                    <span>27 Apr 10:30</span>
-                  </div>
-                  <div class="timeline-item">
-                    <span>Proses cuci dan setrika</span>
-                    <span>27 Apr 11:00</span>
-                  </div>
-                  <div class="timeline-item">
-                    <span>Siap diambil</span>
-                    <span>28 Apr 15:00</span>
-                  </div>
-                </div>
-              </div>
-              <div class="cta-actions">
-                <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat admin</a>
-                <a class="btn btn-ghost" href="contact.html">Kontak</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="footer">
@@ -193,8 +150,12 @@
     </footer>
 
     <div class="floating-buttons">
-      <a class="fab" href="tel:+6282143297707" aria-label="Telepon Rodeo Laundry">Call</a>
-      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">WA</a>
+      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">
+        <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+        </svg>
+        <span class="sr-only">WhatsApp</span>
+      </a>
     </div>
 
     <script src="asset/js/main.js"></script>
