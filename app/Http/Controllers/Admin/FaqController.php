@@ -40,7 +40,7 @@ class FaqController extends Controller
 
         return redirect()->route('admin.dashboard')
             ->with('success', 'FAQ berhasil diperbarui.')
-            ->withFragment('faqs');
+            ->withFragment('faq');
     }
 
     public function destroy(Faq $faq)

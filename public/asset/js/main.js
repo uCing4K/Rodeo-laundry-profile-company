@@ -339,3 +339,145 @@ window.cancelEditServiceType = function() {
   const cancelBtn = document.getElementById('cancel-edit-service-types');
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
+
+window.editFaq = function (faqId, question, answer) {
+  console.log('editFaq called with:', faqId, question, answer);
+  const form = document.getElementById('faq-form');
+  if (!form) {
+    console.error('FAQ form not found');
+    return;
+  }
+  form.action = `/admin/faqs/${faqId}`;
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (!methodInput) {
+    methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    form.appendChild(methodInput);
+  }
+  methodInput.value = 'PUT';
+
+  const questionInput = form.querySelector('[name="question"]');
+  const answerInput = form.querySelector('[name="answer"]');
+  if (questionInput) questionInput.value = question;
+  if (answerInput) answerInput.value = answer;
+
+  const submitButton = document.getElementById('faq-submit-button');
+  if (submitButton) submitButton.textContent = 'Perbarui FAQ';
+
+  let cancelButton = form.querySelector('.cancel-edit-faq');
+  if (!cancelButton) {
+    cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'btn btn-ghost cancel-edit-faq';
+    cancelButton.textContent = 'Batal';
+    cancelButton.addEventListener('click', cancelEditFaq);
+    const actions = document.getElementById('faq-form-actions');
+    if (actions) actions.appendChild(cancelButton);
+  }
+
+  window.location.hash = 'faq';
+};
+
+window.cancelEditFaq = function () {
+  const form = document.getElementById('faq-form');
+  if (!form) return;
+  form.action = '/admin/faqs';
+  const methodInput = form.querySelector('input[name="_method"]');
+  if (methodInput) methodInput.remove();
+  const questionInput = form.querySelector('[name="question"]');
+  const answerInput = form.querySelector('[name="answer"]');
+  if (questionInput) questionInput.value = '';
+  if (answerInput) answerInput.value = '';
+  const submitButton = document.getElementById('faq-submit-button');
+  if (submitButton) submitButton.textContent = 'Simpan FAQ';
+  const cancelButton = form.querySelector('.cancel-edit-faq');
+  if (cancelButton) cancelButton.remove();
+};
+
+window.editTestimonial = function (testimonialId, customerName, content) {
+  console.log('editTestimonial called with:', testimonialId, customerName, content);
+  const form = document.getElementById('testimonial-form');
+  if (!form) {
+    console.error('Testimonial form not found');
+    return;
+  }
+  form.action = `/admin/testimonials/${testimonialId}`;
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (!methodInput) {
+    methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    form.appendChild(methodInput);
+  }
+  methodInput.value = 'PUT';
+
+  const nameInput = form.querySelector('[name="customer_name"]');
+  const contentInput = form.querySelector('[name="content"]');
+  if (nameInput) nameInput.value = customerName;
+  if (contentInput) contentInput.value = content;
+
+  const submitButton = document.getElementById('testimonial-submit-button');
+  if (submitButton) submitButton.textContent = 'Perbarui testimoni';
+
+  let cancelButton = form.querySelector('.cancel-edit-testimonial');
+  if (!cancelButton) {
+    cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'btn btn-ghost cancel-edit-testimonial';
+    cancelButton.textContent = 'Batal';
+    cancelButton.addEventListener('click', cancelEditTestimonial);
+    const actions = document.getElementById('testimonial-form-actions');
+    if (actions) actions.appendChild(cancelButton);
+  }
+
+  window.location.hash = 'testimonials';
+};
+
+window.cancelEditTestimonial = function () {
+  const form = document.getElementById('testimonial-form');
+  if (!form) return;
+  form.action = '/admin/testimonials';
+  const methodInput = form.querySelector('input[name="_method"]');
+  if (methodInput) methodInput.remove();
+  const nameInput = form.querySelector('[name="customer_name"]');
+  const contentInput = form.querySelector('[name="content"]');
+  if (nameInput) nameInput.value = '';
+  if (contentInput) contentInput.value = '';
+  const submitButton = document.getElementById('testimonial-submit-button');
+  if (submitButton) submitButton.textContent = 'Simpan testimoni';
+  const cancelButton = form.querySelector('.cancel-edit-testimonial');
+  if (cancelButton) cancelButton.remove();
+};
+
+const initAdminEditButtons = () => {
+  console.log('initAdminEditButtons called');
+  // Use event delegation for better reliability
+  document.addEventListener('click', (event) => {
+    console.log('Click detected on:', event.target.className);
+    if (event.target.classList.contains('edit-faq-button')) {
+      event.preventDefault();
+      const button = event.target;
+      const faqId = button.dataset.id;
+      const question = button.dataset.question || '';
+      const answer = button.dataset.answer || '';
+      console.log('Edit FAQ clicked:', faqId, question, answer);
+      window.editFaq(faqId, question, answer);
+    } else if (event.target.classList.contains('edit-testimonial-button')) {
+      event.preventDefault();
+      const button = event.target;
+      const testimonialId = button.dataset.id;
+      const customerName = button.dataset.name || '';
+      const content = button.dataset.content || '';
+      console.log('Edit Testimonial clicked:', testimonialId, customerName, content);
+      window.editTestimonial(testimonialId, customerName, content);
+    }
+  });
+};
+
+// Call after DOM is loaded
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAdminEditButtons);
+} else {
+  initAdminEditButtons();
+}

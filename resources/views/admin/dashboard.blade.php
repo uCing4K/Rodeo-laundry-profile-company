@@ -357,9 +357,6 @@
           </section>
 
           <section class="admin-section" id="faq" data-api="/admin/faq">
-            @php
-              $edit_faq = session('edit_faq');
-            @endphp
             <h3>FAQ</h3>
             <p>Kelola pertanyaan umum yang tampil di halaman FAQ.</p>
             <div class="table-wrapper">
@@ -378,7 +375,7 @@
                       <td data-label="Jawaban">{{ \Illuminate\Support\Str::limit($faq->answer, 80) }}</td>
                       <td data-label="Aksi">
                         <div class="admin-table-actions">
-                          <a class="admin-action-btn" href="{{ route('admin.faqs.edit', $faq) }}">Edit</a>
+                          <a class="admin-action-btn edit-faq-button" href="javascript:void(0)" data-id="{{ $faq->id }}" data-question="{{ e($faq->question) }}" data-answer="{{ e($faq->answer) }}">Edit</a>
                           <form action="{{ route('admin.faqs.destroy', $faq) }}" method="post" data-confirm="Hapus FAQ ini?">
                             @csrf
                             @method('DELETE')
@@ -395,25 +392,21 @@
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="{{ $edit_faq ? route('admin.faqs.update', $edit_faq['id']) : route('admin.faqs.store') }}" method="post">
+            <form class="hero-form" id="faq-form" action="{{ route('admin.faqs.store') }}" method="post">
               @csrf
-              @if ($edit_faq)
-                @method('PUT')
-              @endif
               <div class="field">
-                <input type="text" name="question" placeholder="Pertanyaan" value="{{ old('question', $edit_faq['question'] ?? '') }}" required />
+                <input type="text" name="question" placeholder="Pertanyaan" value="{{ old('question') }}" required />
               </div>
               <div class="field">
-                <textarea name="answer" rows="3" placeholder="Jawaban" required>{{ old('answer', $edit_faq['answer'] ?? '') }}</textarea>
+                <textarea name="answer" rows="3" placeholder="Jawaban" required>{{ old('answer') }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">{{ $edit_faq ? 'Perbarui FAQ' : 'Simpan FAQ' }}</button>
+              <div class="form-actions" id="faq-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="faq-submit-button">Simpan FAQ</button>
+              </div>
             </form>
           </section>
 
           <section class="admin-section" id="testimonials" data-api="/admin/testimonials">
-            @php
-              $edit_testimonial = session('edit_testimonial');
-            @endphp
             <h3>Testimoni</h3>
             <p>Kelola testimoni pelanggan yang tampil di beranda.</p>
             <div class="table-wrapper">
@@ -432,7 +425,7 @@
                       <td data-label="Pesan">{{ \Illuminate\Support\Str::limit($testimonial->content, 80) }}</td>
                       <td data-label="Aksi">
                         <div class="admin-table-actions">
-                          <a class="admin-action-btn" href="{{ route('admin.testimonials.edit', $testimonial) }}">Edit</a>
+                          <a class="admin-action-btn edit-testimonial-button" href="javascript:void(0)" data-id="{{ $testimonial->id }}" data-name="{{ e($testimonial->customer_name) }}" data-content="{{ e($testimonial->content) }}">Edit</a>
                           <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="post" data-confirm="Hapus testimoni ini?">
                             @csrf
                             @method('DELETE')
@@ -449,24 +442,18 @@
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="{{ $edit_testimonial ? route('admin.testimonials.update', $edit_testimonial['id']) : route('admin.testimonials.store') }}" method="post">
+            <form class="hero-form" id="testimonial-form" action="{{ route('admin.testimonials.store') }}" method="post">
               @csrf
-              @if ($edit_testimonial)
-                @method('PUT')
-              @endif
               <div class="form-grid">
                 <div class="field">
-                  <input type="text" name="customer_name" placeholder="Nama pelanggan" value="{{ old('customer_name', $edit_testimonial['customer_name'] ?? '') }}" required />
+                  <input type="text" name="customer_name" placeholder="Nama pelanggan" value="{{ old('customer_name') }}" required />
                 </div>
               </div>
               <div class="field">
-                <textarea name="content" rows="3" placeholder="Pesan testimoni" required>{{ old('content', $edit_testimonial['content'] ?? '') }}</textarea>
+                <textarea name="content" rows="3" placeholder="Pesan testimoni" required>{{ old('content') }}</textarea>
               </div>
-              <div class="form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-                <button class="btn btn-primary" type="submit">{{ $edit_testimonial ? 'Perbarui testimoni' : 'Simpan testimoni' }}</button>
-                @if ($edit_testimonial)
-                  <a class="btn btn-ghost" href="{{ route('admin.dashboard') }}#testimonials">Batal</a>
-                @endif
+              <div class="form-actions" id="testimonial-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="testimonial-submit-button">Simpan testimoni</button>
               </div>
             </form>
           </section>
