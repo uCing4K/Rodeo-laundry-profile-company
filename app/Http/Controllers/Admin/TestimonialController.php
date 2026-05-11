@@ -17,17 +17,11 @@ class TestimonialController extends Controller
 
         Testimonial::create($validated);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Testimoni berhasil ditambahkan.')
-            ->withFragment('testimonials');
+        return redirect(route('admin.dashboard') . '#testimonials')
+            ->with('success', 'Testimoni berhasil ditambahkan.');
     }
 
-    public function edit(Testimonial $testimonial)
-    {
-        return redirect()->route('admin.dashboard')
-            ->with('edit_testimonial', $testimonial->toArray())
-            ->withFragment('testimonials');
-    }
+
 
     public function update(Request $request, Testimonial $testimonial)
     {
@@ -38,17 +32,15 @@ class TestimonialController extends Controller
 
         $testimonial->update($validated);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Testimoni berhasil diperbarui.')
-            ->withFragment('testimonials');
+        return redirect(route('admin.dashboard') . '#testimonials')
+            ->with('success', 'Testimoni berhasil diperbarui.');
     }
 
     public function destroy(Testimonial $testimonial)
     {
         $testimonial->delete();
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Testimoni berhasil dihapus.')
-            ->withFragment('testimonials');
+        return redirect(route('admin.dashboard') . '#testimonials')
+            ->with('success', 'Testimoni berhasil dihapus.');
     }
 }

@@ -39,20 +39,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
-        Route::get('/testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
         Route::put('/testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
         Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
 
         Route::post('/faqs', [FaqController::class, 'store'])->name('faqs.store');
-        Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
         Route::put('/faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
-                Route::post('/operating-hours', [\App\Http\Controllers\Admin\OperatingHourController::class, 'store'])->name('operating-hours.store');
-        Route::get('/operating-hours/{operatingHour}/edit', [\App\Http\Controllers\Admin\OperatingHourController::class, 'edit'])->name('operating-hours.edit');
-        Route::put('/operating-hours/{operatingHour}', [\App\Http\Controllers\Admin\OperatingHourController::class, 'update'])->name('operating-hours.update');
-        Route::delete('/operating-hours/{operatingHour}', [\App\Http\Controllers\Admin\OperatingHourController::class, 'destroy'])->name('operating-hours.destroy');
-                Route::post('/operating-hours', [\App\Http\Controllers\Admin\OperatingHourController::class, 'store'])->name('operating-hours.store');
-        Route::get('/operating-hours/{operatingHour}/edit', [\App\Http\Controllers\Admin\OperatingHourController::class, 'edit'])->name('operating-hours.edit');
+        Route::post('/operating-hours', [\App\Http\Controllers\Admin\OperatingHourController::class, 'store'])->name('operating-hours.store');
         Route::put('/operating-hours/{operatingHour}', [\App\Http\Controllers\Admin\OperatingHourController::class, 'update'])->name('operating-hours.update');
         Route::delete('/operating-hours/{operatingHour}', [\App\Http\Controllers\Admin\OperatingHourController::class, 'destroy'])->name('operating-hours.destroy');
         

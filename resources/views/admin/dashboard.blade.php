@@ -367,7 +367,7 @@
                       <td data-label="Jawaban">{{ \Illuminate\Support\Str::limit($faq->answer, 80) }}</td>
                       <td data-label="Aksi">
                         <div class="admin-table-actions">
-                          <a class="admin-action-btn edit-faq-button" href="javascript:void(0)" data-id="{{ $faq->id }}" data-question="{{ e($faq->question) }}" data-answer="{{ e($faq->answer) }}">Edit</a>
+                          <a class="admin-action-btn" href="javascript:void(0)" onclick="editFaq({{ $faq->id }}, {{ json_encode($faq->question) }}, {{ json_encode($faq->answer) }})">Edit</a>
                           <form action="{{ route('admin.faqs.destroy', $faq) }}" method="post" data-confirm="Hapus FAQ ini?">
                             @csrf
                             @method('DELETE')
@@ -394,6 +394,7 @@
               </div>
               <div class="form-actions" id="faq-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                 <button class="btn btn-primary" type="submit" id="faq-submit-button">Simpan FAQ</button>
+                <button class="btn btn-ghost" type="button" id="cancel-edit-faq" style="display: none;" onclick="cancelEditFaq()">Batal Edit</button>
               </div>
             </form>
           </section>
@@ -417,7 +418,7 @@
                       <td data-label="Pesan">{{ \Illuminate\Support\Str::limit($testimonial->content, 80) }}</td>
                       <td data-label="Aksi">
                         <div class="admin-table-actions">
-                          <a class="admin-action-btn edit-testimonial-button" href="javascript:void(0)" data-id="{{ $testimonial->id }}" data-name="{{ e($testimonial->customer_name) }}" data-content="{{ e($testimonial->content) }}">Edit</a>
+                          <a class="admin-action-btn" href="javascript:void(0)" onclick="editTestimonial({{ $testimonial->id }}, {{ json_encode($testimonial->customer_name) }}, {{ json_encode($testimonial->content) }})">Edit</a>
                           <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="post" data-confirm="Hapus testimoni ini?">
                             @csrf
                             @method('DELETE')
@@ -446,6 +447,7 @@
               </div>
               <div class="form-actions" id="testimonial-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                 <button class="btn btn-primary" type="submit" id="testimonial-submit-button">Simpan testimoni</button>
+                <button class="btn btn-ghost" type="button" id="cancel-edit-testimonial" style="display: none;" onclick="cancelEditTestimonial()">Batal Edit</button>
               </div>
             </form>
           </section>
@@ -533,7 +535,7 @@
                     <td data-label="Jam Tutup">{{ \Carbon\Carbon::parse($hour->closed_time)->format('H:i') }}</td>
                     <td data-label="Status"><span class="status-tag">{{ $hour->is_closed ? 'Tutup' : 'Buka' }}</span></td>
                     <td data-label="Aksi">
-                      <a class="admin-action-btn edit-operating-hour-button" href="javascript:void(0)" data-id="{{ $hour->id }}" data-open="{{ $hour->open_time }}" data-close="{{ $hour->closed_time }}" data-closed="{{ $hour->is_closed }}">Edit</a>
+                      <a class="admin-action-btn" href="javascript:void(0)" onclick="editOperatingHour({{ $hour->id }}, {{ json_encode($hour->open_time) }}, {{ json_encode($hour->closed_time) }}, {{ $hour->is_closed }})">Edit</a>
                     </td>
                   </tr>
                   @endforeach
@@ -559,6 +561,7 @@
               </div>
               <div class="form-actions" id="operating-hour-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
                 <button class="btn btn-primary" type="submit" id="operating-hour-submit-button">Simpan jam operasional</button>
+                <button class="btn btn-ghost" type="button" id="cancel-edit-operating-hour" style="display: none;" onclick="cancelEditOperatingHour()">Batal Edit</button>
               </div>
             </form>
           </section>

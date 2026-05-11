@@ -1,5 +1,4 @@
 (() => {
-  console.log('Main JavaScript loaded');
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuPanel = document.querySelector("[data-menu-panel]");
   const root = document.documentElement;
@@ -227,7 +226,7 @@ window.editServiceCategory = function(id, category, product, unit, price, type_i
   const form = document.getElementById('form-service-categories');
   if (!form) return;
   form.action = `/admin/service-categories/${id}`;
-  
+
   let methodInput = form.querySelector('input[name="_method"]');
   if (!methodInput) {
       methodInput = document.createElement('input');
@@ -239,10 +238,10 @@ window.editServiceCategory = function(id, category, product, unit, price, type_i
 
   const catInput = form.querySelector('input[name="category"]');
   if (catInput) catInput.value = category || '';
-  
+
   const prodInput = form.querySelector('input[name="product"]');
   if (prodInput) prodInput.value = product || '';
-  
+
   const unitSelect = form.querySelector('select[name="unit"]');
   if (unitSelect) {
     let normalizedUnit = unit ? unit.toLowerCase().trim() : '';
@@ -251,22 +250,22 @@ window.editServiceCategory = function(id, category, product, unit, price, type_i
     }
     unitSelect.value = normalizedUnit || '';
   }
-  
+
   const priceInput = form.querySelector('input[name="base_price"]');
   if (priceInput) priceInput.value = price || '0';
-  
+
   const typeSelect = form.querySelector('select[name="service_type_id"]');
   if (typeSelect) typeSelect.value = type_id || '';
-  
+
   const descInput = form.querySelector('textarea[name="description"]');
   if (descInput) descInput.value = description || '';
 
   const submitBtn = form.querySelector('button[type="submit"]');
   if (submitBtn) submitBtn.innerText = 'Update layanan';
-  
+
   const cancelBtn = document.getElementById('cancel-edit-service-categories');
   if (cancelBtn) cancelBtn.style.display = 'inline-flex';
-  
+
   form.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 
@@ -275,15 +274,15 @@ window.cancelEditServiceCategory = function() {
   if (!form) return;
   form.reset();
   form.action = "/admin/service-categories";
-  
+
   let methodInput = form.querySelector('input[name="_method"]');
   if (methodInput) {
       methodInput.remove();
   }
-  
+
   const submitBtn = form.querySelector('button[type="submit"]');
   if (submitBtn) submitBtn.innerText = 'Simpan layanan';
-  
+
   const cancelBtn = document.getElementById('cancel-edit-service-categories');
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
@@ -292,7 +291,7 @@ window.editServiceType = function(id, name, duration, cost, description) {
   const form = document.getElementById('form-service-types');
   if (!form) return;
   form.action = `/admin/service-types/${id}`;
-  
+
   let methodInput = form.querySelector('input[name="_method"]');
   if (!methodInput) {
       methodInput = document.createElement('input');
@@ -304,22 +303,22 @@ window.editServiceType = function(id, name, duration, cost, description) {
 
   const nameInput = form.querySelector('input[name="name"]');
   if (nameInput) nameInput.value = name || '';
-  
+
   const durationInput = form.querySelector('input[name="estimated_duration"]');
   if (durationInput) durationInput.value = duration || '';
-  
+
   const costInput = form.querySelector('input[name="additional_cost"]');
   if (costInput) costInput.value = cost || '0';
-  
+
   const descInput = form.querySelector('textarea[name="description"]');
   if (descInput) descInput.value = description || '';
 
   const submitBtn = form.querySelector('button[type="submit"]');
   if (submitBtn) submitBtn.innerText = 'Update tipe';
-  
+
   const cancelBtn = document.getElementById('cancel-edit-service-types');
   if (cancelBtn) cancelBtn.style.display = 'inline-flex';
-  
+
   form.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 
@@ -328,244 +327,56 @@ window.cancelEditServiceType = function() {
   if (!form) return;
   form.reset();
   form.action = "/admin/service-types";
-  
+
   let methodInput = form.querySelector('input[name="_method"]');
   if (methodInput) {
       methodInput.remove();
   }
-  
+
   const submitBtn = form.querySelector('button[type="submit"]');
   if (submitBtn) submitBtn.innerText = 'Simpan tipe';
-  
+
   const cancelBtn = document.getElementById('cancel-edit-service-types');
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
 
-window.editFaq = function (faqId, question, answer) {
-  console.log('editFaq called with:', faqId, question, answer);
-  const form = document.getElementById('faq-form');
-  if (!form) {
-    console.error('FAQ form not found');
-    return;
-  }
-  form.action = `/admin/faqs/${faqId}`;
-  let methodInput = form.querySelector('input[name="_method"]');
-  if (!methodInput) {
-    methodInput = document.createElement('input');
-    methodInput.type = 'hidden';
-    methodInput.name = '_method';
-    form.appendChild(methodInput);
-  }
-  methodInput.value = 'PUT';
-
-  const questionInput = form.querySelector('[name="question"]');
-  const answerInput = form.querySelector('[name="answer"]');
-  if (questionInput) questionInput.value = question;
-  if (answerInput) answerInput.value = answer;
-
-  const submitButton = document.getElementById('faq-submit-button');
-  if (submitButton) submitButton.textContent = 'Perbarui FAQ';
-
-  let cancelButton = form.querySelector('.cancel-edit-faq');
-  if (!cancelButton) {
-    cancelButton = document.createElement('button');
-    cancelButton.type = 'button';
-    cancelButton.className = 'btn btn-ghost cancel-edit-faq';
-    cancelButton.textContent = 'Batal';
-    cancelButton.addEventListener('click', cancelEditFaq);
-    const actions = document.getElementById('faq-form-actions');
-    if (actions) actions.appendChild(cancelButton);
-  }
-
-  window.location.hash = 'faq';
-};
-
-window.cancelEditFaq = function () {
-  const form = document.getElementById('faq-form');
+window.editCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
   if (!form) return;
-  form.action = '/admin/faqs';
-  const methodInput = form.querySelector('input[name="_method"]');
-  if (methodInput) methodInput.remove();
-  const questionInput = form.querySelector('[name="question"]');
-  const answerInput = form.querySelector('[name="answer"]');
-  if (questionInput) questionInput.value = '';
-  if (answerInput) answerInput.value = '';
-  const submitButton = document.getElementById('faq-submit-button');
-  if (submitButton) submitButton.textContent = 'Simpan FAQ';
-  const cancelButton = form.querySelector('.cancel-edit-faq');
-  if (cancelButton) cancelButton.remove();
-};
 
-window.editTestimonial = function (testimonialId, customerName, content) {
-  console.log('editTestimonial called with:', testimonialId, customerName, content);
-  const form = document.getElementById('testimonial-form');
-  if (!form) {
-    console.error('Testimonial form not found');
-    return;
-  }
-  form.action = `/admin/testimonials/${testimonialId}`;
-  let methodInput = form.querySelector('input[name="_method"]');
-  if (!methodInput) {
-    methodInput = document.createElement('input');
-    methodInput.type = 'hidden';
-    methodInput.name = '_method';
-    form.appendChild(methodInput);
-  }
-  methodInput.value = 'PUT';
-
-  const nameInput = form.querySelector('[name="customer_name"]');
-  const contentInput = form.querySelector('[name="content"]');
-  if (nameInput) nameInput.value = customerName;
-  if (contentInput) contentInput.value = content;
-
-  const submitButton = document.getElementById('testimonial-submit-button');
-  if (submitButton) submitButton.textContent = 'Perbarui testimoni';
-
-  let cancelButton = form.querySelector('.cancel-edit-testimonial');
-  if (!cancelButton) {
-    cancelButton = document.createElement('button');
-    cancelButton.type = 'button';
-    cancelButton.className = 'btn btn-ghost cancel-edit-testimonial';
-    cancelButton.textContent = 'Batal';
-    cancelButton.addEventListener('click', cancelEditTestimonial);
-    const actions = document.getElementById('testimonial-form-actions');
-    if (actions) actions.appendChild(cancelButton);
-  }
-
-  window.location.hash = 'testimonials';
-};
-
-window.cancelEditTestimonial = function () {
-  const form = document.getElementById('testimonial-form');
-  if (!form) return;
-  form.action = '/admin/testimonials';
-  const methodInput = form.querySelector('input[name="_method"]');
-  if (methodInput) methodInput.remove();
-  const nameInput = form.querySelector('[name="customer_name"]');
-  const contentInput = form.querySelector('[name="content"]');
-  if (nameInput) nameInput.value = '';
-  if (contentInput) contentInput.value = '';
-  const submitButton = document.getElementById('testimonial-submit-button');
-  if (submitButton) submitButton.textContent = 'Simpan testimoni';
-  const cancelButton = form.querySelector('.cancel-edit-testimonial');
-  if (cancelButton) cancelButton.remove();
-};
-
-window.editOperatingHour = function (hourId, day, openTime, closeTime, isClosed) {
-  console.log('editOperatingHour called with:', hourId, day, openTime, closeTime, isClosed);
-  const form = document.getElementById('operating-hour-form');
-  if (!form) {
-    console.error('Operating hour form not found');
-    return;
-  }
-  form.action = `/admin/operating-hours/${hourId}`;
-  console.log('Form action changed to:', form.action);
-  let methodInput = form.querySelector('input[name="_method"]');
-  if (!methodInput) {
-    methodInput = document.createElement('input');
-    methodInput.type = 'hidden';
-    methodInput.name = '_method';
-    form.appendChild(methodInput);
-  }
-  methodInput.value = 'PUT';
-  console.log('Method input set to PUT');
-
-  const openInput = form.querySelector('[name="open_time"]');
-  const closeInput = form.querySelector('[name="closed_time"]');
-  const closedSelect = form.querySelector('[name="is_closed"]');
-  if (openInput) {
-    openInput.value = openTime;
-    console.log('Open time set to:', openTime);
-  }
-  if (closeInput) {
-    closeInput.value = closeTime;
-    console.log('Close time set to:', closeTime);
-  }
-  if (closedSelect) {
-    closedSelect.value = isClosed ? '1' : '0';
-    console.log('Is closed set to:', isClosed ? '1' : '0');
-  }
-
-  const submitButton = document.getElementById('operating-hour-submit-button');
-  if (submitButton) submitButton.textContent = 'Perbarui jam operasional';
-
-  let cancelButton = form.querySelector('.cancel-edit-operating-hour');
-  if (!cancelButton) {
-    cancelButton = document.createElement('button');
-    cancelButton.type = 'button';
-    cancelButton.className = 'btn btn-ghost cancel-edit-operating-hour';
-    cancelButton.textContent = 'Batal';
-    cancelButton.addEventListener('click', cancelEditOperatingHour);
-    const actions = document.getElementById('operating-hour-form-actions');
-    if (actions) actions.appendChild(cancelButton);
-  }
-
-  window.location.hash = 'hours';
-};
-
-window.cancelEditOperatingHour = function () {
-  const form = document.getElementById('operating-hour-form');
-  if (!form) return;
-  form.action = '/admin/operating-hours';
-  const methodInput = form.querySelector('input[name="_method"]');
-  if (methodInput) methodInput.remove();
-  const openInput = form.querySelector('[name="open_time"]');
-  const closeInput = form.querySelector('[name="closed_time"]');
-  const closedSelect = form.querySelector('[name="is_closed"]');
-  if (openInput) openInput.value = '';
-  if (closeInput) closeInput.value = '';
-  if (closedSelect) closedSelect.value = '';
-  const submitButton = document.getElementById('operating-hour-submit-button');
-  if (submitButton) submitButton.textContent = 'Simpan jam operasional';
-  const cancelButton = form.querySelector('.cancel-edit-operating-hour');
-  if (cancelButton) cancelButton.remove();
-};
-
-const initAdminEditButtons = () => {
-  console.log('initAdminEditButtons called');
-  // Use event delegation for better reliability
-  document.addEventListener('click', (event) => {
-    console.log('Click detected on:', event.target.className, event.target.tagName);
-    if (event.target.classList.contains('edit-faq-button')) {
-      event.preventDefault();
-      const button = event.target;
-      const faqId = button.dataset.id;
-      const question = button.dataset.question || '';
-      const answer = button.dataset.answer || '';
-      console.log('Edit FAQ clicked:', faqId, question, answer);
-      window.editFaq(faqId, question, answer);
-    } else if (event.target.classList.contains('edit-testimonial-button')) {
-      event.preventDefault();
-      const button = event.target;
-      const testimonialId = button.dataset.id;
-      const customerName = button.dataset.name || '';
-      const content = button.dataset.content || '';
-      console.log('Edit Testimonial clicked:', testimonialId, customerName, content);
-      window.editTestimonial(testimonialId, customerName, content);
-    } else if (event.target.classList.contains('edit-operating-hour-button')) {
-      event.preventDefault();
-      console.log('Operating hour edit button clicked');
-      const button = event.target;
-      const hourId = button.dataset.id;
-      const openTime = button.dataset.open || '';
-      const closeTime = button.dataset.close || '';
-      const isClosed = button.dataset.closed === '1';
-      console.log('Edit Operating Hour clicked:', hourId, openTime, closeTime, isClosed);
-      window.editOperatingHour(hourId, '', openTime, closeTime, isClosed);
-    }
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.removeAttribute('disabled');
   });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'none';
+  if (btnSave) btnSave.style.display = 'inline-flex';
+  if (btnCancel) btnCancel.style.display = 'inline-flex';
 };
 
-// Check for fragment on page load and scroll to section
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.location.hash) {
-    const element = document.querySelector(window.location.hash);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-  initAdminEditButtons();
-});
+window.cancelEditCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
+  if (!form) return;
+
+  form.reset();
+
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.setAttribute('disabled', 'disabled');
+  });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'inline-flex';
+  if (btnSave) btnSave.style.display = 'none';
+  if (btnCancel) btnCancel.style.display = 'none';
+};
 
 window.filterPopularSearch = function(query) {
   const container = document.getElementById('popular-search-results');
@@ -579,3 +390,160 @@ window.filterPopularSearch = function(query) {
     item.style.display = searchVal.includes(q) ? 'flex' : 'none';
   });
 };
+
+window.editFaq = function(id, question, answer) {
+  const form = document.getElementById("faq-form");
+  if (!form) return;
+  form.action = `/admin/faqs/${id}`;
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (!methodInput) {
+      methodInput = document.createElement("input");
+      methodInput.type = "hidden";
+      methodInput.name = "_method";
+      form.appendChild(methodInput);
+  }
+  methodInput.value = "PUT";
+
+  const qInput = form.querySelector(`input[name="question"]`);
+  if (qInput) qInput.value = question || "";
+
+  const aInput = form.querySelector(`textarea[name="answer"]`);
+  if (aInput) aInput.value = answer || "";
+
+  const submitBtn = document.getElementById("faq-submit-button");
+  if (submitBtn) submitBtn.innerText = "Update FAQ";
+
+  const cancelBtn = document.getElementById("cancel-edit-faq");
+  if (cancelBtn) cancelBtn.style.display = "inline-flex";
+
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
+window.cancelEditFaq = function() {
+  const form = document.getElementById("faq-form");
+  if (!form) return;
+  form.reset();
+  form.action = "/admin/faqs";
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (methodInput) {
+      methodInput.remove();
+  }
+
+  const submitBtn = document.getElementById("faq-submit-button");
+  if (submitBtn) submitBtn.innerText = "Simpan FAQ";
+
+  const cancelBtn = document.getElementById("cancel-edit-faq");
+  if (cancelBtn) cancelBtn.style.display = "none";
+};
+
+window.editTestimonial = function(id, name, content) {
+  const form = document.getElementById("testimonial-form");
+  if (!form) return;
+  form.action = `/admin/testimonials/${id}`;
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (!methodInput) {
+      methodInput = document.createElement("input");
+      methodInput.type = "hidden";
+      methodInput.name = "_method";
+      form.appendChild(methodInput);
+  }
+  methodInput.value = "PUT";
+
+  const nInput = form.querySelector(`input[name="customer_name"]`);
+  if (nInput) nInput.value = name || "";
+
+  const cInput = form.querySelector(`textarea[name="content"]`);
+  if (cInput) cInput.value = content || "";
+
+  const submitBtn = document.getElementById("testimonial-submit-button");
+  if (submitBtn) submitBtn.innerText = "Update testimoni";
+
+  const cancelBtn = document.getElementById("cancel-edit-testimonial");
+  if (cancelBtn) cancelBtn.style.display = "inline-flex";
+
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
+window.cancelEditTestimonial = function() {
+  const form = document.getElementById("testimonial-form");
+  if (!form) return;
+  form.reset();
+  form.action = "/admin/testimonials";
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (methodInput) {
+      methodInput.remove();
+  }
+
+  const submitBtn = document.getElementById("testimonial-submit-button");
+  if (submitBtn) submitBtn.innerText = "Simpan testimoni";
+
+  const cancelBtn = document.getElementById("cancel-edit-testimonial");
+  if (cancelBtn) cancelBtn.style.display = "none";
+};
+
+window.editOperatingHour = function(id, open, close, is_closed) {
+  const form = document.getElementById("operating-hour-form");
+  if (!form) return;
+  form.action = `/admin/operating-hours/${id}`;
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (!methodInput) {
+      methodInput = document.createElement("input");
+      methodInput.type = "hidden";
+      methodInput.name = "_method";
+      form.appendChild(methodInput);
+  }
+  methodInput.value = "PUT";
+
+  const oInput = form.querySelector(`input[name="open_time"]`);
+  if (oInput) {
+      if(open && open.length > 5) {
+          oInput.value = open.substring(0, 5);
+      } else {
+          oInput.value = open || "";
+      }
+  }
+
+  const cInput = form.querySelector(`input[name="closed_time"]`);
+  if (cInput) {
+      if(close && close.length > 5) {
+          cInput.value = close.substring(0, 5);
+      } else {
+          cInput.value = close || "";
+      }
+  }
+
+  const sInput = form.querySelector(`select[name="is_closed"]`);
+  if (sInput) sInput.value = is_closed ? "1" : "0";
+
+  const submitBtn = document.getElementById("operating-hour-submit-button");
+  if (submitBtn) submitBtn.innerText = "Update jam operasional";
+
+  const cancelBtn = document.getElementById("cancel-edit-operating-hour");
+  if (cancelBtn) cancelBtn.style.display = "inline-flex";
+
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
+};
+
+window.cancelEditOperatingHour = function() {
+  const form = document.getElementById("operating-hour-form");
+  if (!form) return;
+  form.reset();
+  form.action = "/admin/operating-hours";
+
+  let methodInput = form.querySelector(`input[name="_method"]`);
+  if (methodInput) {
+      methodInput.remove();
+  }
+
+  const submitBtn = document.getElementById("operating-hour-submit-button");
+  if (submitBtn) submitBtn.innerText = "Simpan jam operasional";
+
+  const cancelBtn = document.getElementById("cancel-edit-operating-hour");
+  if (cancelBtn) cancelBtn.style.display = "none";
+};
+

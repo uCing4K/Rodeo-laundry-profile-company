@@ -9,17 +9,11 @@ use Illuminate\Validation\Rule;
 
 class OperatingHourController extends Controller
 {
-    public function edit(OperatingHour $operating_hour)
-    {
-        return redirect()->route('admin.dashboard')
-            ->with('edit_operating_hour', $operating_hour->toArray())
-            ->withFragment('hours');
-    }
 
-    public function update(Request $request, OperatingHour $operating_hour)
+    public function update(Request $request, OperatingHour $operatingHour)
     {
         \Log::info('OperatingHour update request', [
-            'id' => $operating_hour->id,
+            'id' => $operatingHour->id,
             'data' => $request->all()
         ]);
 
@@ -32,7 +26,7 @@ class OperatingHourController extends Controller
         // Convert string values to integer for boolean column
         $validated['is_closed'] = (bool) (int) $validated['is_closed'];
 
-        $operating_hour->update($validated);
+        $operatingHour->update($validated);
 
         return redirect('/admin/dashboard#hours')
             ->with('success', 'Jam operasional berhasil diperbarui.');

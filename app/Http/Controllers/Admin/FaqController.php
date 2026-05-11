@@ -17,17 +17,11 @@ class FaqController extends Controller
 
         Faq::create($validated);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'FAQ berhasil ditambahkan.')
-            ->withFragment('faqs');
+        return redirect(route('admin.dashboard') . '#faq')
+            ->with('success', 'FAQ berhasil ditambahkan.');
     }
 
-    public function edit(Faq $faq)
-    {
-        return redirect()->route('admin.dashboard')
-            ->with('edit_faq', $faq->toArray())
-            ->withFragment('faqs');
-    }
+
 
     public function update(Request $request, Faq $faq)
     {
@@ -38,17 +32,15 @@ class FaqController extends Controller
 
         $faq->update($validated);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'FAQ berhasil diperbarui.')
-            ->withFragment('faq');
+        return redirect(route('admin.dashboard') . '#faq')
+            ->with('success', 'FAQ berhasil diperbarui.');
     }
 
     public function destroy(Faq $faq)
     {
         $faq->delete();
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'FAQ berhasil dihapus.')
-            ->withFragment('faqs');
+        return redirect(route('admin.dashboard') . '#faq')
+            ->with('success', 'FAQ berhasil dihapus.');
     }
 }
