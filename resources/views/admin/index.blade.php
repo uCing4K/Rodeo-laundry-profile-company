@@ -68,7 +68,7 @@
               <label for="password" style="font-weight: 600; font-size: 0.9rem; color: var(--ink-900);">
                 Password
               </label>
-              <div class="field" style="margin: 0;">
+              <div class="field" style="margin: 0; position: relative;">
                 <input
                   type="password"
                   id="password"
@@ -76,23 +76,17 @@
                   placeholder="••••••••"
                   autocomplete="current-password"
                   required
-                  style="border-color: {{ $errors->has('password') ? '#fc8181' : 'var(--line)' }};"
+                  style="border-color: {{ $errors->has('password') ? '#fc8181' : 'var(--line)' }}; padding-right: 40px;"
                 />
+                <button type="button" onclick="togglePassword()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--ink-500); padding: 0;">
+                  <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                </button>
               </div>
               @error('password')
                 <small style="color: #c53030; font-size: 0.85rem;">{{ $message }}</small>
               @enderror
             </div>
 
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.9rem; color: var(--ink-700);">
-              <input
-                type="checkbox"
-                id="remember"
-                name="remember"
-                style="width: 16px; height: 16px; accent-color: var(--orange-500); cursor: pointer;"
-              />
-              Ingat saya
-            </label>
 
             <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-md); margin-top: 4px;">
               Masuk Sekarang
@@ -104,5 +98,20 @@
     </main>
 
     <script src="{{ asset('asset/js/main.js') }}"></script>
+    <script>
+      function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const icon = document.getElementById('togglePasswordIcon');
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          passwordInput.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      }
+    </script>
   </body>
 </html>
