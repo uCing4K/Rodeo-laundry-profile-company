@@ -22,6 +22,7 @@ class AdminDashboardController extends Controller
         ];
 
         $categories = ServiceCategory::with('serviceType')->get();
+        $popular_services = ServiceCategory::where('is_popular', true)->get();
         $service_types = ServiceType::all();
         $faqs = Faq::all();
         $testimonials = Testimonial::all();
@@ -31,6 +32,7 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard', compact(
             'stats', 
             'categories', 
+            'popular_services',
             'service_types', 
             'faqs', 
             'testimonials', 

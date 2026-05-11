@@ -60,4 +60,14 @@ class ServiceCategoryController extends Controller
         $serviceCategory->delete();
         return redirect()->route('admin.dashboard')->with('success', 'Layanan berhasil dihapus.');
     }
+
+    public function togglePopular(Request $request, ServiceCategory $serviceCategory)
+    {
+        $serviceCategory->update([
+            'is_popular' => !$serviceCategory->is_popular
+        ]);
+
+        $status = $serviceCategory->is_popular ? 'ditambahkan ke' : 'dihapus dari';
+        return redirect()->route('admin.dashboard')->with('success', "Layanan berhasil {$status} daftar populer.");
+    }
 }
