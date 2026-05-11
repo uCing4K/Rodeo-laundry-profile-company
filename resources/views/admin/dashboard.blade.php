@@ -43,9 +43,9 @@
               <i class="admin-nav-icon fas fa-tools"></i>
               <span>Layanan & Harga</span>
             </a>
-            <a class="admin-nav-item" href="#categories">
-              <i class="admin-nav-icon fas fa-folder"></i>
-              <span>Kategori</span>
+            <a class="admin-nav-item" href="#popular-services">
+              <i class="admin-nav-icon fas fa-star"></i>
+              <span>Layanan Populer</span>
             </a>
             <a class="admin-nav-item" href="#service-types">
               <i class="admin-nav-icon fas fa-cog"></i>
@@ -152,8 +152,8 @@
               </div>
               <div class="admin-kpis">
                 <div class="admin-kpi">
-                  <p class="stat-value">15</p>
-                  <p class="stat-label">Kategori layanan</p>
+                  <p class="stat-value">4</p>
+                  <p class="stat-label">Layanan populer</p>
                 </div>
                 <div class="admin-kpi">
                   <p class="stat-value">120</p>
@@ -251,30 +251,27 @@
             </form>
           </section>
 
-          <section class="admin-section" id="categories" data-api="/admin/categories">
-            <h3>Kategori Layanan</h3>
-            <p>Kelola kategori dan urutan tampilan.</p>
+          <section class="admin-section" id="popular-services" data-api="/admin/popular-services">
+            <h3>Layanan Populer</h3>
+            <p>Tentukan layanan mana yang akan ditampilkan sebagai layanan populer di beranda.</p>
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th>Nama</th>
-                    <th>Icon</th>
-                    <th>Urutan</th>
+                    <th>Layanan</th>
+                    <th>Kategori</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td data-label="Nama">Setrika</td>
-                    <td data-label="Icon">HT</td>
-                    <td data-label="Urutan">1</td>
+                    <td data-label="Layanan">Cuci Komplit</td>
+                    <td data-label="Kategori">Pakaian</td>
                     <td data-label="Status"><span class="status-tag">Aktif</span></td>
                     <td data-label="Aksi">
                       <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="/admin/categories/1/edit">Edit</a>
-                        <form action="/admin/categories/1" method="post" data-confirm="Hapus kategori ini?">
+                        <form action="/admin/popular-services/1" method="post" data-confirm="Hapus layanan ini dari daftar populer?">
                           @csrf
                           @method('DELETE')
                           <button class="admin-action-btn is-danger" type="submit">Hapus</button>
@@ -285,11 +282,60 @@
                 </tbody>
               </table>
             </div>
+            <form class="hero-form" action="/admin/popular-services" method="post">
+              @csrf
+              <div class="form-grid">
+                <div class="field">
+                  <select name="service_id" required>
+                    <option value="">Pilih Layanan</option>
+                    <option value="1">Setrika Saja</option>
+                    <option value="2">Cuci Komplit</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <select name="is_active" required>
+                    <option value="">Status</option>
+                    <option value="1">Aktif</option>
+                    <option value="0">Nonaktif</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">Tambah ke populer</button>
+            </form>
           </section>
 
           <section class="admin-section" id="service-types" data-api="/admin/service-types">
             <h3>Tipe Layanan</h3>
             <p>Kelola tipe layanan seperti reguler, express, premium.</p>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>Biaya Tambahan</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Nama">Reguler</td>
+                    <td data-label="Biaya Tambahan">0</td>
+                    <td data-label="Deskripsi">Layanan standar</td>
+                    <td data-label="Aksi">
+                      <div class="admin-table-actions">
+                        <a class="admin-action-btn" href="/admin/service-types/1/edit">Edit</a>
+                        <form action="/admin/service-types/1" method="post" data-confirm="Hapus tipe layanan ini?">
+                          @csrf
+                          @method('DELETE')
+                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <form class="hero-form" action="/admin/service-types" method="post">
               @csrf
               <div class="form-grid">
@@ -310,6 +356,33 @@
           <section class="admin-section" id="faq" data-api="/admin/faq">
             <h3>FAQ</h3>
             <p>Kelola pertanyaan umum yang tampil di halaman FAQ.</p>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Pertanyaan</th>
+                    <th>Jawaban</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Pertanyaan">Berapa lama proses cuci?</td>
+                    <td data-label="Jawaban">Proses cuci reguler memakan waktu 3 hari.</td>
+                    <td data-label="Aksi">
+                      <div class="admin-table-actions">
+                        <a class="admin-action-btn" href="/admin/faq/1/edit">Edit</a>
+                        <form action="/admin/faq/1" method="post" data-confirm="Hapus FAQ ini?">
+                          @csrf
+                          @method('DELETE')
+                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <form class="hero-form" action="/admin/faq" method="post">
               @csrf
               <div class="field">
@@ -331,7 +404,6 @@
                   <tr>
                     <th>Nama</th>
                     <th>Pesan</th>
-                    <th>Rating</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
@@ -340,7 +412,6 @@
                   <tr>
                     <td data-label="Nama">Rina P.</td>
                     <td data-label="Pesan">Pengerjaan cepat dan rapi.</td>
-                    <td data-label="Rating">5</td>
                     <td data-label="Status"><span class="status-tag">Aktif</span></td>
                     <td data-label="Aksi">
                       <div class="admin-table-actions">
@@ -356,11 +427,58 @@
                 </tbody>
               </table>
             </div>
+            <form class="hero-form" action="/admin/testimonials" method="post">
+              @csrf
+              <div class="form-grid">
+                <div class="field">
+                  <input type="text" name="name" placeholder="Nama pelanggan" required />
+                </div>
+                <div class="field">
+                  <select name="is_active" required>
+                    <option value="">Status</option>
+                    <option value="1">Aktif</option>
+                    <option value="0">Nonaktif</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <textarea name="message" rows="3" placeholder="Pesan testimoni" required></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit">Simpan testimoni</button>
+            </form>
           </section>
 
           <section class="admin-section" id="settings" data-api="/admin/settings">
             <h3>Company Settings</h3>
             <p>Data global yang tampil di header, footer, dan halaman kontak.</p>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama Perusahaan</th>
+                    <th>Nomor Telepon</th>
+                    <th>Link WhatsApp</th>
+                    <th>Email</th>
+                    <th>Alamat</th>
+                    <th>Link Map Embed</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Nama Perusahaan">Rodeo Laundry</td>
+                    <td data-label="Nomor Telepon">08123456789</td>
+                    <td data-label="Link WhatsApp">https://wa.me/628123456789</td>
+                    <td data-label="Email">hello@rodeolaundry.com</td>
+                    <td data-label="Alamat">Jl. Contoh No. 123</td>
+                    <td data-label="Link Map">https://www.google.com/maps?q=Batu%2C%20Sumberejo%2C%20Gg.%20Rodeo&output=embed</td>
+                    <td data-label="Aksi">
+                      <a class="admin-action-btn" href="/admin/settings/1/edit">Edit</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <form class="hero-form" action="/admin/settings" method="post">
               @csrf
               <div class="form-grid">
@@ -370,13 +488,16 @@
                 <div class="field">
                   <input
                     type="tel"
-                    name="whatsapp"
-                    placeholder="WhatsApp"
+                    name="phone"
+                    placeholder="Nomor Telepon"
                     inputmode="numeric"
                     pattern="[0-9+()\s-]+"
                     title="Gunakan angka dan simbol +() - saja"
                     required
                   />
+                </div>
+                <div class="field">
+                  <input type="url" name="whatsapp_link" placeholder="Link WhatsApp (https://wa.me/...)" required />
                 </div>
                 <div class="field">
                   <input
@@ -389,6 +510,9 @@
                   />
                 </div>
                 <div class="field"><input type="text" name="address" placeholder="Alamat" required /></div>
+                <div class="field">
+                  <textarea name="map_embed" rows="1" placeholder="Link Map Embed (Kode iframe)" required></textarea>
+                </div>
               </div>
               <div class="field">
                 <textarea name="seo_description" rows="3" placeholder="Deskripsi SEO"></textarea>
@@ -424,6 +548,37 @@
                 </tbody>
               </table>
             </div>
+            <form class="hero-form" action="/admin/operating-hours" method="post">
+              @csrf
+              <div class="form-grid">
+                <div class="field">
+                  <select name="day" required>
+                    <option value="">Pilih Hari</option>
+                    <option value="Senin">Senin</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Rabu">Rabu</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Jumat">Jumat</option>
+                    <option value="Sabtu">Sabtu</option>
+                    <option value="Minggu">Minggu</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <input type="time" name="open_time" required />
+                </div>
+                <div class="field">
+                  <input type="time" name="close_time" required />
+                </div>
+                <div class="field">
+                  <select name="is_closed" required>
+                    <option value="">Status</option>
+                    <option value="0">Buka</option>
+                    <option value="1">Tutup</option>
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="submit">Simpan jam operasional</button>
+            </form>
           </section>
 
         </div>
