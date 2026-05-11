@@ -9,7 +9,6 @@ class CompanySetting extends Model
     protected $table = 'company_settings';
 
     protected $fillable = [
-        'company_name',
         'phone',
         'whatsapp_link',
         'email',

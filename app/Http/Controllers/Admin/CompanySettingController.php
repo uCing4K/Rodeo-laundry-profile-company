@@ -11,7 +11,6 @@ class CompanySettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'company_name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'whatsapp_link' => 'required|url|max:255',
             'email' => 'required|email|max:255',

@@ -459,10 +459,7 @@
               @csrf
               @method('PUT')
               <div class="form-grid">
-                <div class="field">
-                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Nama Perusahaan</label>
-                  <input type="text" name="company_name" placeholder="Nama perusahaan" value="{{ $company_settings->company_name ?? '' }}" required disabled />
-                </div>
+
                 <div class="field">
                   <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Nomor Telepon</label>
                   <input
