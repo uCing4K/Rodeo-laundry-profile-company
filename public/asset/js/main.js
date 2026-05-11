@@ -339,3 +339,41 @@ window.cancelEditServiceType = function() {
   const cancelBtn = document.getElementById('cancel-edit-service-types');
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
+
+window.editCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
+  if (!form) return;
+  
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.removeAttribute('disabled');
+  });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'none';
+  if (btnSave) btnSave.style.display = 'inline-flex';
+  if (btnCancel) btnCancel.style.display = 'inline-flex';
+};
+
+window.cancelEditCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
+  if (!form) return;
+
+  form.reset();
+
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.setAttribute('disabled', 'disabled');
+  });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'inline-flex';
+  if (btnSave) btnSave.style.display = 'none';
+  if (btnCancel) btnCancel.style.display = 'none';
+};

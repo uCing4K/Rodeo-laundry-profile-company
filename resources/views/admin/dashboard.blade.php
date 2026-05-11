@@ -451,44 +451,20 @@
             </form>
           </section>
 
-          <section class="admin-section" id="settings" data-api="/admin/settings">
+          <section class="admin-section" id="settings">
             <h3>Company Settings</h3>
-            <p>Data global yang tampil di header, footer, dan halaman kontak.</p>
-            <div class="table-wrapper">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Nama Perusahaan</th>
-                    <th>Nomor Telepon</th>
-                    <th>Link WhatsApp</th>
-                    <th>Email</th>
-                    <th>Alamat</th>
-                    <th>Link Map Embed</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="Nama Perusahaan">Rodeo Laundry</td>
-                    <td data-label="Nomor Telepon">08123456789</td>
-                    <td data-label="Link WhatsApp">https://wa.me/628123456789</td>
-                    <td data-label="Email">hello@rodeolaundry.com</td>
-                    <td data-label="Alamat">Jl. Contoh No. 123</td>
-                    <td data-label="Link Map">https://www.google.com/maps?q=Batu%2C%20Sumberejo%2C%20Gg.%20Rodeo&output=embed</td>
-                    <td data-label="Aksi">
-                      <a class="admin-action-btn" href="/admin/settings/1/edit">Edit</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <form class="hero-form" action="/admin/settings" method="post">
+            <p>Data global yang tampil di header, footer, dan halaman kontak. Karena hanya ada satu data, silakan langsung edit nilainya di bawah ini.</p>
+            
+            <form class="hero-form" id="form-company-settings" action="{{ route('admin.settings.update') }}" method="post" style="margin-top: 1.5rem;">
               @csrf
+              @method('PUT')
               <div class="form-grid">
                 <div class="field">
-                  <input type="text" name="company_name" placeholder="Nama perusahaan" required />
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Nama Perusahaan</label>
+                  <input type="text" name="company_name" placeholder="Nama perusahaan" value="{{ $company_settings->company_name ?? '' }}" required disabled />
                 </div>
                 <div class="field">
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Nomor Telepon</label>
                   <input
                     type="tel"
                     name="phone"
@@ -496,31 +472,46 @@
                     inputmode="numeric"
                     pattern="[0-9+()\s-]+"
                     title="Gunakan angka dan simbol +() - saja"
+                    value="{{ $company_settings->phone ?? '' }}"
                     required
+                    disabled
                   />
                 </div>
                 <div class="field">
-                  <input type="url" name="whatsapp_link" placeholder="Link WhatsApp (https://wa.me/...)" required />
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link WhatsApp</label>
+                  <input type="url" name="whatsapp_link" placeholder="Link WhatsApp (https://wa.me/...)" value="{{ $company_settings->whatsapp_link ?? '' }}" required disabled />
                 </div>
                 <div class="field">
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Email</label>
                   <input
                     type="email"
                     name="email"
                     placeholder="Email"
                     pattern=".+@.+"
                     title="Masukkan email yang valid"
+                    value="{{ $company_settings->email ?? '' }}"
                     required
+                    disabled
                   />
                 </div>
-                <div class="field"><input type="text" name="address" placeholder="Alamat" required /></div>
                 <div class="field">
-                  <textarea name="map_embed" rows="1" placeholder="Link Map Embed (Kode iframe)" required></textarea>
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Alamat</label>
+                  <input type="text" name="address" placeholder="Alamat" value="{{ $company_settings->address ?? '' }}" required disabled />
+                </div>
+                <div class="field">
+                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link Map Embed (Kode Iframe)</label>
+                  <textarea name="map_embed" rows="1" placeholder="Link Map Embed (Kode iframe)" required disabled>{{ $company_settings->map_embed ?? '' }}</textarea>
                 </div>
               </div>
               <div class="field">
-                <textarea name="seo_description" rows="3" placeholder="Deskripsi SEO"></textarea>
+                <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Deskripsi SEO</label>
+                <textarea name="seo_description" rows="3" placeholder="Deskripsi SEO" disabled>{{ $company_settings->seo_description ?? '' }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan settings</button>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary" type="button" id="btn-edit-settings" onclick="editCompanySettings()">Edit Settings</button>
+                <button class="btn btn-primary" type="submit" id="btn-save-settings" style="display: none;">Update Settings</button>
+                <button class="btn btn-ghost" type="button" id="btn-cancel-settings" style="display: none;" onclick="cancelEditCompanySettings()">Batal Edit</button>
+              </div>
             </form>
           </section>
 
