@@ -51,6 +51,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
         Route::put('/faqs/{faq}', [FaqController::class, 'update'])->name('faqs.update');
         Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+        
+        Route::post('/service-types', [\App\Http\Controllers\Admin\ServiceTypeController::class, 'store'])->name('service-types.store');
+        Route::put('/service-types/{serviceType}', [\App\Http\Controllers\Admin\ServiceTypeController::class, 'update'])->name('service-types.update');
+        Route::delete('/service-types/{serviceType}', [\App\Http\Controllers\Admin\ServiceTypeController::class, 'destroy'])->name('service-types.destroy');
+
+        Route::post('/service-categories', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'store'])->name('service-categories.store');
+        Route::put('/service-categories/{serviceCategory}', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'update'])->name('service-categories.update');
+        Route::delete('/service-categories/{serviceCategory}', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'destroy'])->name('service-categories.destroy');
     });
 });
 

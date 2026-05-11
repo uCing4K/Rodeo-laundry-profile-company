@@ -10,8 +10,8 @@ class ServiceCategorySeeder extends Seeder
     {
 
         DB::table('service_categories')->insert([
-            ['name' => 'Setrika Saja', 'description' => 'Layanan setrika saja', 'base_price' => 2500, 'service_type_id' => 1],
-            ['name' => 'Cuci Komplit', 'description' => 'Layanan cuci lengkap dengan setrika', 'base_price' => 5000, 'service_type_id' => 1],
+            ['category' => 'Setrika Saja', 'product' => 'Pakaian', 'unit' => 'Kg', 'description' => 'Layanan setrika saja', 'base_price' => 2500, 'service_type_id' => 1],
+            ['category' => 'Cuci Komplit', 'product' => 'Pakaian', 'unit' => 'Kg', 'description' => 'Layanan cuci lengkap dengan setrika', 'base_price' => 5000, 'service_type_id' => 1],
         ]);
     }
 }
