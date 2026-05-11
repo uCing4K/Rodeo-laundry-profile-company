@@ -20,6 +20,9 @@
               <span class="admin-brand-role">Admin Dashboard</span>
             </div>
           </div>
+          <button class="admin-menu-btn" type="button" data-admin-menu-close aria-label="Close menu">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
 
         <p class="admin-sidebar-note">
@@ -99,6 +102,9 @@
 
       <main class="admin-main">
         <header class="admin-topbar">
+          <button class="admin-menu-btn" type="button" data-admin-menu-toggle aria-label="Toggle menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
           <div class="admin-topbar-left">
             <div class="admin-topbar-title">
               <p class="admin-kicker">Dashboard</p>
@@ -147,20 +153,20 @@
           <section class="admin-grid">
             <div class="admin-card">
               <div class="admin-card-head">
-                <h3>Ringkasan KPI</h3>
-                <span class="admin-chip">Hari ini</span>
+                <h3>Ringkasan</h3>
+                <span class="admin-chip">Total Data</span>
               </div>
               <div class="admin-kpis">
                 <div class="admin-kpi">
-                  <p class="stat-value">4</p>
+                  <p class="stat-value">{{ $popular_services->count() }}</p>
                   <p class="stat-label">Layanan populer</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">120</p>
-                  <p class="stat-label">Produk aktif</p>
+                  <p class="stat-value">{{ $stats['total_categories'] }}</p>
+                  <p class="stat-label">Layanan tersedia</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">10</p>
+                  <p class="stat-value">{{ $stats['total_faq'] }}</p>
                   <p class="stat-label">FAQ aktif</p>
                 </div>
               </div>
@@ -247,54 +253,40 @@
           <section class="admin-section" id="popular-services" data-api="/admin/popular-services">
             <h3>Layanan Populer</h3>
             <p>Tentukan layanan mana yang akan ditampilkan sebagai layanan populer di beranda.</p>
+            <div style="margin-bottom: 1rem;">
+              <button class="btn btn-primary" type="button" onclick="document.getElementById('popular-modal').style.display='flex'">Tambah Layanan Populer</button>
+            </div>
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th>Layanan</th>
                     <th>Kategori</th>
-                    <th>Status</th>
+                    <th>Produk</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse($popular_services as $service)
                   <tr>
-                    <td data-label="Layanan">Cuci Komplit</td>
-                    <td data-label="Kategori">Pakaian</td>
-                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
+                    <td data-label="Kategori">{{ $service->category }}</td>
+                    <td data-label="Produk">{{ $service->product ?? '-' }}</td>
                     <td data-label="Aksi">
                       <div class="admin-table-actions">
-                        <form action="/admin/popular-services/1" method="post" data-confirm="Hapus layanan ini dari daftar populer?">
+                        <form action="{{ route('admin.service-categories.toggle-popular', $service->id) }}" method="post" data-confirm="Hapus layanan ini dari daftar populer?">
                           @csrf
-                          @method('DELETE')
                           <button class="admin-action-btn is-danger" type="submit">Hapus</button>
                         </form>
                       </div>
                     </td>
                   </tr>
+                  @empty
+                  <tr>
+                    <td colspan="3" style="text-align: center;">Belum ada layanan populer</td>
+                  </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/popular-services" method="post">
-              @csrf
-              <div class="form-grid">
-                <div class="field">
-                  <select name="service_id" required>
-                    <option value="">Pilih Layanan</option>
-                    <option value="1">Setrika Saja</option>
-                    <option value="2">Cuci Komplit</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <select name="is_active" required>
-                    <option value="">Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Nonaktif</option>
-                  </select>
-                </div>
-              </div>
-              <button class="btn btn-primary" type="submit">Tambah ke populer</button>
-            </form>
           </section>
 
           <section class="admin-section" id="service-types" data-api="/admin/service-types">
@@ -461,7 +453,7 @@
           <section class="admin-section" id="settings">
             <h3>Company Settings</h3>
             <p>Data global yang tampil di header, footer, dan halaman kontak. Karena hanya ada satu data, silakan langsung edit nilainya di bawah ini.</p>
-            
+
             <form class="hero-form" id="form-company-settings" action="{{ route('admin.settings.update') }}" method="post" style="margin-top: 1.5rem;">
               @csrf
               @method('PUT')
@@ -502,10 +494,10 @@
                   <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Alamat</label>
                   <input type="text" name="address" placeholder="Alamat" value="{{ $company_settings->address ?? '' }}" required disabled />
                 </div>
-                <div class="field">
-                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link Map Embed (Kode Iframe)</label>
-                  <textarea name="map_embed" rows="1" placeholder="Link Map Embed (Kode iframe)" required disabled>{{ $company_settings->map_embed ?? '' }}</textarea>
-                </div>
+              </div>
+              <div class="field">
+                <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link Map Embed (Kode Iframe)</label>
+                <textarea name="map_embed" rows="3" placeholder="Link Map Embed (Kode iframe)" required disabled>{{ $company_settings->map_embed ?? '' }}</textarea>
               </div>
               <div class="field">
                 <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Deskripsi SEO</label>
@@ -573,16 +565,17 @@
 
         </div>
       </main>
+      <div class="admin-sidebar-backdrop" data-admin-backdrop></div>
     </div>
 
     <script src="{{ asset('asset/js/main.js') }}"></script>
 
-    <div id="logout-modal" onclick="if(event.target===this) modal.style.display='none'">
+    <div id="logout-modal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.4); align-items: center; justify-content: center;" onclick="if(event.target===this) this.style.display='none'">
       <div class="logout-card">
         <h3>Konfirmasi Logout</h3>
         <p>Yakin ingin keluar dari dashboard admin?</p>
         <div class="logout-actions">
-          <button class="btn btn-ghost" onclick="modal.style.display='none'">Batal</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('logout-modal').style.display='none'">Batal</button>
           <button class="btn btn-primary" onclick="document.getElementById('logout-form').submit()">Ya, Logout</button>
         </div>
       </div>
@@ -596,6 +589,47 @@
           <button class="btn btn-ghost" onclick="document.getElementById('delete-modal').style.display='none'">Batal</button>
           <button class="btn btn-primary" style="background: #d64545; border-color: #d64545;" onclick="submitDeleteForm()">Ya, Hapus</button>
         </div>
+      </div>
+    </div>
+
+
+    <div id="popular-modal" onclick="if(event.target===this) this.style.display='none'" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 1rem;">
+      <div style="background: #141312; color: #f5f2ee; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.5rem; width: 100%; max-width: 480px; max-height: 80vh; display: flex; flex-direction: column; gap: 1rem;">
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h3 style="margin: 0; font-size: 1rem; font-weight: 600; color: #ffffff;">Tambah Layanan Populer</h3>
+          <button onclick="document.getElementById('popular-modal').style.display='none'; document.getElementById('popular-search-input').value=''; filterPopularSearch('');" style="background: none; border: none; cursor: pointer; font-size: 1.4rem; color: rgba(255,255,255,0.5); line-height: 1; padding: 0;">&times;</button>
+        </div>
+
+        <input
+          type="text"
+          id="popular-search-input"
+          placeholder="Cari layanan..."
+          oninput="filterPopularSearch(this.value)"
+          style="width: 100%; padding: 0.55rem 0.85rem; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; background: rgba(255,255,255,0.06); color: #f5f2ee; font-size: 0.875rem; box-sizing: border-box; outline: none;"
+          autofocus
+        />
+
+        <div id="popular-search-results" style="overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 0.4rem;">
+          @forelse($categories->where('is_popular', false) as $cat)
+          <div
+            data-search="{{ strtolower($cat->category . ' ' . ($cat->product ?? '') . ' ' . ($cat->serviceType->name ?? '')) }}"
+            style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); gap: 0.75rem;"
+          >
+            <div style="min-width: 0;">
+              <p style="margin: 0; font-size: 0.875rem; font-weight: 500; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $cat->category }}{{ $cat->product ? ' – ' . $cat->product : '' }}</p>
+              <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.5);">{{ $cat->serviceType->name ?? 'Tanpa tipe' }} · Rp{{ number_format($cat->base_price, 0, ',', '.') }}</p>
+            </div>
+            <form action="{{ route('admin.service-categories.toggle-popular', $cat->id) }}" method="post" style="flex-shrink: 0;">
+              @csrf
+              <button class="btn btn-primary" type="submit" style="padding: 0.35rem 0.85rem; font-size: 0.8rem;">Pilih</button>
+            </form>
+          </div>
+          @empty
+          <p style="text-align: center; color: rgba(255,255,255,0.4); font-size: 0.875rem; margin: 1rem 0;">Semua layanan sudah menjadi populer.</p>
+          @endforelse
+        </div>
+
       </div>
     </div>
 

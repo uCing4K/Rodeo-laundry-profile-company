@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
+@php
+    $globalSetting = \App\Models\CompanySetting::first();
+@endphp
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

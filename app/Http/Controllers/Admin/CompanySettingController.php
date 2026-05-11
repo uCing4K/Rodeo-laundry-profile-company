@@ -27,6 +27,6 @@ class CompanySettingController extends Controller
             CompanySetting::create($validated);
         }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Pengaturan perusahaan berhasil diperbarui.');
+        return redirect(route('admin.dashboard') . '#settings')->with('success', 'Pengaturan perusahaan berhasil diperbarui.');
     }
 }

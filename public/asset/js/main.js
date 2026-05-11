@@ -566,3 +566,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   initAdminEditButtons();
 });
+
+window.filterPopularSearch = function(query) {
+  const container = document.getElementById('popular-search-results');
+  if (!container) return;
+
+  const items = container.querySelectorAll('[data-search]');
+  const q = query.toLowerCase().trim();
+
+  items.forEach(item => {
+    const searchVal = item.getAttribute('data-search') || '';
+    item.style.display = searchVal.includes(q) ? 'flex' : 'none';
+  });
+};

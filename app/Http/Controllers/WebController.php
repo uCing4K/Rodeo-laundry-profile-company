@@ -18,11 +18,13 @@ class WebController extends Controller
         $companySetting = CompanySetting::first();
         $categories = ServiceCategory::limit(6)->get();
         $testimonials = Testimonial::all();
+        $popularServices = ServiceCategory::where('is_popular', true)->with('serviceType')->get();
 
         return view('index', [
-            'companySetting' => $companySetting,
-            'categories' => $categories,
-            'testimonials' => $testimonials,
+            'companySetting'  => $companySetting,
+            'categories'      => $categories,
+            'testimonials'    => $testimonials,
+            'popularServices' => $popularServices,
         ]);
     }
 

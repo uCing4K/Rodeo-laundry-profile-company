@@ -29,7 +29,7 @@ class ServiceCategoryController extends Controller
 
         ServiceCategory::create($validated);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Layanan berhasil ditambahkan.');
+        return redirect(route('admin.dashboard') . '#services')->with('success', 'Layanan berhasil ditambahkan.');
     }
 
     public function update(Request $request, ServiceCategory $serviceCategory)
@@ -52,12 +52,22 @@ class ServiceCategoryController extends Controller
 
         $serviceCategory->update($validated);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Layanan berhasil diperbarui.');
+        return redirect(route('admin.dashboard') . '#services')->with('success', 'Layanan berhasil diperbarui.');
     }
 
     public function destroy(ServiceCategory $serviceCategory)
     {
         $serviceCategory->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Layanan berhasil dihapus.');
+        return redirect(route('admin.dashboard') . '#services')->with('success', 'Layanan berhasil dihapus.');
+    }
+
+    public function togglePopular(Request $request, ServiceCategory $serviceCategory)
+    {
+        $serviceCategory->update([
+            'is_popular' => !$serviceCategory->is_popular
+        ]);
+
+        $status = $serviceCategory->is_popular ? 'ditambahkan ke' : 'dihapus dari';
+        return redirect(route('admin.dashboard') . '#popular-services')->with('success', "Layanan berhasil {$status} daftar populer.");
     }
 }
