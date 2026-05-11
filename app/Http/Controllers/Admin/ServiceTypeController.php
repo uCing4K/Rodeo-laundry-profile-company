@@ -19,7 +19,7 @@ class ServiceTypeController extends Controller
 
         ServiceType::create($validated);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Tipe layanan berhasil ditambahkan.');
+        return redirect(route('admin.dashboard') . '#service-types')->with('success', 'Tipe layanan berhasil ditambahkan.');
     }
 
     public function update(Request $request, ServiceType $serviceType)
@@ -33,12 +33,12 @@ class ServiceTypeController extends Controller
 
         $serviceType->update($validated);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Tipe layanan berhasil diperbarui.');
+        return redirect(route('admin.dashboard') . '#service-types')->with('success', 'Tipe layanan berhasil diperbarui.');
     }
 
     public function destroy(ServiceType $serviceType)
     {
         $serviceType->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Tipe layanan berhasil dihapus.');
+        return redirect(route('admin.dashboard') . '#service-types')->with('success', 'Tipe layanan berhasil dihapus.');
     }
 }

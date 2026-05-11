@@ -20,6 +20,9 @@
               <span class="admin-brand-role">Admin Dashboard</span>
             </div>
           </div>
+          <button class="admin-menu-btn" type="button" data-admin-menu-close aria-label="Close menu">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
 
         <p class="admin-sidebar-note">
@@ -99,6 +102,9 @@
 
       <main class="admin-main">
         <header class="admin-topbar">
+          <button class="admin-menu-btn" type="button" data-admin-menu-toggle aria-label="Toggle menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
           <div class="admin-topbar-left">
             <div class="admin-topbar-title">
               <p class="admin-kicker">Dashboard</p>
@@ -147,20 +153,20 @@
           <section class="admin-grid">
             <div class="admin-card">
               <div class="admin-card-head">
-                <h3>Ringkasan KPI</h3>
-                <span class="admin-chip">Hari ini</span>
+                <h3>Ringkasan</h3>
+                <span class="admin-chip">Total Data</span>
               </div>
               <div class="admin-kpis">
                 <div class="admin-kpi">
-                  <p class="stat-value">4</p>
+                  <p class="stat-value">{{ $popular_services->count() }}</p>
                   <p class="stat-label">Layanan populer</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">120</p>
-                  <p class="stat-label">Produk aktif</p>
+                  <p class="stat-value">{{ $stats['total_categories'] }}</p>
+                  <p class="stat-label">Layanan tersedia</p>
                 </div>
                 <div class="admin-kpi">
-                  <p class="stat-value">10</p>
+                  <p class="stat-value">{{ $stats['total_faq'] }}</p>
                   <p class="stat-label">FAQ aktif</p>
                 </div>
               </div>
@@ -440,7 +446,7 @@
           <section class="admin-section" id="settings">
             <h3>Company Settings</h3>
             <p>Data global yang tampil di header, footer, dan halaman kontak. Karena hanya ada satu data, silakan langsung edit nilainya di bawah ini.</p>
-            
+
             <form class="hero-form" id="form-company-settings" action="{{ route('admin.settings.update') }}" method="post" style="margin-top: 1.5rem;">
               @csrf
               @method('PUT')
@@ -560,16 +566,17 @@
 
         </div>
       </main>
+      <div class="admin-sidebar-backdrop" data-admin-backdrop></div>
     </div>
 
     <script src="{{ asset('asset/js/main.js') }}"></script>
 
-    <div id="logout-modal" onclick="if(event.target===this) modal.style.display='none'">
+    <div id="logout-modal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.4); align-items: center; justify-content: center;" onclick="if(event.target===this) this.style.display='none'">
       <div class="logout-card">
         <h3>Konfirmasi Logout</h3>
         <p>Yakin ingin keluar dari dashboard admin?</p>
         <div class="logout-actions">
-          <button class="btn btn-ghost" onclick="modal.style.display='none'">Batal</button>
+          <button class="btn btn-ghost" onclick="document.getElementById('logout-modal').style.display='none'">Batal</button>
           <button class="btn btn-primary" onclick="document.getElementById('logout-form').submit()">Ya, Logout</button>
         </div>
       </div>
