@@ -18,11 +18,13 @@ class WebController extends Controller
         $companySetting = CompanySetting::first();
         $categories = ServiceCategory::limit(6)->get();
         $testimonials = Testimonial::all();
+        $popularServices = ServiceCategory::where('is_popular', true)->with('serviceType')->get();
 
         return view('index', [
-            'companySetting' => $companySetting,
-            'categories' => $categories,
-            'testimonials' => $testimonials,
+            'companySetting'  => $companySetting,
+            'categories'      => $categories,
+            'testimonials'    => $testimonials,
+            'popularServices' => $popularServices,
         ]);
     }
 
@@ -31,9 +33,25 @@ class WebController extends Controller
         $categories = ServiceCategory::with('serviceType')->get();
         $serviceTypes = ServiceType::all();
 
+        $regulerCategories = $categories->filter(function($cat) {
+            return $cat->serviceType && strtolower($cat->serviceType->name) === 'reguler';
+        });
+        
+        $premiumCategories = $categories->filter(function($cat) {
+            return $cat->serviceType && strtolower($cat->serviceType->name) === 'premium';
+        });
+        
+        $otherCategories = $categories->filter(function($cat) {
+            if (!$cat->serviceType) return true;
+            $name = strtolower($cat->serviceType->name);
+            return $name !== 'reguler' && $name !== 'premium';
+        });
+
         return view('services', [
-            'categories' => $categories,
-            'serviceTypes' => $serviceTypes,
+            'regulerCategories' => $regulerCategories,
+            'premiumCategories' => $premiumCategories,
+            'otherCategories'   => $otherCategories,
+            'serviceTypes'      => $serviceTypes,
         ]);
     }
 
@@ -82,10 +100,12 @@ class WebController extends Controller
 
     public function operatingHours()
     {
-        $data = OperatingHour::where('is_closed', false)->get();
+        $data = OperatingHour::all();
+        $companySetting = CompanySetting::first();
 
         return view('contact', [
             'operatingHours' => $data,
+            'companySetting' => $companySetting,
         ]);
     }
 }

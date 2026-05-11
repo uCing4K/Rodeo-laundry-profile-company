@@ -133,9 +133,14 @@
   if (confirmForms.length) {
     confirmForms.forEach((form) => {
       form.addEventListener("submit", (event) => {
+        event.preventDefault();
         const message = form.getAttribute("data-confirm") || "Lanjutkan aksi ini?";
-        if (!window.confirm(message)) {
-          event.preventDefault();
+        if (typeof window.confirmDelete === 'function') {
+          window.confirmDelete(message, form);
+        } else {
+          if (window.confirm(message)) {
+            form.submit();
+          }
         }
       });
     });
@@ -194,3 +199,194 @@
     });
   }
 })();
+
+window.confirmLogout = function() {
+  const modal = document.getElementById('logout-modal');
+  if (modal) modal.style.display = 'flex';
+};
+
+let currentDeleteForm = null;
+window.confirmDelete = function(message, form) {
+  const textEl = document.getElementById('delete-modal-text');
+  const modalEl = document.getElementById('delete-modal');
+  if (textEl && modalEl) {
+    textEl.innerText = message;
+    currentDeleteForm = form;
+    modalEl.style.display = 'flex';
+  }
+};
+
+window.submitDeleteForm = function() {
+  if (currentDeleteForm) {
+    currentDeleteForm.submit();
+  }
+};
+
+window.editServiceCategory = function(id, category, product, unit, price, type_id, description) {
+  const form = document.getElementById('form-service-categories');
+  if (!form) return;
+  form.action = `/admin/service-categories/${id}`;
+  
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (!methodInput) {
+      methodInput = document.createElement('input');
+      methodInput.type = 'hidden';
+      methodInput.name = '_method';
+      form.appendChild(methodInput);
+  }
+  methodInput.value = 'PUT';
+
+  const catInput = form.querySelector('input[name="category"]');
+  if (catInput) catInput.value = category || '';
+  
+  const prodInput = form.querySelector('input[name="product"]');
+  if (prodInput) prodInput.value = product || '';
+  
+  const unitSelect = form.querySelector('select[name="unit"]');
+  if (unitSelect) {
+    let normalizedUnit = unit ? unit.toLowerCase().trim() : '';
+    if (normalizedUnit && !normalizedUnit.startsWith('/')) {
+        normalizedUnit = '/' + normalizedUnit;
+    }
+    unitSelect.value = normalizedUnit || '';
+  }
+  
+  const priceInput = form.querySelector('input[name="base_price"]');
+  if (priceInput) priceInput.value = price || '0';
+  
+  const typeSelect = form.querySelector('select[name="service_type_id"]');
+  if (typeSelect) typeSelect.value = type_id || '';
+  
+  const descInput = form.querySelector('textarea[name="description"]');
+  if (descInput) descInput.value = description || '';
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.innerText = 'Update layanan';
+  
+  const cancelBtn = document.getElementById('cancel-edit-service-categories');
+  if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+  
+  form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+window.cancelEditServiceCategory = function() {
+  const form = document.getElementById('form-service-categories');
+  if (!form) return;
+  form.reset();
+  form.action = "/admin/service-categories";
+  
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (methodInput) {
+      methodInput.remove();
+  }
+  
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.innerText = 'Simpan layanan';
+  
+  const cancelBtn = document.getElementById('cancel-edit-service-categories');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+};
+
+window.editServiceType = function(id, name, duration, cost, description) {
+  const form = document.getElementById('form-service-types');
+  if (!form) return;
+  form.action = `/admin/service-types/${id}`;
+  
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (!methodInput) {
+      methodInput = document.createElement('input');
+      methodInput.type = 'hidden';
+      methodInput.name = '_method';
+      form.appendChild(methodInput);
+  }
+  methodInput.value = 'PUT';
+
+  const nameInput = form.querySelector('input[name="name"]');
+  if (nameInput) nameInput.value = name || '';
+  
+  const durationInput = form.querySelector('input[name="estimated_duration"]');
+  if (durationInput) durationInput.value = duration || '';
+  
+  const costInput = form.querySelector('input[name="additional_cost"]');
+  if (costInput) costInput.value = cost || '0';
+  
+  const descInput = form.querySelector('textarea[name="description"]');
+  if (descInput) descInput.value = description || '';
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.innerText = 'Update tipe';
+  
+  const cancelBtn = document.getElementById('cancel-edit-service-types');
+  if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+  
+  form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+window.cancelEditServiceType = function() {
+  const form = document.getElementById('form-service-types');
+  if (!form) return;
+  form.reset();
+  form.action = "/admin/service-types";
+  
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (methodInput) {
+      methodInput.remove();
+  }
+  
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.innerText = 'Simpan tipe';
+  
+  const cancelBtn = document.getElementById('cancel-edit-service-types');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+};
+
+window.editCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
+  if (!form) return;
+  
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.removeAttribute('disabled');
+  });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'none';
+  if (btnSave) btnSave.style.display = 'inline-flex';
+  if (btnCancel) btnCancel.style.display = 'inline-flex';
+};
+
+window.cancelEditCompanySettings = function() {
+  const form = document.getElementById('form-company-settings');
+  if (!form) return;
+
+  form.reset();
+
+  const inputs = form.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.setAttribute('disabled', 'disabled');
+  });
+
+  const btnEdit = document.getElementById('btn-edit-settings');
+  const btnSave = document.getElementById('btn-save-settings');
+  const btnCancel = document.getElementById('btn-cancel-settings');
+
+  if (btnEdit) btnEdit.style.display = 'inline-flex';
+  if (btnSave) btnSave.style.display = 'none';
+  if (btnCancel) btnCancel.style.display = 'none';
+};
+
+window.filterPopularSearch = function(query) {
+  const container = document.getElementById('popular-search-results');
+  if (!container) return;
+
+  const items = container.querySelectorAll('[data-search]');
+  const q = query.toLowerCase().trim();
+
+  items.forEach(item => {
+    const searchVal = item.getAttribute('data-search') || '';
+    item.style.display = searchVal.includes(q) ? 'flex' : 'none';
+  });
+};

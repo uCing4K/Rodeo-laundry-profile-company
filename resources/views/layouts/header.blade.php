@@ -13,14 +13,14 @@
       <a @if(Route::currentRouteName() === 'contact') class="is-active" @endif href="{{ route('contact') }}">Kontak</a>
       <a @if(Route::currentRouteName() === 'faq') class="is-active" @endif href="{{ route('faq') }}">FAQ</a>
       <div class="nav-mobile-cta">
-        <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a class="btn btn-primary" href="{{ $globalSetting->whatsapp_link ?? 'https://wa.me/6282143297707' }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a class="btn btn-ghost" href="{{ route('tracking') }}">Cek Status</a>
       </div>
     </nav>
 
     <div class="header-cta">
       <a class="btn btn-ghost" href="{{ route('tracking') }}">Cek Status</a>
-      <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="btn btn-primary" href="{{ $globalSetting->whatsapp_link ?? 'https://wa.me/6282143297707' }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
 
     <button

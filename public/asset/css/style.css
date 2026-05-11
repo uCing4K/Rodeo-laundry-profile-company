@@ -785,9 +785,11 @@ small {
 
 .admin-shell {
   min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-columns: 280px 1fr;
   background: #f5f3ef;
+  overflow: hidden;
 }
 
 .admin-sidebar {
@@ -977,6 +979,8 @@ small {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .admin-topbar {
@@ -990,12 +994,20 @@ small {
   position: sticky;
   top: 0;
   z-index: 120;
+  flex-wrap: nowrap;
 }
 
 .admin-topbar-left {
   display: flex;
   align-items: center;
   gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-topbar-title {
+  display: grid;
+  gap: 4px;
 }
 
 .admin-topbar-title h1 {
@@ -1037,6 +1049,8 @@ small {
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .admin-menu-btn:hover {
@@ -1509,15 +1523,47 @@ small {
   }
 
   .admin-sidebar {
-    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: min(86vw, 320px);
+    min-height: 100vh;
+    max-height: 100vh;
+    transform: translateX(-105%);
+    transition: transform 0.28s ease;
+    overflow-y: auto;
+    padding: 24px 20px;
+  }
+
+  .admin-sidebar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .admin-menu-btn {
-    display: none;
+    display: inline-flex;
+  }
+
+  .admin-menu-close {
+    display: inline-flex;
   }
 
   .admin-sidebar-backdrop {
-    display: none;
+    display: block;
+  }
+
+  body.admin-menu-open {
+    overflow: hidden;
+  }
+
+  body.admin-menu-open .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  body.admin-menu-open .admin-sidebar-backdrop {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .admin-nav {
@@ -1529,8 +1575,11 @@ small {
     justify-content: flex-start;
   }
 
-  .admin-content {
-    padding: 24px 20px 32px;
+  .admin-actions .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    flex-shrink: 1;
+    white-space: nowrap;
   }
 
   .admin-section,
@@ -1540,7 +1589,47 @@ small {
   }
 
   .admin-topbar {
-    padding: 14px 18px;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    gap: 12px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .admin-topbar-left {
+    flex: 1;
+    min-width: 0;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .admin-topbar-title {
+    display: grid;
+    gap: 0;
+  }
+
+  .admin-topbar-title h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .admin-kicker {
+    display: none !important;
+  }
+
+  .admin-topbar-subtitle {
+    display: none !important;
   }
 
   .admin-auth {
@@ -1598,22 +1687,27 @@ small {
   }
 
   .admin-topbar-title h1 {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .admin-topbar {
-    position: static;
-    flex-direction: column;
-    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    flex-direction: row;
+    align-items: center;
     gap: 12px;
-    background: linear-gradient(135deg, #ffffff, #fff1e3);
-    border: 1px solid rgba(245, 130, 31, 0.18);
-    border-radius: 16px;
-    box-shadow: var(--shadow-sm);
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 12px 16px;
   }
 
   .admin-topbar-left {
-    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
   }
 
   .admin-actions,
@@ -1621,7 +1715,13 @@ small {
     width: 100%;
   }
 
-  .admin-actions .btn,
+  .admin-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    flex-shrink: 1;
+    white-space: nowrap;
+  }
+
   .admin-hero-actions .btn {
     width: 100%;
   }
@@ -1636,11 +1736,16 @@ small {
     grid-template-columns: 1fr;
   }
 
-  .admin-topbar .btn,
   .admin-actions .btn,
   .hero-actions .btn,
   .cta-actions .btn {
     width: 100%;
+  }
+
+  .admin-topbar .btn {
+    width: auto;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
   }
 
   .admin-nav {

@@ -38,10 +38,9 @@
 
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
       <span class="badge">Cek status cepat</span>
-      <h3>Masukkan nomor order atau token.</h3>
+      <h3>Masukkan token Anda.</h3>
       <p>
-        Format order: RODEO-YYYYMMDD-XXXX. Anda juga bisa pakai token
-        tracking.
+        Gunakan token tracking untuk mengecek status laundry Anda.
       </p>
       <form
         class="hero-form"
@@ -98,52 +97,29 @@
   </div>
 </section>
 
-<section class="section" id="services" data-api="/api/public/services">
+<section class="section" id="services">
   <div class="container">
     <div class="section-header" data-reveal>
       <div class="eyebrow">Layanan unggulan</div>
-      <h2 class="section-title">Kategori populer dan harga mulai.</h2>
+      <h2 class="section-title">Kategori layanan populer.</h2>
       <p class="section-subtitle">
-        Semua harga di bawah ini dapat diupdate otomatis dari database POS.
+        Daftar layanan yang paling banyak dipesan.
       </p>
     </div>
     <div class="grid-3">
-      <div class="card" data-reveal style="--reveal-delay: 0ms;">
-        <div class="icon-badge">CS</div>
-        <h3>Cuci Setrika</h3>
-        <p>Mulai dari Rp 5.000 per kg.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      @forelse($popularServices as $index => $service)
+      <div class="card" data-reveal style="--reveal-delay: {{ ($index % 3) * 80 }}ms;">
+        <div class="icon-badge">{{ strtoupper(substr($service->category, 0, 2)) }}</div>
+        <h3>{{ $service->category }}</h3>
+        <p>Mulai dari Rp {{ number_format($service->base_price, 0, ',', '.') }}{{ $service->unit ?? '' }}.</p>
+        <a class="btn btn-ghost" href="{{ route('services') }}">Lihat detail</a>
       </div>
-      <div class="card" data-reveal style="--reveal-delay: 80ms;">
-        <div class="icon-badge">CK</div>
-        <h3>Cuci Kering Lipat</h3>
-        <p>Mulai dari Rp 4.000 per kg.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      @empty
+      <div class="card" data-reveal style="--reveal-delay: 0ms; grid-column: 1/-1; text-align: center;">
+        <p>Belum ada layanan populer yang dipilih.</p>
+        <a class="btn btn-ghost" href="{{ route('services') }}">Lihat semua layanan</a>
       </div>
-      <div class="card" data-reveal style="--reveal-delay: 160ms;">
-        <div class="icon-badge">ST</div>
-        <h3>Setrika Saja</h3>
-        <p>Mulai dari Rp 2.500 per kg.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-      </div>
-      <div class="card" data-reveal style="--reveal-delay: 0ms;">
-        <div class="icon-badge">SL</div>
-        <h3>Selimut</h3>
-        <p>Mulai dari Rp 5.000 per pcs.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-      </div>
-      <div class="card" data-reveal style="--reveal-delay: 80ms;">
-        <div class="icon-badge">BD</div>
-        <h3>Bedcover</h3>
-        <p>Mulai dari Rp 13.000 per pcs.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-      </div>
-      <div class="card" data-reveal style="--reveal-delay: 160ms;">
-        <div class="icon-badge">SP</div>
-        <h3>Seprai</h3>
-        <p>Mulai dari Rp 5.000 per pcs.</p>
-        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-      </div>
+      @endforelse
     </div>
   </div>
 </section>

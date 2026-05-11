@@ -10,7 +10,7 @@ class ServiceCategory extends Model
     protected $table = 'service_categories';
 
     protected $fillable = [
-        'name', 'description', 'base_price', 'service_type_id',
+        'category', 'product', 'unit', 'description', 'base_price', 'service_type_id', 'is_popular',
     ];
 
     protected $casts = [
