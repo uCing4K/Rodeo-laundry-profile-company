@@ -88,7 +88,7 @@
               @if($hour->is_closed)
                 Tutup
               @else
-                {{ \Carbon\Carbon::parse($hour->open_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($hour->close_time)->format('H:i') }} WIB
+                {{ \Carbon\Carbon::parse($hour->open_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($hour->closed_time)->format('H:i') }} WIB
               @endif
             </td>
           </tr>

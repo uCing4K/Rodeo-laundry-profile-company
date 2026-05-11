@@ -98,10 +98,12 @@ class WebController extends Controller
 
     public function operatingHours()
     {
-        $data = OperatingHour::where('is_closed', false)->get();
+        $data = OperatingHour::all();
+        $companySetting = CompanySetting::first();
 
         return view('contact', [
             'operatingHours' => $data,
+            'companySetting' => $companySetting,
         ]);
     }
 }
