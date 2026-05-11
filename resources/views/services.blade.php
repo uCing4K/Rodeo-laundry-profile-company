@@ -22,22 +22,20 @@
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
       <span class="badge">Informasi cepat</span>
       <h3>Estimasi selesai</h3>
-      <p>Layanan reguler selesai dalam 24 - 48 jam.</p>
+      <p>Estimasi durasi pengerjaan berdasarkan tipe layanan.</p>
       <div class="hero-stats">
+        @foreach($serviceTypes as $type)
         <div class="stat">
-          <div class="stat-value">Reguler</div>
-          <div class="stat-label">Harga standar</div>
+          <div class="stat-value">{{ $type->name }}</div>
+          <div class="stat-label">{{ $type->estimated_duration ?? 'Tanya admin' }}</div>
         </div>
-        <div class="stat">
-          <div class="stat-value">Premium</div>
-          <div class="stat-label">48 - 72 jam</div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" data-api="/api/public/services">
+<section class="section">
   <div class="container">
     <div class="section-header" data-reveal>
       <div class="eyebrow">Layanan reguler</div>
@@ -54,98 +52,32 @@
           </tr>
         </thead>
         <tbody>
+          @forelse($regulerCategories as $category)
           <tr>
-            <td data-label="Kategori">Setrika</td>
-            <td data-label="Produk">Setrika Saja</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 2.500</td>
+            <td data-label="Kategori">{{ $category->category }}</td>
+            <td data-label="Produk">{{ $category->product ?? '-' }}</td>
+            <td data-label="Satuan">{{ $category->unit ?? '-' }}</td>
+            <td data-label="Harga">Rp {{ number_format($category->base_price, 0, ',', '.') }}</td>
           </tr>
+          @empty
           <tr>
-            <td data-label="Kategori">Cuci Kering</td>
-            <td data-label="Produk">Cuci Kering Lipat</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 4.000</td>
+            <td colspan="4" style="text-align: center; padding: 2rem;">Belum ada layanan reguler.</td>
           </tr>
-          <tr>
-            <td data-label="Kategori">Cuci Setrika</td>
-            <td data-label="Produk">Cuci Setrika</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 5.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Selimut</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 5.000 - 20.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Bedcover</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 13.000 - 25.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Seprai</td>
-            <td data-label="Produk">Seprai + sarung bantal guling</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 5.000 - 10.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Karpet</td>
-            <td data-label="Produk">Tipis - sedang - tebal</td>
-            <td data-label="Satuan">/meter</td>
-            <td data-label="Harga">Rp 5.000 - 15.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Boneka</td>
-            <td data-label="Produk">Kecil - sedang - besar - jumbo</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 2.000 - 25.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Handuk dan Jaket</td>
-            <td data-label="Produk">Handuk, jaket, keset</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 2.000 - 15.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Cuci Sepatu</td>
-            <td data-label="Produk">Ukuran kecil - normal</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 10.000 - 15.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Gorden</td>
-            <td data-label="Produk">Normal - tebal</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 7.000 - 10.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Bantal dan Guling</td>
-            <td data-label="Produk">Bantal normal, guling tebal</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 10.000 - 12.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Tas</td>
-            <td data-label="Produk">Kecil - sedang - besar</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 5.000 - 15.000</td>
-          </tr>
+          @endforelse
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" data-api="/api/public/services?type=premium">
+<section class="section section-alt">
   <div class="container">
     <div class="section-header" data-reveal>
       <div class="eyebrow">Layanan premium</div>
       <h2 class="section-title">Daftar harga layanan premium.</h2>
       <p class="section-subtitle">
         Layanan premium dengan penanganan ekstra hati-hati,
-        dan dikerjakan oleh tim berpengalaman. Estimasi selesai 48 – 72 jam.
+        dan dikerjakan oleh tim berpengalaman.
       </p>
     </div>
     <div class="table-wrapper" data-reveal>
@@ -159,74 +91,31 @@
           </tr>
         </thead>
         <tbody>
+          @forelse($premiumCategories as $category)
           <tr>
-            <td data-label="Kategori">Cuci Setrika</td>
-            <td data-label="Produk">Cuci Setrika Premium</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 8.000</td>
+            <td data-label="Kategori">{{ $category->category }}</td>
+            <td data-label="Produk">{{ $category->product ?? '-' }}</td>
+            <td data-label="Satuan">{{ $category->unit ?? '-' }}</td>
+            <td data-label="Harga">Rp {{ number_format($category->base_price, 0, ',', '.') }}</td>
           </tr>
+          @empty
           <tr>
-            <td data-label="Kategori">Selimut</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 10.000 - 35.000</td>
+            <td colspan="4" style="text-align: center; padding: 2rem;">Belum ada layanan premium.</td>
           </tr>
-          <tr>
-            <td data-label="Kategori">Bedcover</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 20.000 - 45.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Karpet</td>
-            <td data-label="Produk">Tipis - sedang - tebal</td>
-            <td data-label="Satuan">/meter</td>
-            <td data-label="Harga">Rp 10.000 - 25.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Boneka</td>
-            <td data-label="Produk">Kecil - sedang - besar - jumbo</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 5.000 - 40.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Cuci Sepatu</td>
-            <td data-label="Produk">Sneakers - formal - boots</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 20.000 - 35.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Tas</td>
-            <td data-label="Produk">Kecil - sedang - besar</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 15.000 - 40.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Jaket Kulit / Bahan Khusus</td>
-            <td data-label="Produk">Kulit, suede, wol</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 25.000 - 60.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Gorden</td>
-            <td data-label="Produk">Normal - tebal - blackout</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 12.000 - 20.000</td>
-          </tr>
+          @endforelse
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<section class="section" data-api="/api/public/services?type=express">
+<section class="section">
   <div class="container">
     <div class="section-header" data-reveal>
-      <div class="eyebrow">Layanan express</div>
-      <h2 class="section-title">Daftar harga layanan express.</h2>
+      <div class="eyebrow">Layanan lainnya</div>
+      <h2 class="section-title">Daftar harga layanan lainnya.</h2>
       <p class="section-subtitle">
-        Selesai dalam waktu lebih cepat. Dikenakan biaya
-        tambahan express di atas harga reguler. Cocok untuk kebutuhan mendadak.
+        Layanan tambahan, express, atau layanan khusus lainnya yang tersedia di Rodeo Laundry.
       </p>
     </div>
     <div class="table-wrapper" data-reveal>
@@ -236,46 +125,24 @@
             <th>Kategori</th>
             <th>Produk</th>
             <th>Satuan</th>
+            <th>Tipe Layanan</th>
             <th>Harga</th>
           </tr>
         </thead>
         <tbody>
+          @forelse($otherCategories as $category)
           <tr>
-            <td data-label="Kategori">Cuci Kering</td>
-            <td data-label="Produk">Cuci Kering Lipat Express</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 7.000</td>
+            <td data-label="Kategori">{{ $category->category }}</td>
+            <td data-label="Produk">{{ $category->product ?? '-' }}</td>
+            <td data-label="Satuan">{{ $category->unit ?? '-' }}</td>
+            <td data-label="Tipe Layanan"><span class="badge">{{ $category->serviceType->name ?? '-' }}</span></td>
+            <td data-label="Harga">Rp {{ number_format($category->base_price, 0, ',', '.') }}</td>
           </tr>
+          @empty
           <tr>
-            <td data-label="Kategori">Cuci Setrika</td>
-            <td data-label="Produk">Cuci Setrika Express</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 9.000</td>
+            <td colspan="5" style="text-align: center; padding: 2rem;">Belum ada layanan lainnya.</td>
           </tr>
-          <tr>
-            <td data-label="Kategori">Setrika</td>
-            <td data-label="Produk">Setrika Saja Express</td>
-            <td data-label="Satuan">/kg</td>
-            <td data-label="Harga">Rp 5.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Selimut</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 8.000 - 28.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Bedcover</td>
-            <td data-label="Produk">S - M - L - XL - XXL</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 18.000 - 35.000</td>
-          </tr>
-          <tr>
-            <td data-label="Kategori">Cuci Sepatu</td>
-            <td data-label="Produk">Ukuran kecil - normal</td>
-            <td data-label="Satuan">pcs</td>
-            <td data-label="Harga">Rp 18.000 - 25.000</td>
-          </tr>
+          @endforelse
         </tbody>
       </table>
     </div>
