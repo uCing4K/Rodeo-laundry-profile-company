@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
+use App\Models\ServiceType;
 use Illuminate\Http\Request;
 
 class ServiceCategoryController extends Controller
@@ -18,6 +19,13 @@ class ServiceCategoryController extends Controller
             'service_type_id' => 'nullable|exists:service_types,id',
             'description' => 'nullable|string',
         ]);
+
+        if (!empty($validated['service_type_id'])) {
+            $serviceType = ServiceType::find($validated['service_type_id']);
+            if ($serviceType) {
+                $validated['base_price'] += $serviceType->additional_cost;
+            }
+        }
 
         ServiceCategory::create($validated);
 
@@ -34,6 +42,13 @@ class ServiceCategoryController extends Controller
             'service_type_id' => 'nullable|exists:service_types,id',
             'description' => 'nullable|string',
         ]);
+
+        if (!empty($validated['service_type_id'])) {
+            $serviceType = ServiceType::find($validated['service_type_id']);
+            if ($serviceType) {
+                $validated['base_price'] += $serviceType->additional_cost;
+            }
+        }
 
         $serviceCategory->update($validated);
 

@@ -192,7 +192,7 @@
                     <td data-label="Tipe">{{ $category->serviceType->name ?? '-' }}</td>
                     <td data-label="Aksi">
                       <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="javascript:void(0)" onclick="editServiceCategory({{ $category->id }}, {{ json_encode($category->category) }}, {{ json_encode($category->product) }}, {{ json_encode($category->unit) }}, {{ $category->base_price }}, {{ json_encode($category->service_type_id) }}, {{ json_encode($category->description) }})">Edit</a>
+                        <a class="admin-action-btn" href="javascript:void(0)" onclick="editServiceCategory({{ $category->id }}, {{ json_encode($category->category) }}, {{ json_encode($category->product) }}, {{ json_encode($category->unit) }}, {{ $category->base_price - ($category->serviceType->additional_cost ?? 0) }}, {{ json_encode($category->service_type_id) }}, {{ json_encode($category->description) }})">Edit</a>
                         <form action="{{ route('admin.service-categories.destroy', $category->id) }}" method="post" data-confirm="Hapus layanan ini?">
                           @csrf
                           @method('DELETE')
