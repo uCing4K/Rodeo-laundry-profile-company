@@ -354,6 +354,9 @@
           </section>
 
           <section class="admin-section" id="faq" data-api="/admin/faq">
+            @php
+              $edit_faq = session('edit_faq');
+            @endphp
             <h3>FAQ</h3>
             <p>Kelola pertanyaan umum yang tampil di halaman FAQ.</p>
             <div class="table-wrapper">
@@ -366,36 +369,48 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Pertanyaan">Berapa lama proses cuci?</td>
-                    <td data-label="Jawaban">Proses cuci reguler memakan waktu 3 hari.</td>
-                    <td data-label="Aksi">
-                      <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="/admin/faq/1/edit">Edit</a>
-                        <form action="/admin/faq/1" method="post" data-confirm="Hapus FAQ ini?">
-                          @csrf
-                          @method('DELETE')
-                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($faqs as $faq)
+                    <tr>
+                      <td data-label="Pertanyaan">{{ $faq->question }}</td>
+                      <td data-label="Jawaban">{{ \Illuminate\Support\Str::limit($faq->answer, 80) }}</td>
+                      <td data-label="Aksi">
+                        <div class="admin-table-actions">
+                          <a class="admin-action-btn" href="{{ route('admin.faqs.edit', $faq) }}">Edit</a>
+                          <form action="{{ route('admin.faqs.destroy', $faq) }}" method="post" data-confirm="Hapus FAQ ini?">
+                            @csrf
+                            @method('DELETE')
+                            <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3">Belum ada FAQ.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/faq" method="post">
+            <form class="hero-form" action="{{ $edit_faq ? route('admin.faqs.update', $edit_faq['id']) : route('admin.faqs.store') }}" method="post">
               @csrf
+              @if ($edit_faq)
+                @method('PUT')
+              @endif
               <div class="field">
-                <input type="text" name="question" placeholder="Pertanyaan" required />
+                <input type="text" name="question" placeholder="Pertanyaan" value="{{ old('question', $edit_faq['question'] ?? '') }}" required />
               </div>
               <div class="field">
-                <textarea name="answer" rows="3" placeholder="Jawaban" required></textarea>
+                <textarea name="answer" rows="3" placeholder="Jawaban" required>{{ old('answer', $edit_faq['answer'] ?? '') }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan FAQ</button>
+              <button class="btn btn-primary" type="submit">{{ $edit_faq ? 'Perbarui FAQ' : 'Simpan FAQ' }}</button>
             </form>
           </section>
 
           <section class="admin-section" id="testimonials" data-api="/admin/testimonials">
+            @php
+              $edit_testimonial = session('edit_testimonial');
+            @endphp
             <h3>Testimoni</h3>
             <p>Kelola testimoni pelanggan yang tampil di beranda.</p>
             <div class="table-wrapper">
@@ -404,47 +419,52 @@
                   <tr>
                     <th>Nama</th>
                     <th>Pesan</th>
-                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Nama">Rina P.</td>
-                    <td data-label="Pesan">Pengerjaan cepat dan rapi.</td>
-                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
-                    <td data-label="Aksi">
-                      <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="/admin/testimonials/1/edit">Edit</a>
-                        <form action="/admin/testimonials/1" method="post" data-confirm="Hapus testimoni ini?">
-                          @csrf
-                          @method('DELETE')
-                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($testimonials as $testimonial)
+                    <tr>
+                      <td data-label="Nama">{{ $testimonial->customer_name }}</td>
+                      <td data-label="Pesan">{{ \Illuminate\Support\Str::limit($testimonial->content, 80) }}</td>
+                      <td data-label="Aksi">
+                        <div class="admin-table-actions">
+                          <a class="admin-action-btn" href="{{ route('admin.testimonials.edit', $testimonial) }}">Edit</a>
+                          <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="post" data-confirm="Hapus testimoni ini?">
+                            @csrf
+                            @method('DELETE')
+                            <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3">Belum ada testimoni.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/testimonials" method="post">
+            <form class="hero-form" action="{{ $edit_testimonial ? route('admin.testimonials.update', $edit_testimonial['id']) : route('admin.testimonials.store') }}" method="post">
               @csrf
+              @if ($edit_testimonial)
+                @method('PUT')
+              @endif
               <div class="form-grid">
                 <div class="field">
-                  <input type="text" name="name" placeholder="Nama pelanggan" required />
-                </div>
-                <div class="field">
-                  <select name="is_active" required>
-                    <option value="">Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Nonaktif</option>
-                  </select>
+                  <input type="text" name="customer_name" placeholder="Nama pelanggan" value="{{ old('customer_name', $edit_testimonial['customer_name'] ?? '') }}" required />
                 </div>
               </div>
               <div class="field">
-                <textarea name="message" rows="3" placeholder="Pesan testimoni" required></textarea>
+                <textarea name="content" rows="3" placeholder="Pesan testimoni" required>{{ old('content', $edit_testimonial['content'] ?? '') }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan testimoni</button>
+              <div class="form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit">{{ $edit_testimonial ? 'Perbarui testimoni' : 'Simpan testimoni' }}</button>
+                @if ($edit_testimonial)
+                  <a class="btn btn-ghost" href="{{ route('admin.dashboard') }}#testimonials">Batal</a>
+                @endif
+              </div>
             </form>
           </section>
 
