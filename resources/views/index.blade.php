@@ -157,27 +157,17 @@
       <h2 class="section-title">Cerita pelanggan yang puas.</h2>
     </div>
     <div class="grid-3">
-      <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
-        <p>
-          Pengerjaan cepat dan rapi. Harga juga jelas dari awal, jadi
-          nyaman untuk langganan rutin.
-        </p>
-        <strong>Rina P.</strong>
-      </div>
-      <div class="testimonial-card" data-reveal style="--reveal-delay: 80ms;">
-        <p>
-          Enak karena bisa tracking. Saya selalu tahu status pesanan saya
-          tanpa harus tanya lewat chat.
-        </p>
-        <strong>Dedi S.</strong>
-      </div>
-      <div class="testimonial-card" data-reveal style="--reveal-delay: 160ms;">
-        <p>
-          Pelayanan ramah dan hasil bersih. Cocok untuk kebutuhan laundry
-          rutin keluarga.
-        </p>
-        <strong>Fitri A.</strong>
-      </div>
+      @forelse ($testimonials as $testimonial)
+        <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
+          <p>{{ $testimonial->content }}</p>
+          <strong>{{ $testimonial->customer_name }}</strong>
+        </div>
+      @empty
+        <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
+          <p>Belum ada testimoni pelanggan.</p>
+          <strong>Tim Rodeo Laundry</strong>
+        </div>
+      @endforelse
     </div>
   </div>
 </section>

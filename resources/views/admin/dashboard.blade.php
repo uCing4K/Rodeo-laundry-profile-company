@@ -361,32 +361,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Pertanyaan">Berapa lama proses cuci?</td>
-                    <td data-label="Jawaban">Proses cuci reguler memakan waktu 3 hari.</td>
-                    <td data-label="Aksi">
-                      <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="/admin/faq/1/edit">Edit</a>
-                        <form action="/admin/faq/1" method="post" data-confirm="Hapus FAQ ini?">
-                          @csrf
-                          @method('DELETE')
-                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($faqs as $faq)
+                    <tr>
+                      <td data-label="Pertanyaan">{{ $faq->question }}</td>
+                      <td data-label="Jawaban">{{ \Illuminate\Support\Str::limit($faq->answer, 80) }}</td>
+                      <td data-label="Aksi">
+                        <div class="admin-table-actions">
+                          <a class="admin-action-btn edit-faq-button" href="javascript:void(0)" data-id="{{ $faq->id }}" data-question="{{ e($faq->question) }}" data-answer="{{ e($faq->answer) }}">Edit</a>
+                          <form action="{{ route('admin.faqs.destroy', $faq) }}" method="post" data-confirm="Hapus FAQ ini?">
+                            @csrf
+                            @method('DELETE')
+                            <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3">Belum ada FAQ.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/faq" method="post">
+            <form class="hero-form" id="faq-form" action="{{ route('admin.faqs.store') }}" method="post">
               @csrf
               <div class="field">
-                <input type="text" name="question" placeholder="Pertanyaan" required />
+                <input type="text" name="question" placeholder="Pertanyaan" value="{{ old('question') }}" required />
               </div>
               <div class="field">
-                <textarea name="answer" rows="3" placeholder="Jawaban" required></textarea>
+                <textarea name="answer" rows="3" placeholder="Jawaban" required>{{ old('answer') }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan FAQ</button>
+              <div class="form-actions" id="faq-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="faq-submit-button">Simpan FAQ</button>
+              </div>
             </form>
           </section>
 
@@ -399,47 +407,46 @@
                   <tr>
                     <th>Nama</th>
                     <th>Pesan</th>
-                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Nama">Rina P.</td>
-                    <td data-label="Pesan">Pengerjaan cepat dan rapi.</td>
-                    <td data-label="Status"><span class="status-tag">Aktif</span></td>
-                    <td data-label="Aksi">
-                      <div class="admin-table-actions">
-                        <a class="admin-action-btn" href="/admin/testimonials/1/edit">Edit</a>
-                        <form action="/admin/testimonials/1" method="post" data-confirm="Hapus testimoni ini?">
-                          @csrf
-                          @method('DELETE')
-                          <button class="admin-action-btn is-danger" type="submit">Hapus</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($testimonials as $testimonial)
+                    <tr>
+                      <td data-label="Nama">{{ $testimonial->customer_name }}</td>
+                      <td data-label="Pesan">{{ \Illuminate\Support\Str::limit($testimonial->content, 80) }}</td>
+                      <td data-label="Aksi">
+                        <div class="admin-table-actions">
+                          <a class="admin-action-btn edit-testimonial-button" href="javascript:void(0)" data-id="{{ $testimonial->id }}" data-name="{{ e($testimonial->customer_name) }}" data-content="{{ e($testimonial->content) }}">Edit</a>
+                          <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="post" data-confirm="Hapus testimoni ini?">
+                            @csrf
+                            @method('DELETE')
+                            <button class="admin-action-btn is-danger" type="submit">Hapus</button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3">Belum ada testimoni.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/testimonials" method="post">
+            <form class="hero-form" id="testimonial-form" action="{{ route('admin.testimonials.store') }}" method="post">
               @csrf
               <div class="form-grid">
                 <div class="field">
-                  <input type="text" name="name" placeholder="Nama pelanggan" required />
-                </div>
-                <div class="field">
-                  <select name="is_active" required>
-                    <option value="">Status</option>
-                    <option value="1">Aktif</option>
-                    <option value="0">Nonaktif</option>
-                  </select>
+                  <input type="text" name="customer_name" placeholder="Nama pelanggan" value="{{ old('customer_name') }}" required />
                 </div>
               </div>
               <div class="field">
-                <textarea name="message" rows="3" placeholder="Pesan testimoni" required></textarea>
+                <textarea name="content" rows="3" placeholder="Pesan testimoni" required>{{ old('content') }}</textarea>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan testimoni</button>
+              <div class="form-actions" id="testimonial-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="testimonial-submit-button">Simpan testimoni</button>
+              </div>
             </form>
           </section>
 
@@ -512,45 +519,35 @@
                 <thead>
                   <tr>
                     <th>Hari</th>
-                    <th>Jam buka</th>
-                    <th>Jam tutup</th>
+                    <th>Jam Buka</th>
+                    <th>Jam Tutup</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($operating_hours as $hour)
                   <tr>
-                    <td data-label="Hari">Senin</td>
-                    <td data-label="Jam buka">09:00</td>
-                    <td data-label="Jam tutup">19:00</td>
-                    <td data-label="Status"><span class="status-tag">Buka</span></td>
+                    <td data-label="Hari">{{ $hour->day }}</td>
+                    <td data-label="Jam Buka">{{ \Carbon\Carbon::parse($hour->open_time)->format('H:i') }}</td>
+                    <td data-label="Jam Tutup">{{ \Carbon\Carbon::parse($hour->closed_time)->format('H:i') }}</td>
+                    <td data-label="Status"><span class="status-tag">{{ $hour->is_closed ? 'Tutup' : 'Buka' }}</span></td>
                     <td data-label="Aksi">
-                      <a class="admin-action-btn" href="/admin/operating-hours/1/edit">Edit</a>
+                      <a class="admin-action-btn edit-operating-hour-button" href="javascript:void(0)" data-id="{{ $hour->id }}" data-open="{{ $hour->open_time }}" data-close="{{ $hour->closed_time }}" data-closed="{{ $hour->is_closed }}">Edit</a>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/operating-hours" method="post">
+            <form class="hero-form" id="operating-hour-form" action="{{ route('admin.operating-hours.store') }}" method="post">
               @csrf
               <div class="form-grid">
-                <div class="field">
-                  <select name="day" required>
-                    <option value="">Pilih Hari</option>
-                    <option value="Senin">Senin</option>
-                    <option value="Selasa">Selasa</option>
-                    <option value="Rabu">Rabu</option>
-                    <option value="Kamis">Kamis</option>
-                    <option value="Jumat">Jumat</option>
-                    <option value="Sabtu">Sabtu</option>
-                    <option value="Minggu">Minggu</option>
-                  </select>
-                </div>
                 <div class="field">
                   <input type="time" name="open_time" required />
                 </div>
                 <div class="field">
-                  <input type="time" name="close_time" required />
+                  <input type="time" name="closed_time" required />
                 </div>
                 <div class="field">
                   <select name="is_closed" required>
@@ -560,7 +557,9 @@
                   </select>
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan jam operasional</button>
+              <div class="form-actions" id="operating-hour-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="operating-hour-submit-button">Simpan jam operasional</button>
+              </div>
             </form>
           </section>
 
