@@ -35,10 +35,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-
-        Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
         
         Route::post('/service-types', [\App\Http\Controllers\Admin\ServiceTypeController::class, 'store'])->name('service-types.store');
         Route::put('/service-types/{serviceType}', [\App\Http\Controllers\Admin\ServiceTypeController::class, 'update'])->name('service-types.update');
