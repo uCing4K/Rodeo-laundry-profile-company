@@ -495,10 +495,10 @@
                   <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Alamat</label>
                   <input type="text" name="address" placeholder="Alamat" value="{{ $company_settings->address ?? '' }}" required disabled />
                 </div>
-                <div class="field">
-                  <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link Map Embed (Kode Iframe)</label>
-                  <textarea name="map_embed" rows="1" placeholder="Link Map Embed (Kode iframe)" required disabled>{{ $company_settings->map_embed ?? '' }}</textarea>
-                </div>
+              </div>
+              <div class="field">
+                <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Link Map Embed (Kode Iframe)</label>
+                <textarea name="map_embed" rows="3" placeholder="Link Map Embed (Kode iframe)" required disabled>{{ $company_settings->map_embed ?? '' }}</textarea>
               </div>
               <div class="field">
                 <label style="display:block; margin-bottom:0.5rem; font-size:14px; font-weight:500;">Deskripsi SEO</label>
