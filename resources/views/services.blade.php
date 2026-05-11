@@ -1,11 +1,74 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Layanan dan Harga - Rodeo Laundry</title>
+    <meta
+      name="description"
+      content="Daftar layanan dan harga Rodeo Laundry untuk reguler maupun premium."
+    />
+    <meta property="og:title" content="Layanan Rodeo Laundry" />
+    <meta
+      property="og:description"
+      content="Harga transparan dan kategori layanan lengkap untuk kebutuhan Anda."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Lewati ke konten</a>
 
-@section('title', 'Layanan dan Harga - Rodeo Laundry')
-@section('description', 'Daftar layanan dan harga Rodeo Laundry untuk reguler maupun premium.')
-@section('og_title', 'Layanan Rodeo Laundry')
-@section('og_description', 'Harga transparan dan kategori layanan lengkap untuk kebutuhan Anda.')
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="{{ route('index') ?? '/' }}">
+          <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+          <span>Rodeo Laundry</span>
+        </a>
 
-@section('content')
+        <nav class="site-nav" id="site-menu" data-menu-panel>
+          <a href="{{ route('index') ?? '/' }}">Beranda</a>
+          <a class="is-active" href="{{ route('services') ?? '/services' }}">Layanan</a>
+          <a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a href="{{ route('about') ?? '/about' }}">Tentang</a>
+          <a href="{{ route('contact') ?? '/contact' }}">Kontak</a>
+          <a href="{{ route('faq') ?? '/faq' }}">FAQ</a>
+          <div class="nav-mobile-cta">
+            <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+              <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+              </svg>
+              <span class="sr-only">WhatsApp</span>
+            </a>
+            <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          </div>
+        </nav>
+
+        <div class="header-cta">
+          <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+            </svg>
+            <span class="sr-only">WhatsApp</span>
+          </a>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          data-menu-toggle
+          aria-controls="site-menu"
+          aria-expanded="false"
+        >
+          <span class="menu-toggle-lines" aria-hidden="true"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
       <section class="hero">
         <div class="container hero-grid">
           <div data-reveal style="--reveal-delay: 0ms;">
@@ -38,30 +101,6 @@
         </div>
       </section>
 
-      <section class="section section-alt">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Filter layanan</div>
-            <h2 class="section-title">Cari layanan sesuai kebutuhan.</h2>
-            <p class="section-subtitle">
-              Filter ini dapat dibuat dinamis dari kategori dan tipe layanan.
-            </p>
-          </div>
-          <div class="service-filters" data-reveal>
-            <span class="chip is-active">Semua</span>
-            @foreach($serviceTypes as $type)
-              <span class="chip">{{ $type->name }}</span>
-            @endforeach
-          </div>
-          <div class="section" style="padding-top: 36px;">
-            <div class="field">
-              <input type="search" placeholder="Cari nama layanan atau kategori" />
-              <button class="btn btn-primary" type="button">Cari</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="section" data-api="/api/public/services">
         <div class="container">
           <div class="section-header" data-reveal>
@@ -79,18 +118,84 @@
                 </tr>
               </thead>
               <tbody>
-                @forelse($products as $product)
-                  <tr>
-                    <td>{{ $product->category?->name ?? '-' }}</td>
-                    <td>{{ $product->name }}</td>
-                    <td>/{{ $product->unit }}</td>
-                    <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td colspan="4" style="text-align: center;">Tidak ada produk tersedia</td>
-                  </tr>
-                @endforelse
+                <tr>
+                  <td data-label="Kategori">Setrika</td>
+                  <td data-label="Produk">Setrika Saja</td>
+                  <td data-label="Satuan">/kg</td>
+                  <td data-label="Harga">Rp 2.500</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Cuci Kering</td>
+                  <td data-label="Produk">Cuci Kering Lipat</td>
+                  <td data-label="Satuan">/kg</td>
+                  <td data-label="Harga">Rp 4.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Cuci Setrika</td>
+                  <td data-label="Produk">Cuci Setrika</td>
+                  <td data-label="Satuan">/kg</td>
+                  <td data-label="Harga">Rp 5.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Selimut</td>
+                  <td data-label="Produk">S - M - L - XL - XXL</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 5.000 - 20.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Bedcover</td>
+                  <td data-label="Produk">S - M - L - XL - XXL</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 13.000 - 25.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Seprai</td>
+                  <td data-label="Produk">Seprai + sarung bantal guling</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 5.000 - 10.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Karpet</td>
+                  <td data-label="Produk">Tipis - sedang - tebal</td>
+                  <td data-label="Satuan">/meter</td>
+                  <td data-label="Harga">Rp 5.000 - 15.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Boneka</td>
+                  <td data-label="Produk">Kecil - sedang - besar - jumbo</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 2.000 - 25.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Handuk dan Jaket</td>
+                  <td data-label="Produk">Handuk, jaket, keset</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 2.000 - 15.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Cuci Sepatu</td>
+                  <td data-label="Produk">Ukuran kecil - normal</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 10.000 - 15.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Gorden</td>
+                  <td data-label="Produk">Normal - tebal</td>
+                  <td data-label="Satuan">/kg</td>
+                  <td data-label="Harga">Rp 7.000 - 10.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Bantal dan Guling</td>
+                  <td data-label="Produk">Bantal normal, guling tebal</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 10.000 - 12.000</td>
+                </tr>
+                <tr>
+                  <td data-label="Kategori">Tas</td>
+                  <td data-label="Produk">Kecil - sedang - besar</td>
+                  <td data-label="Satuan">pcs</td>
+                  <td data-label="Harga">Rp 5.000 - 15.000</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -115,24 +220,24 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Atasan dan Luaran</td>
-                  <td>Kaos, kemeja, jaket tipis - tebal</td>
-                  <td>Rp 15.000 - 30.000 / pcs</td>
+                  <td data-label="Kategori">Atasan dan Luaran</td>
+                  <td data-label="Produk">Kaos, kemeja, jaket tipis - tebal</td>
+                  <td data-label="Harga">Rp 15.000 - 30.000 pcs</td>
                 </tr>
                 <tr>
-                  <td>Bawahan</td>
-                  <td>Celana pendek - panjang, jeans, rok</td>
-                  <td>Rp 15.000 - 25.000 / pcs</td>
+                  <td data-label="Kategori">Bawahan</td>
+                  <td data-label="Produk">Celana pendek - panjang, jeans, rok</td>
+                  <td data-label="Harga">Rp 15.000 - 25.000 pcs</td>
                 </tr>
                 <tr>
-                  <td>Ibadah dan Lainnya</td>
-                  <td>Hijab, sajadah, mukena set, baju renang</td>
-                  <td>Rp 15.000 - 30.000 / pcs</td>
+                  <td data-label="Kategori">Ibadah dan Lainnya</td>
+                  <td data-label="Produk">Hijab, sajadah, mukena set, baju renang</td>
+                  <td data-label="Harga">Rp 15.000 - 30.000 pcs</td>
                 </tr>
                 <tr>
-                  <td>Formal dan Gaun</td>
-                  <td>Dress anak - dewasa, jas, jas setelan</td>
-                  <td>Rp 20.000 - 50.000 / pcs</td>
+                  <td data-label="Kategori">Formal dan Gaun</td>
+                  <td data-label="Produk">Dress anak - dewasa, jas, jas setelan</td>
+                  <td data-label="Harga">Rp 20.000 - 50.000 pcs</td>
                 </tr>
               </tbody>
             </table>
@@ -147,17 +252,18 @@
             <h2 class="section-title">Pilih waktu pengerjaan sesuai kebutuhan.</h2>
           </div>
           <div class="grid-3">
-            @forelse($serviceTypes as $index => $type)
-              <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
-                <h3>{{ $type->name }}</h3>
-                <p>{{ $type->description }}</p>
-                @if($type->additional_cost > 0)
-                  <p style="font-size: 0.9em; color: #666;">Biaya tambahan: Rp {{ number_format($type->additional_cost, 0, ',', '.') }}</p>
-                @endif
-              </div>
-            @empty
-              <p>Tidak ada jenis layanan tersedia.</p>
-            @endforelse
+            <div class="card" data-reveal style="--reveal-delay: 0ms;">
+              <h3>Reguler</h3>
+              <p>Harga standar sesuai kategori produk.</p>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 80ms;">
+              <h3>Express 24 Jam</h3>
+              <p>Tambahan biaya Rp 15.000 untuk penyelesaian cepat.</p>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 160ms;">
+              <h3>Express Same Day</h3>
+              <p>Tambahan biaya Rp 10.000 untuk pengerjaan hari yang sama.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -178,4 +284,53 @@
         </div>
       </section>
     </main>
-@endsection
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">
+            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <span>Rodeo Laundry</span>
+          </div>
+          <p>
+            Layanan laundry profesional dengan proses cepat dan hasil bersih.
+          </p>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          <ul>
+            <li><a href="{{ route('index') ?? '/' }}">Beranda</a></li>
+            <li><a href="{{ route('services') ?? '/services' }}">Layanan</a></li>
+            <li><a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a></li>
+            <li><a href="{{ route('about') ?? '/about' }}">Tentang</a></li>
+            <li><a href="{{ route('contact') ?? '/contact' }}">Kontak</a></li>
+            <li><a href="{{ route('faq') ?? '/faq' }}">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Kontak</h3>
+          <ul>
+            <li>Batu, Sumberejo, Gg. Rodeo</li>
+            <li><a href="tel:+6282143297707">+62 821-4329-7707</a></li>
+            <li><a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
+            <li>Jam operasional: 09:00 - 19:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>Copyright 2026 Rodeo Laundry. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="floating-buttons">
+      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">
+        <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+        </svg>
+        <span class="sr-only">WhatsApp</span>
+      </a>
+    </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+  </body>
+</html>

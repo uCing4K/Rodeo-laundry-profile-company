@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Login - Rodeo Laundry</title>
     <meta name="description" content="Halaman login admin Rodeo Laundry." />
-    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
       .login-container {
@@ -66,7 +66,7 @@
         font-size: 0.95rem;
       }
 
-      .login-form-group input[type="email"],
+      .login-form-group input[type="text"],
       .login-form-group input[type="password"] {
         padding: 12px 16px;
         border: 2px solid var(--line);
@@ -77,7 +77,7 @@
         background: #ffffff;
       }
 
-      .login-form-group input[type="email"]:focus,
+      .login-form-group input[type="text"]:focus,
       .login-form-group input[type="password"]:focus {
         outline: none;
         border-color: var(--orange-500);
@@ -145,27 +145,48 @@
       <div class="login-form-wrapper">
         <div class="login-form-header">
           <div class="login-logo-container">
-            <img src="{{ asset('asset/Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
           </div>
           <h2>Masuk Admin</h2>
           <p>Masukkan kredensial Anda untuk lanjut</p>
         </div>
 
         <form class="login-form" data-api="/admin/login" method="post">
+          @csrf
           <div class="login-form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="admin@example.com" required />
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="admin"
+              autocomplete="username"
+              required
+            />
           </div>
 
           <div class="login-form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="••••••••" required />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <div class="login-form-remember">
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">Remember me</label>
           </div>
 
           <button class="login-form-submit" type="submit">Masuk Sekarang</button>
         </form>
       </div>
     </div>
-    <script src="{{ asset('asset/js/main.js') }}"></script>
+
+    <script src="{{ asset('js/main.js') }}"></script>
   </body>
 </html>

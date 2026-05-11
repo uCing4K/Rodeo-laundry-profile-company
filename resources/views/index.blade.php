@@ -1,11 +1,74 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rodeo Laundry - Bersih, Cepat, Terpercaya</title>
+    <meta
+      name="description"
+      content="Rodeo Laundry menghadirkan layanan laundry profesional dengan proses cepat, harga transparan, dan tracking pesanan yang mudah."
+    />
+    <meta property="og:title" content="Rodeo Laundry" />
+    <meta
+      property="og:description"
+      content="Laundry profesional dengan layanan cepat, transparan, dan bisa tracking status pesanan."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Lewati ke konten</a>
 
-@section('title', 'Rodeo Laundry - Bersih, Cepat, Terpercaya')
-@section('description', 'Rodeo Laundry menghadirkan layanan laundry profesional dengan proses cepat, harga transparan, dan tracking pesanan yang mudah.')
-@section('og_title', 'Rodeo Laundry')
-@section('og_description', 'Laundry profesional dengan layanan cepat, transparan, dan bisa tracking status pesanan.')
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="{{ route('index') ?? '/' }}">
+          <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+          <span>Rodeo Laundry</span>
+        </a>
 
-@section('content')
+        <nav class="site-nav" id="site-menu" data-menu-panel>
+          <a class="is-active" href="{{ route('index') ?? '/' }}">Beranda</a>
+          <a href="{{ route('services') ?? '/services' }}">Layanan</a>
+          <a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a href="{{ route('about') ?? '/about' }}">Tentang</a>
+          <a href="{{ route('contact') ?? '/contact' }}">Kontak</a>
+          <a href="{{ route('faq') ?? '/faq' }}">FAQ</a>
+          <div class="nav-mobile-cta">
+            <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+              <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+              </svg>
+              <span class="sr-only">WhatsApp</span>
+            </a>
+            <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          </div>
+        </nav>
+
+        <div class="header-cta">
+          <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
+          <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+            </svg>
+            <span class="sr-only">WhatsApp</span>
+          </a>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          data-menu-toggle
+          aria-controls="site-menu"
+          aria-expanded="false"
+        >
+          <span class="menu-toggle-lines" aria-hidden="true"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content">
       <section class="hero">
         <div class="container hero-grid">
           <div data-reveal style="--reveal-delay: 0ms;">
@@ -43,16 +106,21 @@
               Format order: RODEO-YYYYMMDD-XXXX. Anda juga bisa pakai token
               tracking.
             </p>
-            <form class="hero-form" action="{{ route('tracking') ?? '/tracking' }}" method="get">
+            <form
+              class="hero-form"
+              data-tracking-form
+              data-tracking-redirect="https://rodeolaundry.online/public/receipt-digital.php"
+            >
               <div class="field">
                 <input
                   type="text"
-                  name="query"
-                  placeholder="Contoh: RODEO-20260428-0001"
+                  name="token"
+                  placeholder="Contoh: 3b04a2dcf6df846a889de268b5c4f24b"
+                  required
                 />
                 <button class="btn btn-primary" type="submit">Cek</button>
               </div>
-              <small>Gunakan halaman Cek Status untuk detail lengkap.</small>
+              <small>Masukkan token agar langsung diarahkan ke status order.</small>
             </form>
           </div>
         </div>
@@ -103,16 +171,42 @@
             </p>
           </div>
           <div class="grid-3">
-            @forelse($products as $index => $product)
-              <div class="card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
-                <div class="icon-badge">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
-                <h3>{{ $product->name }}</h3>
-                <p>Mulai dari Rp {{ number_format($product->price, 0, ',', '.') }} per {{ $product->unit }}.</p>
-                <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-              </div>
-            @empty
-              <p>Tidak ada produk tersedia saat ini.</p>
-            @endforelse
+            <div class="card" data-reveal style="--reveal-delay: 0ms;">
+              <div class="icon-badge">CS</div>
+              <h3>Cuci Setrika</h3>
+              <p>Mulai dari Rp 5.000 per kg.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 80ms;">
+              <div class="icon-badge">CK</div>
+              <h3>Cuci Kering Lipat</h3>
+              <p>Mulai dari Rp 4.000 per kg.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 160ms;">
+              <div class="icon-badge">ST</div>
+              <h3>Setrika Saja</h3>
+              <p>Mulai dari Rp 2.500 per kg.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 0ms;">
+              <div class="icon-badge">SL</div>
+              <h3>Selimut</h3>
+              <p>Mulai dari Rp 5.000 per pcs.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 80ms;">
+              <div class="icon-badge">BD</div>
+              <h3>Bedcover</h3>
+              <p>Mulai dari Rp 13.000 per pcs.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
+            <div class="card" data-reveal style="--reveal-delay: 160ms;">
+              <div class="icon-badge">SP</div>
+              <h3>Seprai</h3>
+              <p>Mulai dari Rp 5.000 per pcs.</p>
+              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+            </div>
           </div>
         </div>
       </section>
@@ -150,19 +244,27 @@
             <h2 class="section-title">Cerita pelanggan yang puas.</h2>
           </div>
           <div class="grid-3">
-            @forelse($testimonials as $index => $testimonial)
-              <div class="testimonial-card" data-reveal style="--reveal-delay: {{ $index * 80 }}ms;">
-                <p>{{ $testimonial->content }}</p>
-                <strong>{{ $testimonial->customer_name }}</strong>
-                @if(!empty($testimonial->customer_title))
-                  <span>{{ $testimonial->customer_title }}</span>
-                @endif
-              </div>
-            @empty
-              <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
-                <p>Belum ada testimoni pelanggan saat ini.</p>
-              </div>
-            @endforelse
+            <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
+              <p>
+                Pengerjaan cepat dan rapi. Harga juga jelas dari awal, jadi
+                nyaman untuk langganan rutin.
+              </p>
+              <strong>Rina P.</strong>
+            </div>
+            <div class="testimonial-card" data-reveal style="--reveal-delay: 80ms;">
+              <p>
+                Enak karena bisa tracking. Saya selalu tahu status pesanan saya
+                tanpa harus tanya lewat chat.
+              </p>
+              <strong>Dedi S.</strong>
+            </div>
+            <div class="testimonial-card" data-reveal style="--reveal-delay: 160ms;">
+              <p>
+                Pelayanan ramah dan hasil bersih. Cocok untuk kebutuhan laundry
+                rutin keluarga.
+              </p>
+              <strong>Fitri A.</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -200,4 +302,53 @@
         </div>
       </section>
     </main>
-@endsection
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">
+            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
+            <span>Rodeo Laundry</span>
+          </div>
+          <p>
+            Layanan laundry profesional dengan proses cepat dan hasil bersih.
+          </p>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          <ul>
+            <li><a href="{{ route('index') ?? '/' }}">Beranda</a></li>
+            <li><a href="{{ route('services') ?? '/services' }}">Layanan</a></li>
+            <li><a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a></li>
+            <li><a href="{{ route('about') ?? '/about' }}">Tentang</a></li>
+            <li><a href="{{ route('contact') ?? '/contact' }}">Kontak</a></li>
+            <li><a href="{{ route('faq') ?? '/faq' }}">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Kontak</h3>
+          <ul>
+            <li>Batu, Sumberejo, Gg. Rodeo</li>
+            <li><a href="tel:+6282143297707">+62 821-4329-7707</a></li>
+            <li><a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
+            <li>Jam operasional: 09:00 - 19:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>Copyright 2026 Rodeo Laundry. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="floating-buttons">
+      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">
+        <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
+        </svg>
+        <span class="sr-only">WhatsApp</span>
+      </a>
+    </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+  </body>
+</html>
