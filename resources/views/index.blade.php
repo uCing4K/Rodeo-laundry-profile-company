@@ -1,354 +1,241 @@
-<!DOCTYPE html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rodeo Laundry - Bersih, Cepat, Terpercaya</title>
-    <meta
-      name="description"
-      content="Rodeo Laundry menghadirkan layanan laundry profesional dengan proses cepat, harga transparan, dan tracking pesanan yang mudah."
-    />
-    <meta property="og:title" content="Rodeo Laundry" />
-    <meta
-      property="og:description"
-      content="Laundry profesional dengan layanan cepat, transparan, dan bisa tracking status pesanan."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="id_ID" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Lewati ke konten</a>
+@extends('layouts.app')
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a class="logo" href="{{ route('index') ?? '/' }}">
-          <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
-          <span>Rodeo Laundry</span>
-        </a>
+@section('title', 'Rodeo Laundry - Bersih, Cepat, Terpercaya')
+@section('description', 'Rodeo Laundry menghadirkan layanan laundry profesional dengan proses cepat, harga transparan, dan tracking pesanan yang mudah.')
+@section('og_title', 'Rodeo Laundry')
+@section('og_description', 'Laundry profesional dengan layanan cepat, transparan, dan bisa tracking status pesanan.')
 
-        <nav class="site-nav" id="site-menu" data-menu-panel>
-          <a class="is-active" href="{{ route('index') ?? '/' }}">Beranda</a>
-          <a href="{{ route('services') ?? '/services' }}">Layanan</a>
-          <a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          <a href="{{ route('about') ?? '/about' }}">Tentang</a>
-          <a href="{{ route('contact') ?? '/contact' }}">Kontak</a>
-          <a href="{{ route('faq') ?? '/faq' }}">FAQ</a>
-          <div class="nav-mobile-cta">
-            <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
-              <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
-              </svg>
-              <span class="sr-only">WhatsApp</span>
-            </a>
-            <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          </div>
-        </nav>
-
-        <div class="header-cta">
-          <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a>
-          <a class="btn btn-primary btn-icon" href="https://wa.me/6282143297707" aria-label="WhatsApp">
-            <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
-            </svg>
-            <span class="sr-only">WhatsApp</span>
-          </a>
-        </div>
-
-        <button
-          class="menu-toggle"
-          type="button"
-          data-menu-toggle
-          aria-controls="site-menu"
-          aria-expanded="false"
-        >
-          <span class="menu-toggle-lines" aria-hidden="true"></span>
-          <span class="sr-only">Menu</span>
-        </button>
+@section('content')
+<section class="hero">
+  <div class="container hero-grid">
+    <div data-reveal style="--reveal-delay: 0ms;">
+      <div class="eyebrow">Laundry profesional di Batu</div>
+      <h1>Bersih, cepat, dan transparan untuk semua kebutuhan laundry.</h1>
+      <p>
+        Rodeo Laundry membantu pelanggan mendapatkan hasil terbaik dengan
+        proses standar yang rapi, harga jelas, dan tracking pesanan yang
+        mudah.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ route('services') ?? '/services' }}">Lihat layanan</a>
+        <a class="btn btn-ghost" href="{{ route('contact') ?? '/contact' }}">Hubungi kami</a>
       </div>
-    </header>
-
-    <main id="main-content">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div data-reveal style="--reveal-delay: 0ms;">
-            <div class="eyebrow">Laundry profesional di Batu</div>
-            <h1>Bersih, cepat, dan transparan untuk semua kebutuhan laundry.</h1>
-            <p>
-              Rodeo Laundry membantu pelanggan mendapatkan hasil terbaik dengan
-              proses standar yang rapi, harga jelas, dan tracking pesanan yang
-              mudah.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="{{ route('services') ?? '/services' }}">Lihat layanan</a>
-              <a class="btn btn-ghost" href="{{ route('contact') ?? '/contact' }}">Hubungi kami</a>
-            </div>
-            <div class="hero-stats">
-              <div class="stat">
-                <div class="stat-value">24 - 48 jam</div>
-                <div class="stat-label">Durasi standar</div>
-              </div>
-              <div class="stat">
-                <div class="stat-value">Rp 2.500</div>
-                <div class="stat-label">Harga mulai per kg</div>
-              </div>
-              <div class="stat">
-                <div class="stat-value">Tracking</div>
-                <div class="stat-label">Cek status kapan saja</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
-            <span class="badge">Cek status cepat</span>
-            <h3>Masukkan nomor order atau token.</h3>
-            <p>
-              Format order: RODEO-YYYYMMDD-XXXX. Anda juga bisa pakai token
-              tracking.
-            </p>
-            <form
-              class="hero-form"
-              data-tracking-form
-              data-tracking-redirect="https://rodeolaundry.online/public/receipt-digital.php"
-            >
-              <div class="field">
-                <input
-                  type="text"
-                  name="token"
-                  placeholder="Contoh: 3b04a2dcf6df846a889de268b5c4f24b"
-                  required
-                />
-                <button class="btn btn-primary" type="submit">Cek</button>
-              </div>
-              <small>Masukkan token agar langsung diarahkan ke status order.</small>
-            </form>
-          </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">24 - 48 jam</div>
+          <div class="stat-label">Durasi standar</div>
         </div>
-      </section>
-
-      <section class="section section-alt">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Kenapa Rodeo</div>
-            <h2 class="section-title">Alasan pelanggan memilih Rodeo Laundry.</h2>
-            <p class="section-subtitle">
-              Kami fokus pada kualitas, kecepatan, dan komunikasi yang jelas agar
-              pelanggan merasa aman setiap saat.
-            </p>
-          </div>
-          <div class="grid-4">
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <div class="icon-badge">HT</div>
-              <h3>Harga terjangkau</h3>
-              <p>Tarif jelas dari awal, tanpa biaya tersembunyi.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <div class="icon-badge">CP</div>
-              <h3>Proses cepat</h3>
-              <p>Standar pengerjaan 24 - 48 jam untuk layanan reguler.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <div class="icon-badge">TR</div>
-              <h3>Bisa tracking</h3>
-              <p>Cek status pesanan secara real time kapan saja.</p>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 240ms;">
-              <div class="icon-badge">RT</div>
-              <h3>Terpercaya</h3>
-              <p>Ribuan pelanggan sudah mempercayakan cucian mereka.</p>
-            </div>
-          </div>
+        <div class="stat">
+          <div class="stat-value">Rp 2.500</div>
+          <div class="stat-label">Harga mulai per kg</div>
         </div>
-      </section>
-
-      <section class="section" id="services" data-api="/api/public/services">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Layanan unggulan</div>
-            <h2 class="section-title">Kategori populer dan harga mulai.</h2>
-            <p class="section-subtitle">
-              Semua harga di bawah ini dapat diupdate otomatis dari database POS.
-            </p>
-          </div>
-          <div class="grid-3">
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <div class="icon-badge">CS</div>
-              <h3>Cuci Setrika</h3>
-              <p>Mulai dari Rp 5.000 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <div class="icon-badge">CK</div>
-              <h3>Cuci Kering Lipat</h3>
-              <p>Mulai dari Rp 4.000 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <div class="icon-badge">ST</div>
-              <h3>Setrika Saja</h3>
-              <p>Mulai dari Rp 2.500 per kg.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 0ms;">
-              <div class="icon-badge">SL</div>
-              <h3>Selimut</h3>
-              <p>Mulai dari Rp 5.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 80ms;">
-              <div class="icon-badge">BD</div>
-              <h3>Bedcover</h3>
-              <p>Mulai dari Rp 13.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-            <div class="card" data-reveal style="--reveal-delay: 160ms;">
-              <div class="icon-badge">SP</div>
-              <h3>Seprai</h3>
-              <p>Mulai dari Rp 5.000 per pcs.</p>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-alt">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Cara kerja</div>
-            <h2 class="section-title">Tiga langkah yang simpel dan jelas.</h2>
-          </div>
-          <div class="grid-3">
-            <div class="card card-soft" data-reveal style="--reveal-delay: 0ms;">
-              <div class="step-number">01</div>
-              <h3>Hubungi kami</h3>
-              <p>Konfirmasi layanan dan jadwal lewat WhatsApp atau telepon.</p>
-            </div>
-            <div class="card card-soft" data-reveal style="--reveal-delay: 80ms;">
-              <div class="step-number">02</div>
-              <h3>Proses laundry</h3>
-              <p>Tim kami mengerjakan dengan standar kebersihan terbaik.</p>
-            </div>
-            <div class="card card-soft" data-reveal style="--reveal-delay: 160ms;">
-              <div class="step-number">03</div>
-              <h3>Ambil atau kirim</h3>
-              <p>Pesanan selesai sesuai estimasi dan siap diambil.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-header" data-reveal>
-            <div class="eyebrow">Testimoni</div>
-            <h2 class="section-title">Cerita pelanggan yang puas.</h2>
-          </div>
-          <div class="grid-3">
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
-              <p>
-                Pengerjaan cepat dan rapi. Harga juga jelas dari awal, jadi
-                nyaman untuk langganan rutin.
-              </p>
-              <strong>Rina P.</strong>
-            </div>
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 80ms;">
-              <p>
-                Enak karena bisa tracking. Saya selalu tahu status pesanan saya
-                tanpa harus tanya lewat chat.
-              </p>
-              <strong>Dedi S.</strong>
-            </div>
-            <div class="testimonial-card" data-reveal style="--reveal-delay: 160ms;">
-              <p>
-                Pelayanan ramah dan hasil bersih. Cocok untuk kebutuhan laundry
-                rutin keluarga.
-              </p>
-              <strong>Fitri A.</strong>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section-alt">
-        <div class="container">
-          <div class="callout" data-reveal>
-            <span class="badge">Layanan bisnis</span>
-            <h2>Solusi laundry untuk villa, kos, hotel, dan catering.</h2>
-            <p>
-              Rodeo Laundry sudah melayani kebutuhan laundry skala bisnis. Hubungi
-              kami untuk paket khusus dan jadwal yang fleksibel.
-            </p>
-            <div class="cta-actions">
-              <a class="btn btn-dark" href="{{ route('contact') ?? '/contact' }}">Konsultasi bisnis</a>
-              <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat semua layanan</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="cta-banner" data-reveal>
-            <h2>Siap laundry tanpa ribet?</h2>
-            <p>
-              Hubungi Rodeo Laundry sekarang dan dapatkan layanan terbaik untuk
-              kebutuhan harian maupun bisnis.
-            </p>
-            <div class="cta-actions">
-              <a class="btn btn-dark" href="https://wa.me/6282143297707">Chat WhatsApp</a>
-              <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek status pesanan</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <div class="logo">
-            <img src="{{ asset('Rodeo Laundry logo.png') }}" alt="Rodeo Laundry logo" />
-            <span>Rodeo Laundry</span>
-          </div>
-          <p>
-            Layanan laundry profesional dengan proses cepat dan hasil bersih.
-          </p>
-        </div>
-        <div>
-          <h3>Menu</h3>
-          <ul>
-            <li><a href="{{ route('index') ?? '/' }}">Beranda</a></li>
-            <li><a href="{{ route('services') ?? '/services' }}">Layanan</a></li>
-            <li><a href="{{ route('tracking') ?? '/tracking' }}">Cek Status</a></li>
-            <li><a href="{{ route('about') ?? '/about' }}">Tentang</a></li>
-            <li><a href="{{ route('contact') ?? '/contact' }}">Kontak</a></li>
-            <li><a href="{{ route('faq') ?? '/faq' }}">FAQ</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Kontak</h3>
-          <ul>
-            <li>Batu, Sumberejo, Gg. Rodeo</li>
-            <li><a href="tel:+6282143297707">+62 821-4329-7707</a></li>
-            <li><a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
-            <li>Jam operasional: 09:00 - 19:00</li>
-          </ul>
+        <div class="stat">
+          <div class="stat-value">Tracking</div>
+          <div class="stat-label">Cek status kapan saja</div>
         </div>
       </div>
-      <div class="container footer-bottom">
-        <p>Copyright 2026 Rodeo Laundry. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <div class="floating-buttons">
-      <a class="fab" href="https://wa.me/6282143297707" aria-label="WhatsApp Rodeo Laundry">
-        <svg class="icon-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M12.04 0C5.383 0 .02 5.363.017 12.02c-.002 2.11.553 4.167 1.608 5.98L0 24l6.17-1.62a11.954 11.954 0 0 0 5.87 1.496h.005c6.657 0 12.02-5.363 12.023-12.02a11.93 11.93 0 0 0-3.51-8.507A11.93 11.93 0 0 0 12.04 0zM12.05 21.82h-.005a9.934 9.934 0 0 1-5.072-1.39l-.363-.215-3.66.96.976-3.57-.236-.374a9.913 9.913 0 0 1-1.52-5.285c.003-5.45 4.44-9.885 9.894-9.885a9.84 9.84 0 0 1 6.99 2.9 9.84 9.84 0 0 1 2.895 6.993c-.003 5.45-4.44 9.885-9.894 9.885zm5.404-7.37c-.296-.148-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.148-.198.297-.768.967-.94 1.167-.174.198-.347.223-.644.075-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.297.298-.497.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.922-2.206-.242-.579-.487-.5-.672-.51l-.572-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.264.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.695.248-1.29.173-1.412-.074-.123-.272-.198-.57-.347z" />
-        </svg>
-        <span class="sr-only">WhatsApp</span>
-      </a>
     </div>
 
-    <script src="{{ asset('js/main.js') }}"></script>
-  </body>
-</html>
+    <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
+      <span class="badge">Cek status cepat</span>
+      <h3>Masukkan nomor order atau token.</h3>
+      <p>
+        Format order: RODEO-YYYYMMDD-XXXX. Anda juga bisa pakai token
+        tracking.
+      </p>
+      <form
+        class="hero-form"
+        data-tracking-form
+        data-tracking-redirect="https://rodeolaundry.online/public/receipt-digital.php"
+      >
+        <div class="field">
+          <input
+            type="text"
+            name="token"
+            placeholder="Contoh: 3b04a2dcf6df846a889de268b5c4f24b"
+            required
+          />
+          <button class="btn btn-primary" type="submit">Cek</button>
+        </div>
+        <small>Masukkan token agar langsung diarahkan ke status order.</small>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="eyebrow">Kenapa Rodeo</div>
+      <h2 class="section-title">Alasan pelanggan memilih Rodeo Laundry.</h2>
+      <p class="section-subtitle">
+        Kami fokus pada kualitas, kecepatan, dan komunikasi yang jelas agar
+        pelanggan merasa aman setiap saat.
+      </p>
+    </div>
+    <div class="grid-4">
+      <div class="card" data-reveal style="--reveal-delay: 0ms;">
+        <div class="icon-badge">HT</div>
+        <h3>Harga terjangkau</h3>
+        <p>Tarif jelas dari awal, tanpa biaya tersembunyi.</p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 80ms;">
+        <div class="icon-badge">CP</div>
+        <h3>Proses cepat</h3>
+        <p>Standar pengerjaan 24 - 48 jam untuk layanan reguler.</p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 160ms;">
+        <div class="icon-badge">TR</div>
+        <h3>Bisa tracking</h3>
+        <p>Cek status pesanan secara real time kapan saja.</p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 240ms;">
+        <div class="icon-badge">RT</div>
+        <h3>Terpercaya</h3>
+        <p>Ribuan pelanggan sudah mempercayakan cucian mereka.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services" data-api="/api/public/services">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="eyebrow">Layanan unggulan</div>
+      <h2 class="section-title">Kategori populer dan harga mulai.</h2>
+      <p class="section-subtitle">
+        Semua harga di bawah ini dapat diupdate otomatis dari database POS.
+      </p>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-reveal style="--reveal-delay: 0ms;">
+        <div class="icon-badge">CS</div>
+        <h3>Cuci Setrika</h3>
+        <p>Mulai dari Rp 5.000 per kg.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 80ms;">
+        <div class="icon-badge">CK</div>
+        <h3>Cuci Kering Lipat</h3>
+        <p>Mulai dari Rp 4.000 per kg.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 160ms;">
+        <div class="icon-badge">ST</div>
+        <h3>Setrika Saja</h3>
+        <p>Mulai dari Rp 2.500 per kg.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 0ms;">
+        <div class="icon-badge">SL</div>
+        <h3>Selimut</h3>
+        <p>Mulai dari Rp 5.000 per pcs.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 80ms;">
+        <div class="icon-badge">BD</div>
+        <h3>Bedcover</h3>
+        <p>Mulai dari Rp 13.000 per pcs.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay: 160ms;">
+        <div class="icon-badge">SP</div>
+        <h3>Seprai</h3>
+        <p>Mulai dari Rp 5.000 per pcs.</p>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat detail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="eyebrow">Cara kerja</div>
+      <h2 class="section-title">Tiga langkah yang simpel dan jelas.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card card-soft" data-reveal style="--reveal-delay: 0ms;">
+        <div class="step-number">01</div>
+        <h3>Hubungi kami</h3>
+        <p>Konfirmasi layanan dan jadwal lewat WhatsApp atau telepon.</p>
+      </div>
+      <div class="card card-soft" data-reveal style="--reveal-delay: 80ms;">
+        <div class="step-number">02</div>
+        <h3>Proses laundry</h3>
+        <p>Tim kami mengerjakan dengan standar kebersihan terbaik.</p>
+      </div>
+      <div class="card card-soft" data-reveal style="--reveal-delay: 160ms;">
+        <div class="step-number">03</div>
+        <h3>Ambil atau kirim</h3>
+        <p>Pesanan selesai sesuai estimasi dan siap diambil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="eyebrow">Testimoni</div>
+      <h2 class="section-title">Cerita pelanggan yang puas.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card" data-reveal style="--reveal-delay: 0ms;">
+        <p>
+          Pengerjaan cepat dan rapi. Harga juga jelas dari awal, jadi
+          nyaman untuk langganan rutin.
+        </p>
+        <strong>Rina P.</strong>
+      </div>
+      <div class="testimonial-card" data-reveal style="--reveal-delay: 80ms;">
+        <p>
+          Enak karena bisa tracking. Saya selalu tahu status pesanan saya
+          tanpa harus tanya lewat chat.
+        </p>
+        <strong>Dedi S.</strong>
+      </div>
+      <div class="testimonial-card" data-reveal style="--reveal-delay: 160ms;">
+        <p>
+          Pelayanan ramah dan hasil bersih. Cocok untuk kebutuhan laundry
+          rutin keluarga.
+        </p>
+        <strong>Fitri A.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="callout" data-reveal>
+      <span class="badge">Layanan bisnis</span>
+      <h2>Solusi laundry untuk villa, kos, hotel, dan catering.</h2>
+      <p>
+        Rodeo Laundry sudah melayani kebutuhan laundry skala bisnis. Hubungi
+        kami untuk paket khusus dan jadwal yang fleksibel.
+      </p>
+      <div class="cta-actions">
+        <a class="btn btn-dark" href="{{ route('contact') ?? '/contact' }}">Konsultasi bisnis</a>
+        <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat semua layanan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner" data-reveal>
+      <h2>Siap laundry tanpa ribet?</h2>
+      <p>
+        Hubungi Rodeo Laundry sekarang dan dapatkan layanan terbaik untuk
+        kebutuhan harian maupun bisnis.
+      </p>
+      <div class="cta-actions">
+        <a class="btn btn-dark" href="https://wa.me/6282143297707">Chat WhatsApp</a>
+        <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek status pesanan</a>
+      </div>
+    </div>
+  </div>
+</section>
+@endsection
