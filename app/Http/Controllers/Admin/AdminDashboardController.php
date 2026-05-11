@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
-use App\Models\Order;
-use App\Models\Product;
 use App\Models\ServiceCategory;
+use App\Models\ServiceType;
+use App\Models\Testimonial;
+use App\Models\CompanySetting;
+use App\Models\OperatingHour;
 
 class AdminDashboardController extends Controller
 {
@@ -14,25 +16,26 @@ class AdminDashboardController extends Controller
     {
         $stats = [
             'total_categories' => ServiceCategory::count(),
-            'total_products' => Product::where('is_active', true)->count(),
-            'orders_today' => Order::whereDate('created_at', today())->count(),
-            'total_faq' => Faq::where('is_active', true)->count(),
+            'total_faq' => Faq::count(),
+            'total_testimonials' => Testimonial::count(),
+            'total_service_types' => ServiceType::count(),
         ];
 
-        $recent_orders = Order::with('customer')
-            ->latest()
-            ->limit(5)
-            ->get();
+        $categories = ServiceCategory::with('serviceType')->get();
+        $service_types = ServiceType::all();
+        $faqs = Faq::all();
+        $testimonials = Testimonial::all();
+        $company_settings = CompanySetting::first();
+        $operating_hours = OperatingHour::all();
 
-        $products = Product::with('category')
-            ->orderBy('category_id')
-            ->orderBy('sort_order')
-            ->get();
-
-        $categories = ServiceCategory::orderBy('sort_order')
-            ->orderBy('name')
-            ->get();
-
-        return view('admin.dashboard', compact('stats', 'recent_orders', 'products', 'categories'));
+        return view('admin.dashboard', compact(
+            'stats', 
+            'categories', 
+            'service_types', 
+            'faqs', 
+            'testimonials', 
+            'company_settings', 
+            'operating_hours'
+        ));
     }
 }

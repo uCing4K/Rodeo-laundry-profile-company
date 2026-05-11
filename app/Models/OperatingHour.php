@@ -9,13 +9,11 @@ class OperatingHour extends Model
     protected $table = 'operating_hours';
 
     protected $fillable = [
-        'day_of_week', 'day_name', 'open_time',
-        'close_time', 'is_closed', 'note',
+        'day', 'open_time', 'closed_time', 'is_closed',
     ];
 
     protected $casts = [
         'is_closed' => 'boolean',
-        'day_of_week' => 'integer',
     ];
 
     public function getHoursAttribute(): string
@@ -25,7 +23,7 @@ class OperatingHour extends Model
         }
 
         $open  = substr($this->open_time, 0, 5);
-        $close = substr($this->close_time, 0, 5);
+        $close = substr($this->closed_time, 0, 5);
 
         return "{$open} - {$close}";
     }

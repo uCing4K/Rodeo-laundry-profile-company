@@ -3,51 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ServiceCategory extends Model
 {
     protected $table = 'service_categories';
 
     protected $fillable = [
-        'name', 'slug', 'description', 'icon', 'image',
-        'type', 'sort_order', 'is_active',
+        'name', 'description', 'base_price', 'service_type_id',
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'sort_order' => 'integer',
+        'base_price' => 'decimal:2',
     ];
 
-    public function products(): HasMany
+    public function serviceType(): BelongsTo
     {
-        return $this->hasMany(Product::class, 'category_id');
-    }
-
-    public function activeProducts(): HasMany
-    {
-        return $this->hasMany(Product::class, 'category_id')
-        ->where('is_active', true)
-        ->orderBy('sort_order');
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeReguler($query)
-    {
-        return $query->where('type', 'reguler');
-    }
-
-    public function scopePremium($query)
-    {
-        return $query->where('type', 'premium');
-    }
-
-    public function scopeOrdered($query)
-    {
-        return $query->orderBy('type')->orderBy('sort_order');
+        return $this->belongsTo(ServiceType::class, 'service_type_id');
     }
 }

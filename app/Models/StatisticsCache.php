@@ -30,18 +30,8 @@ class StatisticsCache extends Model
     {
         $now = now();
 
-        static::where('stat_key', 'total_orders_completed')->update([
-            'stat_value' => (string) Order::whereIn('status', ['done', 'picked_up'])->count(),
-            'last_calculated_at' => $now,
-        ]);
-
-        static::where('stat_key', 'total_customers')->update([
-            'stat_value' => (string) Customer::where('is_active', true)->count(),
-            'last_calculated_at' => $now,
-        ]);
-
         static::where('stat_key', 'total_service_categories')->update([
-            'stat_value' => (string) ServiceCategory::where('is_active', true)->count(),
+            'stat_value' => (string) ServiceCategory::count(),
             'last_calculated_at' => $now,
         ]);
     }
