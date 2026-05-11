@@ -23,7 +23,7 @@
         </div>
 
         <p class="admin-sidebar-note">
-          Kelola konten, operasional, dan komunikasi pelanggan dari satu tempat.
+          Kelola konten website company profile Rodeo Laundry.
         </p>
 
         <div class="admin-nav-divider"></div>
@@ -104,7 +104,7 @@
               <p class="admin-kicker">Dashboard</p>
               <h1>Selamat datang, {{ Auth::user()->name }}!</h1>
               <p class="admin-topbar-subtitle">
-                Kelola operasional Rodeo Laundry dengan ringkas dan cepat.
+                Kelola isi konten website profil Rodeo Laundry dengan ringkas dan cepat.
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@
               <p class="admin-hero-label">Overview Hari Ini</p>
               <h2>Semua modul siap dikelola dalam satu dashboard.</h2>
               <p>
-                Monitor layanan, harga, dan komunikasi pelanggan dalam satu
+                Monitor layanan, harga, dan pertanyaan pelanggan dalam satu
                 tampilan yang rapi dan mudah dipahami.
               </p>
               <div class="admin-hero-actions">
