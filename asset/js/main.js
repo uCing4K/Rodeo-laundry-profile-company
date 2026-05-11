@@ -1,4 +1,5 @@
 (() => {
+  console.log('Main JavaScript loaded');
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuPanel = document.querySelector("[data-menu-panel]");
   const root = document.documentElement;
@@ -450,11 +451,81 @@ window.cancelEditTestimonial = function () {
   if (cancelButton) cancelButton.remove();
 };
 
+window.editOperatingHour = function (hourId, day, openTime, closeTime, isClosed) {
+  console.log('editOperatingHour called with:', hourId, day, openTime, closeTime, isClosed);
+  const form = document.getElementById('operating-hour-form');
+  if (!form) {
+    console.error('Operating hour form not found');
+    return;
+  }
+  form.action = `/admin/operating-hours/${hourId}`;
+  console.log('Form action changed to:', form.action);
+  let methodInput = form.querySelector('input[name="_method"]');
+  if (!methodInput) {
+    methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    form.appendChild(methodInput);
+  }
+  methodInput.value = 'PUT';
+  console.log('Method input set to PUT');
+
+  const openInput = form.querySelector('[name="open_time"]');
+  const closeInput = form.querySelector('[name="closed_time"]');
+  const closedSelect = form.querySelector('[name="is_closed"]');
+  if (openInput) {
+    openInput.value = openTime;
+    console.log('Open time set to:', openTime);
+  }
+  if (closeInput) {
+    closeInput.value = closeTime;
+    console.log('Close time set to:', closeTime);
+  }
+  if (closedSelect) {
+    closedSelect.value = isClosed ? '1' : '0';
+    console.log('Is closed set to:', isClosed ? '1' : '0');
+  }
+
+  const submitButton = document.getElementById('operating-hour-submit-button');
+  if (submitButton) submitButton.textContent = 'Perbarui jam operasional';
+
+  let cancelButton = form.querySelector('.cancel-edit-operating-hour');
+  if (!cancelButton) {
+    cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'btn btn-ghost cancel-edit-operating-hour';
+    cancelButton.textContent = 'Batal';
+    cancelButton.addEventListener('click', cancelEditOperatingHour);
+    const actions = document.getElementById('operating-hour-form-actions');
+    if (actions) actions.appendChild(cancelButton);
+  }
+
+  window.location.hash = 'hours';
+};
+
+window.cancelEditOperatingHour = function () {
+  const form = document.getElementById('operating-hour-form');
+  if (!form) return;
+  form.action = '/admin/operating-hours';
+  const methodInput = form.querySelector('input[name="_method"]');
+  if (methodInput) methodInput.remove();
+  const openInput = form.querySelector('[name="open_time"]');
+  const closeInput = form.querySelector('[name="closed_time"]');
+  const closedSelect = form.querySelector('[name="is_closed"]');
+  if (openInput) openInput.value = '';
+  if (closeInput) closeInput.value = '';
+  if (closedSelect) closedSelect.value = '';
+  const submitButton = document.getElementById('operating-hour-submit-button');
+  if (submitButton) submitButton.textContent = 'Simpan jam operasional';
+  const cancelButton = form.querySelector('.cancel-edit-operating-hour');
+  if (cancelButton) cancelButton.remove();
+};
+
 const initAdminEditButtons = () => {
   console.log('initAdminEditButtons called');
   // Use event delegation for better reliability
   document.addEventListener('click', (event) => {
-    console.log('Click detected on:', event.target.className);
+    console.log('Click detected on:', event.target.className, event.target.tagName);
     if (event.target.classList.contains('edit-faq-button')) {
       event.preventDefault();
       const button = event.target;
@@ -471,13 +542,27 @@ const initAdminEditButtons = () => {
       const content = button.dataset.content || '';
       console.log('Edit Testimonial clicked:', testimonialId, customerName, content);
       window.editTestimonial(testimonialId, customerName, content);
+    } else if (event.target.classList.contains('edit-operating-hour-button')) {
+      event.preventDefault();
+      console.log('Operating hour edit button clicked');
+      const button = event.target;
+      const hourId = button.dataset.id;
+      const openTime = button.dataset.open || '';
+      const closeTime = button.dataset.close || '';
+      const isClosed = button.dataset.closed === '1';
+      console.log('Edit Operating Hour clicked:', hourId, openTime, closeTime, isClosed);
+      window.editOperatingHour(hourId, '', openTime, closeTime, isClosed);
     }
   });
 };
 
-// Call after DOM is loaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initAdminEditButtons);
-} else {
+// Check for fragment on page load and scroll to section
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.location.hash) {
+    const element = document.querySelector(window.location.hash);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
   initAdminEditButtons();
-}
+});

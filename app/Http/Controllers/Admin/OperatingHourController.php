@@ -18,13 +18,12 @@ class OperatingHourController extends Controller
 
     public function update(Request $request, OperatingHour $operating_hour)
     {
+        \Log::info('OperatingHour update request', [
+            'id' => $operating_hour->id,
+            'data' => $request->all()
+        ]);
+
         $validated = $request->validate([
-            'day' => [
-                'required',
-                'string',
-                Rule::in(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']),
-                Rule::unique('operating_hours', 'day')->ignore($operating_hour->id),
-            ],
             'open_time' => 'required_unless:is_closed,1|date_format:H:i',
             'closed_time' => 'required_unless:is_closed,1|date_format:H:i',
             'is_closed' => 'required|in:0,1',
@@ -35,8 +34,7 @@ class OperatingHourController extends Controller
 
         $operating_hour->update($validated);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Jam operasional berhasil diperbarui.')
-            ->withFragment('hours');
+        return redirect('/admin/dashboard#hours')
+            ->with('success', 'Jam operasional berhasil diperbarui.');
     }
 }

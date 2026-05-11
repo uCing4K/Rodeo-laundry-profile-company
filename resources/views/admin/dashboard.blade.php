@@ -527,45 +527,35 @@
                 <thead>
                   <tr>
                     <th>Hari</th>
-                    <th>Jam buka</th>
-                    <th>Jam tutup</th>
+                    <th>Jam Buka</th>
+                    <th>Jam Tutup</th>
                     <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($operating_hours as $hour)
                   <tr>
-                    <td data-label="Hari">Senin</td>
-                    <td data-label="Jam buka">09:00</td>
-                    <td data-label="Jam tutup">19:00</td>
-                    <td data-label="Status"><span class="status-tag">Buka</span></td>
+                    <td data-label="Hari">{{ $hour->day }}</td>
+                    <td data-label="Jam Buka">{{ \Carbon\Carbon::parse($hour->open_time)->format('H:i') }}</td>
+                    <td data-label="Jam Tutup">{{ \Carbon\Carbon::parse($hour->closed_time)->format('H:i') }}</td>
+                    <td data-label="Status"><span class="status-tag">{{ $hour->is_closed ? 'Tutup' : 'Buka' }}</span></td>
                     <td data-label="Aksi">
-                      <a class="admin-action-btn" href="/admin/operating-hours/1/edit">Edit</a>
+                      <a class="admin-action-btn edit-operating-hour-button" href="javascript:void(0)" data-id="{{ $hour->id }}" data-open="{{ $hour->open_time }}" data-close="{{ $hour->closed_time }}" data-closed="{{ $hour->is_closed }}">Edit</a>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
-            <form class="hero-form" action="/admin/operating-hours" method="post">
+            <form class="hero-form" id="operating-hour-form" action="{{ route('admin.operating-hours.store') }}" method="post">
               @csrf
               <div class="form-grid">
-                <div class="field">
-                  <select name="day" required>
-                    <option value="">Pilih Hari</option>
-                    <option value="Senin">Senin</option>
-                    <option value="Selasa">Selasa</option>
-                    <option value="Rabu">Rabu</option>
-                    <option value="Kamis">Kamis</option>
-                    <option value="Jumat">Jumat</option>
-                    <option value="Sabtu">Sabtu</option>
-                    <option value="Minggu">Minggu</option>
-                  </select>
-                </div>
                 <div class="field">
                   <input type="time" name="open_time" required />
                 </div>
                 <div class="field">
-                  <input type="time" name="close_time" required />
+                  <input type="time" name="closed_time" required />
                 </div>
                 <div class="field">
                   <select name="is_closed" required>
@@ -575,7 +565,9 @@
                   </select>
                 </div>
               </div>
-              <button class="btn btn-primary" type="submit">Simpan jam operasional</button>
+              <div class="form-actions" id="operating-hour-form-actions" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-primary" type="submit" id="operating-hour-submit-button">Simpan jam operasional</button>
+              </div>
             </form>
           </section>
 
