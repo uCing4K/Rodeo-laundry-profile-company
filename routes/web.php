@@ -59,6 +59,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/service-categories', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'store'])->name('service-categories.store');
         Route::put('/service-categories/{serviceCategory}', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'update'])->name('service-categories.update');
         Route::delete('/service-categories/{serviceCategory}', [\App\Http\Controllers\Admin\ServiceCategoryController::class, 'destroy'])->name('service-categories.destroy');
+
+        Route::put('/settings', [\App\Http\Controllers\Admin\CompanySettingController::class, 'update'])->name('settings.update');
     });
 });
 

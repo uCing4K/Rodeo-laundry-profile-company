@@ -12,8 +12,7 @@
       <div class="eyebrow">Cek status order</div>
       <h1>Tracking pesanan laundry secara real time.</h1>
       <p>
-        Masukkan nomor order atau token tracking untuk melihat status
-        pesanan Anda saat ini.
+        Cek status pesanan Anda secara real-time.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat bantuan</a>
@@ -21,10 +20,10 @@
       </div>
     </div>
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
-      <span class="badge">Form tracking</span>
-      <h3>Masukkan data Anda di bawah ini.</h3>
+      <span class="badge">Cek Status</span>
+      <h3>Masukkan token Anda di bawah ini.</h3>
       <p>
-        Format order: RODEO-YYYYMMDD-XXXX atau gunakan token tracking.
+        Gunakan token tracking untuk mengecek status laundry Anda.
       </p>
       <form
         class="hero-form"

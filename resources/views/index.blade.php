@@ -38,10 +38,9 @@
 
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
       <span class="badge">Cek status cepat</span>
-      <h3>Masukkan nomor order atau token.</h3>
+      <h3>Masukkan token Anda.</h3>
       <p>
-        Format order: RODEO-YYYYMMDD-XXXX. Anda juga bisa pakai token
-        tracking.
+        Gunakan token tracking untuk mengecek status laundry Anda.
       </p>
       <form
         class="hero-form"
