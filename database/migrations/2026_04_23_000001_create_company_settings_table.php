@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,14 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('company_settings', function (Blueprint $table) {
-            $table->unsignedInteger('id')->autoIncrement();
-            $table->string('setting_key', 100)->unique();
-            $table->text('setting_value')->nullable();
-            $table->string('setting_group', 50)->default('general')->comment('Grup: general, contact, social, seo, design');
-            $table->string('description', 255)->nullable()->comment('Deskripsi setting untuk admin');
+            $table->id();
+            $table->string('company_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('whatsapp_link')->nullable();
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
+            $table->text('map_embed')->nullable();
+            $table->text('seo_description')->nullable();
             $table->timestamps();
-
-            $table->index('setting_group', 'idx_setting_group');
         });
     }
 

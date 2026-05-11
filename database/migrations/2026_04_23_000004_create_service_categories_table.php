@@ -8,19 +8,21 @@ return new class extends Migration
     
     public function up(): void
     {
-        Schema::create('service_types', function (Blueprint $table) {
+        Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('estimated_duration')->nullable();
-            $table->decimal('additional_cost', 10, 2)->default(0);
+            $table->decimal('base_price', 10, 2)->default(0);
+            $table->unsignedBigInteger('service_type_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('set null');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('service_types');
+        Schema::dropIfExists('service_categories');
     }
 };
 

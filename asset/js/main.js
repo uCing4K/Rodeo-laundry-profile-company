@@ -1,13 +1,11 @@
 (() => {
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuPanel = document.querySelector("[data-menu-panel]");
-  const root = document.documentElement;
 
   if (menuToggle && menuPanel) {
     menuToggle.addEventListener("click", () => {
       const isOpen = menuPanel.classList.toggle("is-open");
       document.body.classList.toggle("menu-open", isOpen);
-      root.classList.toggle("menu-open", isOpen);
       menuToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
@@ -15,7 +13,6 @@
       link.addEventListener("click", () => {
         menuPanel.classList.remove("is-open");
         document.body.classList.remove("menu-open");
-        root.classList.remove("menu-open");
         menuToggle.setAttribute("aria-expanded", "false");
       });
     });
@@ -66,37 +63,6 @@
     });
   }
 
-  const adminNavItems = document.querySelectorAll(".admin-nav-item");
-  if (adminNavItems.length) {
-    const setActiveNav = (hash) => {
-      let matched = false;
-      adminNavItems.forEach((item) => {
-        const isMatch = hash && item.getAttribute("href") === hash;
-        if (isMatch) {
-          matched = true;
-        }
-        item.classList.toggle("is-active", isMatch);
-      });
-
-      if (!matched) {
-        adminNavItems.forEach((item, index) => {
-          item.classList.toggle("is-active", index === 0);
-        });
-      }
-    };
-
-    adminNavItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        setActiveNav(item.getAttribute("href"));
-      });
-    });
-
-    setActiveNav(window.location.hash);
-    window.addEventListener("hashchange", () => {
-      setActiveNav(window.location.hash);
-    });
-  }
-
   const revealItems = document.querySelectorAll("[data-reveal]");
   if (revealItems.length) {
     const observer = new IntersectionObserver(
@@ -129,23 +95,9 @@
     });
   }
 
-  const confirmForms = document.querySelectorAll("form[data-confirm]");
-  if (confirmForms.length) {
-    confirmForms.forEach((form) => {
-      form.addEventListener("submit", (event) => {
-        const message = form.getAttribute("data-confirm") || "Lanjutkan aksi ini?";
-        if (!window.confirm(message)) {
-          event.preventDefault();
-        }
-      });
-    });
-  }
-
-
   const trackingForm = document.querySelector("[data-tracking-form]");
   if (trackingForm) {
     const input = trackingForm.querySelector("input");
-    const redirectBase = trackingForm.getAttribute("data-tracking-redirect");
     const resultWrap = document.querySelector("[data-tracking-result]");
     const resultCard = document.querySelector("[data-tracking-card]");
     const orderOutput = document.querySelector("[data-tracking-order]");
@@ -157,7 +109,7 @@
 
       if (!value) {
         if (errorOutput) {
-          errorOutput.textContent = "Masukkan token tracking terlebih dahulu.";
+          errorOutput.textContent = "Masukkan nomor order atau token tracking.";
           errorOutput.hidden = false;
         }
         if (input) {
@@ -169,15 +121,6 @@
       if (errorOutput) {
         errorOutput.textContent = "";
         errorOutput.hidden = true;
-      }
-
-      if (redirectBase) {
-        const targetUrl = `${redirectBase}?token=${encodeURIComponent(value)}`;
-        const popup = window.open(targetUrl, "_blank");
-        if (!popup) {
-          window.location.href = targetUrl;
-        }
-        return;
       }
 
       if (resultWrap) {
