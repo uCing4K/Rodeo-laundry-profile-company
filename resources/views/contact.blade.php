@@ -16,13 +16,13 @@
         informasi layanan.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
       </div>
     </div>
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
       <span class="badge">Info cepat</span>
       <h3>Jam operasional</h3>
-      <p>Senin - Minggu, pukul 09:00 - 19:00 WIB.</p>
+      <p>Senin - Minggu, buka sekitar pukul 09:00 - 19:00 WIB.</p>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-value">WA aktif</div>
@@ -44,7 +44,7 @@
       <ul>
         <li><strong>Alamat:</strong> Batu, Sumberejo, Gg. Rodeo</li>
         <li><strong>Telepon:</strong> <a href="tel:+6282143297707">+62 821-4329-7707</a></li>
-        <li><strong>WhatsApp:</strong> <a href="https://wa.me/6282143297707">Chat sekarang</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat sekarang</a></li>
         <li><strong>Email:</strong> <a href="mailto:info@rodeolaundry.my.id">info@rodeolaundry.my.id</a></li>
       </ul>
     </div>

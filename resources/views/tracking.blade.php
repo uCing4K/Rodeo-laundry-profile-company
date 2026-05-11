@@ -16,7 +16,7 @@
         pesanan Anda saat ini.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat bantuan</a>
+        <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat bantuan</a>
         <a class="btn btn-ghost" href="{{ route('services') ?? '/services' }}">Lihat layanan</a>
       </div>
     </div>

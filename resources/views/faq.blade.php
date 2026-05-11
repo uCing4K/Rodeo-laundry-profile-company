@@ -16,7 +16,7 @@
         Laundry.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://wa.me/6282143297707">Chat WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
         <a class="btn btn-ghost" href="{{ route('contact') ?? '/contact' }}">Kontak lainnya</a>
       </div>
     </div>

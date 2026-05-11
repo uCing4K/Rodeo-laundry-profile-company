@@ -232,7 +232,7 @@
         kebutuhan harian maupun bisnis.
       </p>
       <div class="cta-actions">
-        <a class="btn btn-dark" href="https://wa.me/6282143297707">Chat WhatsApp</a>
+        <a class="btn btn-dark" href="https://wa.me/6282143297707" target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
         <a class="btn btn-ghost" href="{{ route('tracking') ?? '/tracking' }}">Cek status pesanan</a>
       </div>
     </div>

@@ -288,7 +288,7 @@
           </section>
 
           <section class="admin-section" id="service-types" data-api="/admin/service-types">
-            <h3>Jenis Layanan</h3>
+            <h3>Tipe Layanan</h3>
             <p>Kelola tipe layanan seperti reguler, express, premium.</p>
             <form class="hero-form" action="/admin/service-types" method="post">
               @csrf
