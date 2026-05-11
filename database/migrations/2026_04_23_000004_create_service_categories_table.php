@@ -10,7 +10,9 @@ return new class extends Migration
     {
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('category');
+            $table->string('product')->nullable();
+            $table->string('unit')->nullable();
             $table->text('description')->nullable();
             $table->decimal('base_price', 10, 2)->default(0);
             $table->unsignedBigInteger('service_type_id')->nullable();
