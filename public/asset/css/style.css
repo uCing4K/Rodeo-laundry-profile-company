@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&family=Manrope:wght@600;700;800&display=swap");
 
+/* ========== VARIABLES ========== */
 :root {
   --orange-500: #f5821f;
   --orange-600: #e57017;
@@ -21,6 +22,7 @@
   --container: 1200px;
 }
 
+/* ========== BASE ELEMENTS ========== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -214,6 +216,7 @@ small {
   left: 16px;
 }
 
+/* ========== LAYOUT & CONTAINER ========== */
 .site-header {
   position: sticky;
   top: 0;
@@ -330,6 +333,7 @@ small {
   display: none;
 }
 
+/* ========== HERO SECTION ========== */
 .hero {
   position: relative;
   padding: 110px 0 90px;
@@ -436,6 +440,7 @@ small {
   border-color: var(--orange-500);
 }
 
+/* ========== GRID & CARDS ========== */
 .grid-2,
 .grid-3,
 .grid-4 {
@@ -536,6 +541,7 @@ small {
   margin-bottom: 36px;
 }
 
+/* ========== TABLE & RESPONSIVE ========== */
 .table-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-md);
@@ -550,6 +556,7 @@ small {
   min-width: 520px;
 }
 
+/* ========== TABLE & DATA ========== */
 .table thead {
   background: var(--orange-500);
   color: #ffffff;
@@ -570,6 +577,7 @@ small {
   background: rgba(245, 130, 31, 0.1);
 }
 
+/* ========== SERVICE FILTERS & CHIPS ========== */
 .service-filters {
   display: flex;
   flex-wrap: wrap;
@@ -590,6 +598,7 @@ small {
   border-color: transparent;
 }
 
+/* ========== TRACKING SECTION ========== */
 .tracking-result {
   margin-top: 32px;
 }
@@ -660,6 +669,7 @@ small {
   font-weight: 600;
 }
 
+/* ========== ACCORDION ========== */
 .accordion-item {
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
@@ -715,6 +725,10 @@ small {
   border: 0;
 }
 
+/* ========== ACCORDION & ALERTS ========== */
+/* (Accordion styles defined above) */
+
+/* ========== FOOTER ========== */
 .footer {
   background: #1f1d1b;
   color: #f5f2ee;
@@ -777,7 +791,10 @@ small {
   background: var(--orange-600);
 }
 
+/* ========== FLOATING BUTTONS ========== */
+/* (FAB styles defined above) */
 
+/* ========== ADMIN PANEL ========== */
 .admin-body {
   background: #f5f3ef;
   color: var(--ink-900);
@@ -1012,7 +1029,7 @@ small {
 
 .admin-topbar-title h1 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
 }
 
 .admin-kicker {
@@ -1308,16 +1325,17 @@ small {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.8rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 999px;
   border: 1px solid var(--orange-500);
   background: #ffffff;
   color: var(--orange-600);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .admin-action-btn:hover {
@@ -1333,6 +1351,18 @@ small {
 .admin-action-btn.is-danger:hover {
   background: #d64545;
   color: #ffffff;
+}
+
+.admin-action-btn.is-ghost {
+  border-color: rgba(245, 130, 31, 0.3);
+  color: var(--ink-700);
+  background: var(--bg-alt);
+}
+
+.admin-action-btn.is-ghost:hover {
+  background: rgba(245, 130, 31, 0.15);
+  border-color: var(--orange-500);
+  color: var(--orange-600);
 }
 
 .admin-auth {
@@ -1372,7 +1402,12 @@ small {
   transform: translateY(0);
 }
 
+/* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 1100px) {
+  .admin-topbar-title h1 {
+    font-size: 1.2rem;
+  }
+
   .grid-4 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1424,6 +1459,12 @@ small {
   .admin-table td::before,
   .table td::before {
     display: none;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 960px) {
+  .admin-actions {
+    display: none !important;
   }
 }
 
@@ -1571,15 +1612,19 @@ small {
   }
 
   .admin-actions {
-    width: 100%;
-    justify-content: flex-start;
+    display: none !important;
   }
 
   .admin-actions .btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
     flex-shrink: 1;
     white-space: nowrap;
+  }
+
+  .admin-action-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
   }
 
   .admin-section,
@@ -1606,7 +1651,7 @@ small {
   }
 
   .admin-topbar-left {
-    flex: 1;
+    flex: 2;
     min-width: 0;
     gap: 8px;
     display: flex;
@@ -1687,7 +1732,10 @@ small {
   }
 
   .admin-topbar-title h1 {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .admin-topbar {
@@ -1705,19 +1753,23 @@ small {
   }
 
   .admin-topbar-left {
-    flex: 1;
+    flex: 3;
     min-width: 0;
     align-items: center;
   }
 
-  .admin-actions,
+  .admin-actions {
+    display: none;
+  }
+
   .admin-hero-actions {
     width: 100%;
+    flex-shrink: 0;
   }
 
   .admin-actions .btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.7rem;
     flex-shrink: 1;
     white-space: nowrap;
   }
@@ -1744,8 +1796,21 @@ small {
 
   .admin-topbar .btn {
     width: auto;
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.35rem;
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .admin-action-btn {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.3rem;
+    max-width: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .admin-nav {
@@ -1862,6 +1927,7 @@ small {
   }
 }
 
+/* ========== MODALS & DIALOGS ========== */
 #logout-modal {
   display: none;
   position: fixed;

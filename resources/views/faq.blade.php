@@ -22,11 +22,8 @@
     </div>
     <div class="hero-card" data-reveal style="--reveal-delay: 120ms;">
       <span class="badge">Cari jawaban</span>
-      <h3>Gunakan pencarian untuk menemukan topik.</h3>
-      <div class="field" style="margin-top: 16px;">
-        <input type="search" placeholder="Cari pertanyaan" />
-        <button class="btn btn-primary" type="button">Cari</button>
-      </div>
+      <h3>Apa itu Rodeo Laundry?</h3>
+      <p>Rodeo Laundry adalah jasa laundry terpercaya di daerah Sumberejo, Batu</p>
     </div>
   </div>
 </section>
