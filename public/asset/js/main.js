@@ -1,5 +1,4 @@
 (() => {
-  // ========== MOBILE MENU HANDLER ==========
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuPanel = document.querySelector("[data-menu-panel]");
   const root = document.documentElement;
@@ -22,7 +21,6 @@
     });
   }
 
-  // ========== ADMIN MENU HANDLER ==========
   const adminMenuToggle = document.querySelector("[data-admin-menu-toggle]");
   const adminMenuClose = document.querySelector("[data-admin-menu-close]");
   const adminSidebar = document.querySelector("[data-admin-sidebar]");
@@ -68,7 +66,6 @@
     });
   }
 
-  // ========== ADMIN NAVIGATION ITEMS HANDLER ==========
   const adminNavItems = document.querySelectorAll(".admin-nav-item");
   if (adminNavItems.length) {
     const setActiveNav = (hash) => {
@@ -100,7 +97,6 @@
     });
   }
 
-  // ========== REVEAL ITEMS HANDLER (INTERSECTION OBSERVER) ==========
   const revealItems = document.querySelectorAll("[data-reveal]");
   if (revealItems.length) {
     const observer = new IntersectionObserver(
@@ -118,7 +114,6 @@
     revealItems.forEach((item) => observer.observe(item));
   }
 
-  // ========== ACCORDION HANDLER ==========
   const accordions = document.querySelectorAll("[data-accordion]");
   if (accordions.length) {
     accordions.forEach((item) => {
@@ -134,7 +129,6 @@
     });
   }
 
-  // ========== CONFIRM FORMS HANDLER ==========
   const confirmForms = document.querySelectorAll("form[data-confirm]");
   if (confirmForms.length) {
     confirmForms.forEach((form) => {
@@ -152,7 +146,8 @@
     });
   }
 
-  // ========== TRACKING FORM HANDLER ==========  const trackingForm = document.querySelector("[data-tracking-form]");
+
+  const trackingForm = document.querySelector("[data-tracking-form]");
   if (trackingForm) {
     const input = trackingForm.querySelector("input");
     const redirectBase = trackingForm.getAttribute("data-tracking-redirect");
@@ -205,7 +200,6 @@
   }
 })();
 
-// ========== WINDOW UTILITIES (MODALS & CONFIRMATIONS) ==========
 window.confirmLogout = function() {
   const modal = document.getElementById('logout-modal');
   if (modal) modal.style.display = 'flex';
@@ -228,7 +222,6 @@ window.submitDeleteForm = function() {
   }
 };
 
-// ========== SERVICE CATEGORY EDIT FUNCTIONS ==========
 window.editServiceCategory = function(id, category, product, unit, price, type_id, description) {
   const form = document.getElementById('form-service-categories');
   if (!form) return;
@@ -294,7 +287,6 @@ window.cancelEditServiceCategory = function() {
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
 
-// ========== SERVICE TYPE EDIT FUNCTIONS ==========
 window.editServiceType = function(id, name, duration, cost, description) {
   const form = document.getElementById('form-service-types');
   if (!form) return;
@@ -348,7 +340,6 @@ window.cancelEditServiceType = function() {
   if (cancelBtn) cancelBtn.style.display = 'none';
 };
 
-// ========== COMPANY SETTINGS EDIT FUNCTIONS ==========
 window.editCompanySettings = function() {
   const form = document.getElementById('form-company-settings');
   if (!form) return;
@@ -387,7 +378,6 @@ window.cancelEditCompanySettings = function() {
   if (btnCancel) btnCancel.style.display = 'none';
 };
 
-// ========== SEARCH FILTER HANDLER ==========
 window.filterPopularSearch = function(query) {
   const container = document.getElementById('popular-search-results');
   if (!container) return;
@@ -401,7 +391,6 @@ window.filterPopularSearch = function(query) {
   });
 };
 
-// ========== FAQ EDIT FUNCTIONS ==========
 window.editFaq = function(id, question, answer) {
   const form = document.getElementById("faq-form");
   if (!form) return;
@@ -449,7 +438,6 @@ window.cancelEditFaq = function() {
   if (cancelBtn) cancelBtn.style.display = "none";
 };
 
-// ========== TESTIMONIAL EDIT FUNCTIONS ==========
 window.editTestimonial = function(id, name, content) {
   const form = document.getElementById("testimonial-form");
   if (!form) return;
@@ -497,7 +485,6 @@ window.cancelEditTestimonial = function() {
   if (cancelBtn) cancelBtn.style.display = "none";
 };
 
-// ========== OPERATING HOURS EDIT FUNCTIONS ==========
 window.editOperatingHour = function(id, open, close, is_closed) {
   const form = document.getElementById("operating-hour-form");
   if (!form) return;
